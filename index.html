@@ -59,13 +59,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .btn:hover::after{transform:translateX(4px)}
 
 /* ---------- strip of what's on ---------- */
-.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:-1px}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:-1px}
 .strip a{display:grid;gap:12px;align-content:start;padding:14px 16px 18px;background:var(--ground);text-decoration:none;transition:background .25s}
 .strip a:hover{background:var(--surface)}
 .strip img{width:100%;height:120px;object-fit:cover;border-radius:1px;transition:filter .3s}
 .strip a:hover img{filter:brightness(1.15)}
 .strip b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.1;color:var(--ink);margin-top:3px}
-.strip span{font-size:10px;letter-spacing:.22em;white-space:nowrap;text-transform:uppercase;color:var(--gold)}
+.strip span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 
 /* ---------- section title ---------- */
 .rule{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:clamp(56px,8vw,104px) 0 clamp(20px,3vw,32px)}
@@ -186,7 +186,6 @@ fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
 .err.on{display:block}
 body.locked{overflow:hidden}
 
-@media (max-width:1000px){.strip{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:860px){
   .op,.deal{grid-template-columns:1fr;gap:28px}
   .op.flip .pic{order:0}
@@ -212,18 +211,20 @@ body.locked{overflow:hidden}
     <div class="eyebrow">Creator invitations · The Wonder Agency</div>
     <h1>Our favourite places. <em>Our favourite creators.</em></h1>
     <p class="lede">We look after some brilliant restaurants and bars across London — and we're inviting some of our favourite creators to experience them. Choose an invitation below, bring a plus one and enjoy everything listed <strong>on us</strong>, in exchange for a little content about your visit.</p>
-    <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email within two working days.</p>
-    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Five invitations available</small><small>Takes about a minute to request</small></div>
+    <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email.</p>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Seven invitations available</small><small>Takes about a minute to request</small></div>
   </div>
 </section>
 
 <div class="wrap">
   <nav class="strip" aria-label="Jump to an invitation">
-    <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Temper Tantrums</b></div></a>
-    <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Bottomless brunch</span><b>Temper</b></div></a>
-    <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
-    <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · brunch · roast</span><b>BRIX LDN</b></div></a>
-    <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch party</span><b>Notto Piccadilly</b></div></a>
+    <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Tantrums</b></div></a>
+    <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Brunch</span><b>Temper</b></div></a>
+    <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Brunch</span><b>Paradiso</b></div></a>
+    <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · roast</span><b>BRIX LDN</b></div></a>
+    <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch</span><b>Notto</b></div></a>
+    <a href="#kasakin"><img src="img/kasakin.jpg" alt=""><div><span>Feast</span><b>Kasa &amp; Kin</b></div></a>
+    <a href="#centanni"><img src="img/centanni.jpg" alt=""><div><span>Lunch · dinner</span><b>Cent Anni</b></div></a>
   </nav>
 
   <div class="rule" id="whats-on">
@@ -323,11 +324,47 @@ body.locked{overflow:hidden}
     </div>
   </article>
 
+  <!-- VI -->
+  <article class="op flip" id="kasakin">
+    <figure class="pic"><span class="num">VI</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Filipino feast</span><span class="venue">Kasa &amp; Kin</span><span>Soho</span></div>
+      <h2>London's home of ube, <em>on us.</em></h2>
+      <p>London's Home of Ube is inviting you down for a Filipino feast to remember. From sizzling pork sisig to ube cocktails and everything in between, Kasa &amp; Kin really has it all.</p>
+      <p>Enjoy a three-course meal of your choosing and an ube cocktail each, for you and a plus one. The team would love you to champion two things in particular: their ube offering and the sizzle and grill dishes on the menu — so make those the stars of your visit.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Kasa &amp; Kin · Soho</span></li>
+        <li><span class="k">When</span><span class="v"><b>Any day</b> · lunch or dinner</span></li>
+        <li><span class="k">Your invite</span><span class="v">Three courses + an ube cocktail each, for two</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days, featuring the ube and sizzle &amp; grill dishes</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="kasakin">Request a table</button><small>Pick your dates, or let us suggest</small></div>
+    </div>
+  </article>
+
+  <!-- VII -->
+  <article class="op" id="centanni">
+    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Lunch · roast · dinner</span><span class="venue">Cent Anni</span><span>St John's Wood · Wimbledon Village</span></div>
+      <h2>Italian, <em>your way.</em></h2>
+      <p>With two lovely locations in St John's Wood and Wimbledon Village, Cent Anni is an idyllic Italian restaurant for mid-week set lunches, Sunday roasts and cosy evening meals.</p>
+      <p>Choose your restaurant and your dining option — set lunch, Sunday roast or dinner — and we'll get you booked in for you and a plus one. The Sunday roast is St John's Wood only.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Cent Anni · St John's Wood or Wimbledon Village</span></li>
+        <li><span class="k">When</span><span class="v"><b>Set lunch</b> · Monday–Friday<small><b>Sunday roast</b> · Sundays, St John's Wood only</small><small><b>Dinner</b> · any evening</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Your chosen meal with drinks, for two</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="centanni">Choose your Cent Anni visit</button><small>Set lunch, Sunday roast or dinner</small></div>
+    </div>
+  </article>
+
   <section class="deal">
     <div><div class="eyebrow">How it works</div><h3>From invitation to table <em>in four steps.</em></h3></div>
     <ol>
       <li><div><b>Choose</b>Find the invitations you'd like to experience, tick as many as you want, and hit request. Add dates if you have them in mind — if not, we'll suggest some.</div></li>
-      <li><div><b>We confirm</b>We'll check with the venue and email you within two working days to confirm your date and time, or to offer you some. Your visit isn't booked until you receive our confirmation email.</div></li>
+      <li><div><b>We confirm</b>We'll check with the venue and email you to confirm your date and time, or to offer you some. Your visit isn't booked until you receive our confirmation email.</div></li>
       <li><div><b>Enjoy</b>Turn up with your plus one and enjoy everything included in your invitation — it's on us. If you order anything outside the invitation, you'll just pay for that separately.</div></li>
       <li><div><b>Share</b>Create the content listed on your invitation and share it within 7 days, tagging the venue and <b class="in">@thewonderagency</b>. We'll include all the handles and details in your confirmation.</div></li>
     </ol>
@@ -338,7 +375,7 @@ body.locked{overflow:hidden}
     <dl>
       <div><dt>Is everything complimentary?</dt><dd>Yes. Everything listed under Your Invite is covered for you and your plus one. Anything additional you order is yours to pay for.</dd></div>
       <div><dt>Can I request more than one invitation?</dt><dd>Absolutely — tick as many as you like on the form. Each one is confirmed separately, and because places are limited we can't guarantee every request.</dd></div>
-      <div><dt>Is my visit booked when I submit the form?</dt><dd>Not yet. We check every request with the venue and email you within two working days, either confirming your date or offering some. Please wait for our confirmation before making plans or contacting the venue.</dd></div>
+      <div><dt>Is my visit booked when I submit the form?</dt><dd>Not yet. We check every request with the venue and email you, either confirming your date or offering some. Please wait for our confirmation before making plans or contacting the venue.</dd></div>
       <div><dt>What if I need to cancel?</dt><dd>Just reply to your confirmation email as soon as you can — ideally at least 48 hours before your visit — so we can offer the space to someone else.</dd></div>
       <div><dt>Who should I contact?</dt><dd>Once confirmed, we'll send you everything you need for your visit. For anything else, email <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</dd></div>
     </dl>
@@ -419,6 +456,30 @@ body.locked{overflow:hidden}
         <div class="inv">
           <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party</label>
         </div>
+        <div class="inv">
+          <input type="checkbox" id="i-kasakin" name="invitations" value="kasakin"><label for="i-kasakin">Kasa &amp; Kin · Filipino feast</label>
+          <div class="dates" id="dates-kasakin" hidden>
+            <div class="dl">Which dates suit? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="kasakin-d1">First choice</label><select id="kasakin-d1" name="kasakin_date_1" class="pick"></select></div>
+              <div class="f"><label for="kasakin-d2">Second choice</label><select id="kasakin-d2" name="kasakin_date_2" class="pick"></select></div>
+            </div>
+          </div>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-centanni" name="invitations" value="centanni"><label for="i-centanni">Cent Anni · lunch, roast or dinner</label>
+          <div class="dates" id="dates-centanni" hidden>
+            <div class="dl">Which restaurant?</div>
+            <div class="f"><select id="centanni-location" name="centanni_location" aria-label="Cent Anni location"><option>St John's Wood</option><option>Wimbledon Village</option></select></div>
+            <div class="dl">Which would you like to experience?</div>
+            <div class="f"><select id="centanni-service" name="centanni_service" aria-label="Cent Anni experience"><option>Set lunch (Monday–Friday)</option><option>Sunday roast (Sundays, St John's Wood only)</option><option>Dinner (any evening)</option></select></div>
+            <div class="dl">Which dates suit? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="centanni-d1">First choice</label><select id="centanni-d1" name="centanni_date_1" class="pick"></select></div>
+              <div class="f"><label for="centanni-d2">Second choice</label><select id="centanni-d2" name="centanni_date_2" class="pick"></select></div>
+            </div>
+          </div>
+        </div>
         </div>
         <p class="sub">Dates are optional — if you leave them blank, we'll suggest some when we confirm. The launch parties are fixed dates, which we'll email you as soon as they're set.</p>
       </fieldset>
@@ -443,14 +504,14 @@ body.locked{overflow:hidden}
       <div class="err" id="err"><b>Something went wrong.</b> Please try again or email your details to <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</div>
       <div class="actions">
         <button class="btn solid" type="submit" id="send">Request invitations</button>
-        <p class="hint">We'll review your requests and get back to you within two working days. Nothing is booked until you receive our confirmation email.</p>
+        <p class="hint">We'll review your requests and get back to you by email. Nothing is booked until you receive our confirmation email.</p>
       </div>
     </form>
 
     <div class="done" id="done">
       <img class="mark" src="mark.png" alt="">
       <h3>You're on the list.</h3>
-      <p>Thanks — we've got your requests. We'll check with each venue and email you within two working days. Nothing is booked until you receive our confirmation.</p>
+      <p>Thanks — we've got your requests. We'll check with each venue and email you. Nothing is booked until you receive our confirmation.</p>
       <button class="btn" id="again">Explore more invitations</button>
     </div>
   </div>
@@ -468,19 +529,21 @@ const OPS = {
   temper:  {title:"Bottomless brunch — Temper", img:"img/temper.jpg"},
   paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
   brix:    {title:"BRIX LDN — dinner, brunch or Sunday roast", img:"img/brix.jpg"},
-  notto:   {title:"Notto Piccadilly relaunch party", img:"img/notto.jpg"}
+  notto:   {title:"Notto Piccadilly relaunch party", img:"img/notto.jpg"},
+  kasakin: {title:"Kasa & Kin — Filipino feast", img:"img/kasakin.jpg"},
+  centanni:{title:"Cent Anni — set lunch, Sunday roast or dinner", img:"img/centanni.jpg"}
 };
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), err=$("#err");
 let lastFocus=null;
 
-function syncDates(){ for(const id of ["temper","paradiso","brix"]) $("#dates-"+id).hidden=!$("#i-"+id).checked; }
+function syncDates(){ for(const id of ["temper","paradiso","brix","kasakin","centanni"]) $("#dates-"+id).hidden=!$("#i-"+id).checked; }
 $$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
 
 function open(id){
   lastFocus=document.activeElement;
   const o=OPS[id]||OPS.tantrums; id=OPS[id]?id:"tantrums";
-  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix();
+  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix(); fillCA();
   $("#cover-img").src=o.img;
   form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
@@ -494,7 +557,8 @@ function close(){
 }
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
-const DAYS={temper:[6], paradiso:[6,0], brix:{ "Dinner (any evening)":[0,1,2,3,4,5,6], "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }};
+const ALL=[0,1,2,3,4,5,6];
+const DAYS={temper:[6], paradiso:[6,0], kasakin:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 function upcoming(days,count){
   const out=[], d=new Date(); d.setDate(d.getDate()+1);
   while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
@@ -510,10 +574,19 @@ function fill(id,days){
     if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
   }
 }
-fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso);
+fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin);
 const brixSel=$("#brix-service");
-const fillBrix=()=>fill("brix",DAYS.brix[brixSel.value]||[0,1,2,3,4,5,6]);
+const fillBrix=()=>fill("brix",DAYS.brix[brixSel.value]||ALL);
 brixSel.addEventListener("change",fillBrix); fillBrix();
+/* Cent Anni: roast is St John's Wood only */
+const caSel=$("#centanni-service"), caLoc=$("#centanni-location");
+const fillCA=()=>{
+  const roast=caSel.value.startsWith("Sunday roast");
+  if(roast) caLoc.value="St John's Wood";
+  caLoc.options[1].disabled=roast;
+  fill("centanni",DAYS.centanni[caSel.value]||ALL);
+};
+caSel.addEventListener("change",fillCA); fillCA();
 $("#close").addEventListener("click",close); scrim.addEventListener("click",close);
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&sheet.classList.contains("on")) close(); });
 $("#again").addEventListener("click",close);
