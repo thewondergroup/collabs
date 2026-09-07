@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wonder Collabs</title>
+<meta name="description" content="Invitations to our clients' restaurants, bars and launch parties — curated by The Wonder Agency for creators we work with.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+:root{
+  --ground:#080808; --surface:#111110; --raise:#171716;
+  --line:#242320; --line-strong:#3a3833;
+  --ink:#f3efe6; --ink-2:#bdb7aa; --ink-3:#847f75;
+  --gold:#b69a5b; --gold-bright:#dcc07c; --gold-dim:#6f5d38;
+  --display:"Cormorant Garamond","Times New Roman",Georgia,serif;
+  --sans:"Jost","Futura","Helvetica Neue",Arial,sans-serif;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+/* film grain over everything, very faint */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(88vh,820px);display:grid;align-content:end;padding:150px 0 clamp(40px,6vw,72px);isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:70% 50%;transform:scale(1.06);animation:drift 22s ease-out forwards;filter:saturate(.9) brightness(.85)}
+@keyframes drift{to{transform:scale(1)}}
+.hero .bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(8,8,8,.55) 0%,rgba(8,8,8,.15) 35%,rgba(8,8,8,.75) 78%,var(--ground) 100%),
+  linear-gradient(90deg,rgba(8,8,8,.78) 20%,rgba(8,8,8,.35) 55%,transparent 80%)}
+.top{position:absolute;top:0;left:0;right:0;z-index:2}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:28px}
+.top img{height:36px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.top .who{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(46px,7.6vw,96px);line-height:.98;letter-spacing:-.012em;margin:20px 0 26px;max-width:13ch;text-wrap:balance;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.hero h1 em{font-style:italic;color:var(--gold-bright)}
+.lede{max-width:54ch;color:var(--ink-2);font-size:17px;margin:0 0 34px}
+.lede strong{font-weight:400;color:var(--ink)}
+.hero .row{display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center}
+.hero .row small{color:var(--ink-3);font-size:12px;letter-spacing:.06em}
+.hero .row small::before{content:"— ";color:var(--gold-dim)}
+
+/* buttons */
+.btn{appearance:none;background:var(--gold);border:1px solid var(--gold);color:#0a0a0a;font-family:var(--sans);font-weight:400;font-size:12px;letter-spacing:.28em;text-transform:uppercase;padding:16px 26px 15px;border-radius:2px;cursor:pointer;text-decoration:none;transition:background .25s,color .25s,border-color .25s,box-shadow .25s;display:inline-flex;align-items:center;gap:14px}
+.btn::after{content:"→";font-family:var(--display);font-size:18px;line-height:0;transition:transform .25s}
+.btn:hover,.btn:focus-visible{background:var(--gold-bright);color:#0a0a0a;border-color:var(--gold-bright);outline:none;box-shadow:0 12px 40px -10px rgba(182,154,91,.7)}
+.btn:hover::after{transform:translateX(4px)}
+
+/* ---------- strip of what's on ---------- */
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:-1px}
+.strip a{display:grid;gap:12px;align-content:start;padding:14px 16px 18px;background:var(--ground);text-decoration:none;transition:background .25s}
+.strip a:hover{background:var(--surface)}
+.strip img{width:100%;height:120px;object-fit:cover;border-radius:1px;transition:filter .3s}
+.strip a:hover img{filter:brightness(1.15)}
+.strip b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.1;color:var(--ink);margin-top:3px}
+.strip span{font-size:10px;letter-spacing:.22em;white-space:nowrap;text-transform:uppercase;color:var(--gold)}
+
+/* ---------- section title ---------- */
+.rule{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:clamp(56px,8vw,104px) 0 clamp(20px,3vw,32px)}
+.rule .big{font-family:var(--display);font-weight:300;font-size:clamp(38px,5.5vw,68px);line-height:1;margin:14px 0 0;letter-spacing:-.01em}
+.rule .big em{font-style:italic;color:var(--gold-bright)}
+.rule .count{font-family:var(--display);font-style:italic;color:var(--ink-3);font-size:20px;white-space:nowrap}
+
+/* ---------- opportunities ---------- */
+.op{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px clamp(32px,5vw,80px);padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);align-items:center}
+.op.flip .pic{order:2}
+.pic{position:relative;aspect-ratio:4/5;margin:0;min-height:420px}
+.pic::before{content:"";position:absolute;inset:0;border:1px solid var(--gold-dim);transform:translate(14px,14px);pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.pic .img{position:absolute;inset:0;overflow:hidden;background:var(--surface)}
+.pic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1);filter:saturate(.92)}
+.op:hover .pic img{transform:scale(1.045)}
+.op:hover .pic::before{transform:translate(20px,20px)}
+.pic figcaption{position:absolute;left:18px;bottom:16px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-2);text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.pic .num{position:absolute;top:-14px;left:-6px;font-family:var(--display);font-style:italic;font-size:64px;line-height:1;color:var(--gold);text-shadow:0 2px 20px rgba(0,0,0,.6);z-index:2}
+.copy .meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px}
+.copy .tag{color:var(--gold);border:1px solid var(--gold-dim);padding:6px 10px 5px;border-radius:2px;letter-spacing:.22em}
+.copy .venue{color:var(--ink);font-weight:400;letter-spacing:.08em}
+.copy h2{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.6vw,58px);line-height:1.02;margin:0 0 18px;letter-spacing:-.008em;text-wrap:balance}
+.copy h2 em{font-style:italic;color:var(--gold-bright)}
+.copy p{margin:0 0 14px;color:var(--ink-2);max-width:58ch}
+.facts{margin:26px 0 26px;padding:0;list-style:none;display:grid}
+.facts li{display:grid;grid-template-columns:104px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.facts li:last-child{border-bottom:1px solid var(--line)}
+.facts .k{color:var(--ink-3);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px}
+.facts .v{color:var(--ink-2)}
+.facts .v b{font-weight:400;color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.cta small{color:var(--ink-3);font-size:12px;letter-spacing:.04em}
+
+/* ---------- how it works ---------- */
+.deal{position:relative;margin:clamp(48px,8vw,96px) 0 0;padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line-strong);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(32px,6vw,96px)}
+.deal::before{content:"";position:absolute;left:50%;top:0;width:min(900px,120vw);height:100%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 0%,rgba(182,154,91,.10),transparent 60%);pointer-events:none}
+.deal h3{font-family:var(--display);font-weight:300;font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin:12px 0 0;text-wrap:balance}
+.deal h3 em{font-style:italic;color:var(--gold-bright)}
+.deal ol{margin:0;padding:0;list-style:none;counter-reset:s;display:grid}
+.deal li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:15px}
+.deal li:last-child{border-bottom:1px solid var(--line)}
+.deal li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-style:italic;font-size:26px;color:var(--gold);line-height:1;padding-top:1px}
+.deal li b{font-weight:400;color:var(--ink);display:block;margin-bottom:2px}
+.deal li b.in{display:inline;margin:0}
+
+/* ---------- faq ---------- */
+.faq{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line-strong);padding-top:clamp(36px,5vw,56px)}
+.faq dl{margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 40px}
+.faq dt{font-family:var(--display);font-weight:400;font-size:22px;line-height:1.15;color:var(--ink);margin:0 0 8px}
+.faq dd{margin:0;color:var(--ink-2);font-size:14.5px;max-width:42ch}
+.faq a{color:var(--ink);text-decoration-color:var(--gold-dim)}
+
+.grp{font-family:var(--display);font-style:italic;font-size:20px;color:var(--gold-bright);margin:14px 0 -6px;padding-top:10px;border-top:1px solid var(--line)}
+.grp:first-of-type{margin-top:0;padding-top:0;border:0}
+.dates{display:grid;gap:12px;padding:16px;border:1px solid var(--line-strong);border-radius:2px;background:var(--raise)}
+.dates .f input,.dates .f select{background-color:var(--surface)}
+.dl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.invites{display:grid;gap:8px}
+.inv{display:grid}
+.inv>input{position:absolute;opacity:0;width:0;height:0}
+.f .inv>label{cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;letter-spacing:.02em;text-transform:none;color:var(--ink-2);border:1px solid var(--line-strong);padding:13px 14px;border-radius:2px;transition:all .2s;user-select:none}
+.inv>label::before{content:"";width:16px;height:16px;border:1px solid var(--ink-3);border-radius:2px;flex:none;transition:all .2s}
+.f .inv>input:checked+label{border-color:var(--gold);color:var(--ink);background:rgba(182,154,91,.08)}
+.f .inv>input:checked+label::before{background:var(--gold);border-color:var(--gold);box-shadow:inset 0 0 0 3px var(--surface)}
+.f .inv>input:focus-visible+label{box-shadow:0 0 0 3px rgba(182,154,91,.35)}
+.inv .dates{border-top:0;margin-top:-1px;border-radius:0 0 2px 2px}
+.dl i{font-style:normal;color:var(--gold-dim);text-transform:none;letter-spacing:.06em;margin-left:6px}
+.f .sub{color:var(--ink-3);font-size:12px;margin:0;letter-spacing:0;text-transform:none}
+.facts .v small{display:block;color:var(--ink-2)}
+footer .tag{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-2)}
+
+/* ---------- footer ---------- */
+footer{position:relative;margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line-strong);padding:40px 0 56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px 40px;align-items:center;color:var(--ink-3);font-size:12px;letter-spacing:.06em}
+footer img{height:24px;opacity:.9}
+footer a{text-decoration:none;color:var(--ink-2)}
+footer a:hover{color:var(--gold-bright)}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;right:0;height:100%;width:min(580px,100%);background:var(--surface);border-left:1px solid var(--line-strong);z-index:50;transform:translateX(102%);transition:transform .42s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overscroll-behavior:contain}
+.sheet.on{transform:none}
+.sheet .cover{position:relative;height:180px;overflow:hidden}
+.sheet .cover img{width:100%;height:100%;object-fit:cover}
+.sheet .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,16,.2),var(--surface))}
+.sheet .in{padding:0 clamp(28px,5vw,44px) clamp(28px,5vw,44px);margin-top:-56px;position:relative}
+.sheet header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:28px}
+.sheet header .eyebrow{margin-bottom:10px}
+.sheet h2{font-family:var(--display);font-weight:300;font-size:36px;line-height:1.04;margin:0;text-wrap:balance}
+.x{appearance:none;background:rgba(17,17,16,.6);border:1px solid var(--line-strong);color:var(--ink-2);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;flex:none}
+.x:hover{border-color:var(--gold);color:var(--gold-bright)}
+form{display:grid;gap:18px}
+#dated{display:grid;gap:18px}
+.f{display:grid;gap:7px}
+.f label,.f legend{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);padding:0}
+.f label i{font-style:normal;color:var(--gold-dim);margin-left:6px}
+.f input,.f select,.f textarea{width:100%;background:var(--raise);border:1px solid var(--line-strong);color:var(--ink);font:inherit;font-weight:300;font-size:15px;padding:13px 14px;border-radius:2px;transition:border-color .2s}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--gold)}
+.f select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.f textarea{min-height:88px;resize:vertical}
+.f input::placeholder,.f textarea::placeholder{color:var(--ink-3)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer;font-size:12px;letter-spacing:.06em;text-transform:none;color:var(--ink-2);border:1px solid var(--line-strong);padding:9px 14px;border-radius:999px;transition:all .2s;user-select:none}
+.chips input{position:absolute;opacity:0;width:0;height:0}
+.chips input:checked+label{border-color:var(--gold);color:var(--gold-bright);background:rgba(182,154,91,.08)}
+.chips input:focus-visible+label{box-shadow:0 0 0 3px rgba(182,154,91,.35)}
+.hint{color:var(--ink-3);font-size:12px;margin:0}
+.actions{display:grid;gap:12px;margin-top:8px}
+.actions .btn{justify-content:center}
+.done{display:none;text-align:center;padding:40px 0}
+.done.on{display:block}
+.done .mark{width:72px;margin:0 auto 24px}
+.done h3{font-family:var(--display);font-weight:300;font-size:36px;margin:0 0 12px;line-height:1.05}
+.done p{color:var(--ink-2);max-width:36ch;margin:0 auto 24px}
+.err{display:none;color:#e0a48a;font-size:13px;border:1px solid rgba(224,164,138,.35);padding:12px 14px;border-radius:2px}
+.err.on{display:block}
+body.locked{overflow:hidden}
+
+@media (max-width:1000px){.strip{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:860px){
+  .op,.deal{grid-template-columns:1fr;gap:28px}
+  .op.flip .pic{order:0}
+  .pic{aspect-ratio:4/5;min-height:0}
+  .strip{grid-template-columns:1fr 1fr}
+  .row2{grid-template-columns:1fr}
+  .hero{min-height:0;padding-top:140px}
+}
+@media (max-width:520px){.strip{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <img src="mark.png" alt="The Wonder Agency">
+  <div class="who">Wonder Collabs · Autumn 2026</div>
+</div></header>
+
+<section class="hero">
+  <div class="bg"><img src="img/hero.jpg" alt=""></div>
+  <div class="wrap">
+    <div class="eyebrow">Creator invitations · The Wonder Agency</div>
+    <h1>Our favourite places. <em>Our favourite creators.</em></h1>
+    <p class="lede">We look after some brilliant restaurants and bars across London — and we're inviting some of our favourite creators to experience them. Choose an invitation below, bring a plus one and enjoy everything listed <strong>on us</strong>, in exchange for a little content about your visit.</p>
+    <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email within two working days.</p>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Five invitations available</small><small>Takes about a minute to request</small></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <nav class="strip" aria-label="Jump to an invitation">
+    <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Temper Tantrums</b></div></a>
+    <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Bottomless brunch</span><b>Temper</b></div></a>
+    <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
+    <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · brunch · roast</span><b>BRIX LDN</b></div></a>
+    <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch party</span><b>Notto Piccadilly</b></div></a>
+  </nav>
+
+  <div class="rule" id="whats-on">
+    <div><div class="eyebrow">You're invited</div><h2 class="big">Pick your <em>next visit.</em></h2></div>
+    <div class="count">Choose → Request → We confirm → You visit → You share</div>
+  </div>
+
+  <!-- I -->
+  <article class="op" id="tantrums">
+    <figure class="pic"><span class="num">I</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Opening night</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
+      <h2>Be there for <em>opening night.</em></h2>
+      <p>From the team behind Temper and Paradiso comes Temper Tantrums — a new coffee and wine bar on Wimpole Street.</p>
+      <p>We're celebrating its arrival with an opening party: live music, flowing wine, small plates and a few surprises along the way. We'll also be revealing the winner of our <em>Free Wine for a Year</em> competition.</p>
+      <p>Come with a plus one, discover the new space and be among the first through the doors.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Temper Tantrums · Wimpole Street, Marylebone W1</span></li>
+        <li><span class="k">When</span><span class="v"><b>One evening</b> · date coming soon</span></li>
+        <li><span class="k">Your invite</span><span class="v">Drinks, small plates and live music for you + one</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="tantrums">Request an invite</button><small>Limited invitations · subject to availability</small></div>
+    </div>
+  </article>
+
+  <!-- II -->
+  <article class="op flip" id="temper">
+    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Temper · Soho</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Temper</span><span>Soho</span></div>
+      <h2>Steak, lobster &amp; <em>90 minutes bottomless.</em></h2>
+      <p>Saturday brunch at Temper means steak, lobster and 90 minutes of bottomless drinks. We'd love you and a plus one to come and try it.</p>
+      <p>Tell us a couple of Saturdays that suit, or leave it to us and we'll suggest some.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Temper · Soho</span></li>
+        <li><span class="k">When</span><span class="v"><b>Saturdays</b> · 12:00–16:00</span></li>
+        <li><span class="k">Your invite</span><span class="v">Surf &amp; turf brunch + 90 minutes of bottomless drinks for two</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="temper">Request a brunch</button><small>Pick your Saturdays, or let us suggest</small></div>
+    </div>
+  </article>
+
+  <!-- III -->
+  <article class="op" id="paradiso">
+    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Paradiso</span><span>Covent Garden</span></div>
+      <h2>Brunch with <em>bottomless cocktails.</em></h2>
+      <p>Weekend brunch, Paradiso style. Choose one large plate or two small plates each, then settle in for 90 minutes of bottomless cocktails, beer and wine.</p>
+      <p>Bring a plus one, any Saturday or Sunday — tell us dates that suit, or leave it to us.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Paradiso · Covent Garden</span></li>
+        <li><span class="k">When</span><span class="v"><b>Saturday &amp; Sunday</b> · 12:00–15:30</span></li>
+        <li><span class="k">Your invite</span><span class="v">Brunch + 90 minutes of bottomless cocktails, beer and wine for two</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="paradiso">Request a brunch</button><small>Pick your dates, or let us suggest</small></div>
+    </div>
+  </article>
+
+  <!-- IV -->
+  <article class="op flip" id="brix">
+    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Dinner · brunch · Sunday roast</span><span class="venue">BRIX LDN</span><span>London Bridge</span></div>
+      <h2>Your choice: <em>dinner, brunch or roast.</em></h2>
+      <p>BRIX is all about smoke, fire, big flavours and very good cocktails. And we're giving you three ways to experience it.</p>
+      <p>Come for dinner and get stuck into the BRIX sharing board, flame-grilled meats and cocktails. Make it brunch for chicken &amp; waffles with hot honey, short rib &amp; eggs and more. Or spend Sunday around the table with smoky meats, all the trimmings and a proper Sunday roast.</p>
+      <p>You choose. We'll host you and a plus one.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">BRIX LDN · London Bridge SE1</span></li>
+        <li><span class="k">When</span><span class="v"><b>Dinner</b> · any evening<small><b>Brunch</b> · 10:00–14:30</small><small><b>Sunday roast</b> · Sundays</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Your chosen experience for two — three courses and cocktails at dinner, or brunch, or the Sunday roast, with drinks</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="brix">Choose your BRIX experience</button><small>Dinner, brunch or Sunday roast</small></div>
+    </div>
+  </article>
+
+  <!-- V -->
+  <article class="op" id="notto">
+    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Relaunch party</span><span class="venue">Notto</span><span>Piccadilly</span></div>
+      <h2>A new look for <em>Notto Piccadilly.</em></h2>
+      <p>The scaffolding is finally coming down. To celebrate the return of Notto Piccadilly's beautiful exterior, we're throwing a relaunch party at the flagship restaurant in the heart of Piccadilly.</p>
+      <p>Join Michelin-starred chef and co-founder Phil Howard for an evening of brilliant pasta, drinks and a few surprises. Bring a plus one and celebrate the new chapter with us.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Notto · Piccadilly W1</span></li>
+        <li><span class="k">When</span><span class="v"><b>One evening</b> · date coming soon</span></li>
+        <li><span class="k">Your invite</span><span class="v">Dinner + drinks for you and a plus one</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="notto">Request an invite</button><small>Limited invitations · subject to availability</small></div>
+    </div>
+  </article>
+
+  <section class="deal">
+    <div><div class="eyebrow">How it works</div><h3>From invitation to table <em>in four steps.</em></h3></div>
+    <ol>
+      <li><div><b>Choose</b>Find the invitations you'd like to experience, tick as many as you want, and hit request. Add dates if you have them in mind — if not, we'll suggest some.</div></li>
+      <li><div><b>We confirm</b>We'll check with the venue and email you within two working days to confirm your date and time, or to offer you some. Your visit isn't booked until you receive our confirmation email.</div></li>
+      <li><div><b>Enjoy</b>Turn up with your plus one and enjoy everything included in your invitation — it's on us. If you order anything outside the invitation, you'll just pay for that separately.</div></li>
+      <li><div><b>Share</b>Create the content listed on your invitation and share it within 7 days, tagging the venue and <b class="in">@thewonderagency</b>. We'll include all the handles and details in your confirmation.</div></li>
+    </ol>
+  </section>
+
+  <section class="faq">
+    <div class="eyebrow">Good to know</div>
+    <dl>
+      <div><dt>Is everything complimentary?</dt><dd>Yes. Everything listed under Your Invite is covered for you and your plus one. Anything additional you order is yours to pay for.</dd></div>
+      <div><dt>Can I request more than one invitation?</dt><dd>Absolutely — tick as many as you like on the form. Each one is confirmed separately, and because places are limited we can't guarantee every request.</dd></div>
+      <div><dt>Is my visit booked when I submit the form?</dt><dd>Not yet. We check every request with the venue and email you within two working days, either confirming your date or offering some. Please wait for our confirmation before making plans or contacting the venue.</dd></div>
+      <div><dt>What if I need to cancel?</dt><dd>Just reply to your confirmation email as soon as you can — ideally at least 48 hours before your visit — so we can offer the space to someone else.</dd></div>
+      <div><dt>Who should I contact?</dt><dd>Once confirmed, we'll send you everything you need for your visit. For anything else, email <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <div><img src="mark.png" alt="The Wonder Agency"></div>
+    <div class="tag">Great hospitality deserves to be talked about.</div>
+    <div>Questions? <a href="mailto:hello@thewonder.group">hello@thewonder.group</a><br>© 2026 The Wonder Agency · London</div>
+  </footer>
+</div>
+
+<!-- request drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="cover"><img id="cover-img" src="img/tantrums.jpg" alt=""></div>
+  <div class="in">
+    <header>
+      <div><div class="eyebrow">Request invitations · about a minute</div><h2 id="sheet-title">Which would you like to visit?</h2></div>
+      <button class="x" id="close" aria-label="Close">×</button>
+    </header>
+
+    <form id="form" novalidate>
+      <input type="hidden" name="source" value="collabs-page">
+      
+      <div class="grp">About you</div>
+      <div class="row2">
+        <div class="f"><label for="name">Your name</label><input id="name" name="name" required autocomplete="name"></div>
+        <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div class="row2">
+        <div class="f"><label for="ig">Instagram handle</label><input id="ig" name="instagram" required placeholder="@"></div>
+        <div class="f"><label for="tt">TikTok handle <i>optional</i></label><input id="tt" name="tiktok" placeholder="@"></div>
+      </div>
+      <div class="f"><label for="followers">Followers on your main platform</label>
+        <select id="followers" name="followers"><option>Under 10k</option><option selected>10k–25k</option><option>25k–50k</option><option>50k–100k</option><option>100k+</option></select>
+      </div>
+
+      <div class="grp">Your invitations</div>
+      <fieldset class="f">
+        <legend>Which would you like to request? <i>tick as many as you like</i></legend>
+        <div class="invites">
+        <div class="inv">
+          <input type="checkbox" id="i-tantrums" name="invitations" value="tantrums"><label for="i-tantrums">Temper Tantrums opening night</label>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-temper" name="invitations" value="temper"><label for="i-temper">Bottomless brunch · Temper</label>
+          <div class="dates" id="dates-temper" hidden>
+            <div class="dl">Any Saturdays in mind? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="temper-d1">First choice</label><input id="temper-d1" name="temper_date_1" type="date"></div>
+              <div class="f"><label for="temper-d2">Second choice</label><input id="temper-d2" name="temper_date_2" type="date"></div>
+            </div>
+          </div>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-paradiso" name="invitations" value="paradiso"><label for="i-paradiso">Bottomless brunch · Paradiso</label>
+          <div class="dates" id="dates-paradiso" hidden>
+            <div class="dl">Any weekend dates in mind? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="paradiso-d1">First choice</label><input id="paradiso-d1" name="paradiso_date_1" type="date"></div>
+              <div class="f"><label for="paradiso-d2">Second choice</label><input id="paradiso-d2" name="paradiso_date_2" type="date"></div>
+            </div>
+          </div>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-brix" name="invitations" value="brix"><label for="i-brix">BRIX LDN · dinner, brunch or roast</label>
+          <div class="dates" id="dates-brix" hidden>
+            <div class="dl">Which would you like to experience?</div>
+            <div class="f"><select id="brix-service" name="brix_service" aria-label="BRIX experience"><option>Dinner</option><option>Brunch</option><option>Sunday roast</option></select></div>
+            <div class="dl">Any dates in mind? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="brix-d1">First choice</label><input id="brix-d1" name="brix_date_1" type="date"></div>
+              <div class="f"><label for="brix-d2">Second choice</label><input id="brix-d2" name="brix_date_2" type="date"></div>
+            </div>
+          </div>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party</label>
+        </div>
+        </div>
+        <p class="sub">Dates are optional — if you leave them blank, we'll suggest some when we confirm. The launch parties are fixed dates, which we'll email you as soon as they're set.</p>
+      </fieldset>
+
+      <div class="grp">Dietary</div>
+      <div class="f"><label for="diet">Any dietary requirements? <i>for you or your guest</i></label><input id="diet" name="dietary" placeholder="Allergies or anything the venue needs to know"></div>
+
+      <div class="grp">Content</div>
+      <fieldset class="f">
+        <legend>What would you like to create?</legend>
+        <div class="chips">
+          <input type="checkbox" id="c1" name="content" value="Stories" checked><label for="c1">Stories</label>
+          <input type="checkbox" id="c2" name="content" value="Reel" checked><label for="c2">Reel</label>
+          <input type="checkbox" id="c3" name="content" value="Carousel"><label for="c3">Carousel</label>
+          <input type="checkbox" id="c4" name="content" value="TikTok"><label for="c4">TikTok</label>
+          <input type="checkbox" id="c5" name="content" value="Google review"><label for="c5">Google review</label>
+        </div>
+        <p class="sub">Your invitation includes the minimum content shown above. Tick anything else you'd also be interested in creating.</p>
+      </fieldset>
+      <div class="f"><label for="notes">Anything else?</label><textarea id="notes" name="notes" placeholder="Timings, ideas, collaboration pitches, dates to avoid or anything else we should know."></textarea></div>
+
+      <div class="err" id="err"><b>Something went wrong.</b> Please try again or email your details to <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</div>
+      <div class="actions">
+        <button class="btn solid" type="submit" id="send">Request invitations</button>
+        <p class="hint">We'll review your requests and get back to you within two working days. Nothing is booked until you receive our confirmation email.</p>
+      </div>
+    </form>
+
+    <div class="done" id="done">
+      <img class="mark" src="mark.png" alt="">
+      <h3>You're on the list.</h3>
+      <p>Thanks — we've got your requests. We'll check with each venue and email you within two working days. Nothing is booked until you receive our confirmation.</p>
+      <button class="btn" id="again">Explore more invitations</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+/* ---- CONFIG ---------------------------------------------------------
+   Paste the Apps Script web-app URL here once deployed (see README).
+   Leave empty to test the page without sending anything.               */
+const ENDPOINT = "";
+/* -------------------------------------------------------------------- */
+
+const OPS = {
+  tantrums:{title:"Temper Tantrums opening night", img:"img/tantrums.jpg"},
+  temper:  {title:"Bottomless brunch — Temper", img:"img/temper.jpg"},
+  paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
+  brix:    {title:"BRIX LDN — dinner, brunch or Sunday roast", img:"img/brix.jpg"},
+  notto:   {title:"Notto Piccadilly relaunch party", img:"img/notto.jpg"}
+};
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), err=$("#err");
+let lastFocus=null;
+
+function syncDates(){ for(const id of ["temper","paradiso","brix"]) $("#dates-"+id).hidden=!$("#i-"+id).checked; }
+$$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
+
+function open(id){
+  lastFocus=document.activeElement;
+  const o=OPS[id]||OPS.tantrums; id=OPS[id]?id:"tantrums";
+  form.reset(); $("#i-"+id).checked=true; syncDates();
+  $("#cover-img").src=o.img;
+  form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
+  sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
+  sheet.scrollTop=0; setTimeout(()=>$("#name").focus(),420);
+  history.replaceState(null,"","?op="+id);
+}
+function close(){
+  sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("locked");
+  history.replaceState(null,"",location.pathname);
+  if(lastFocus) lastFocus.focus();
+}
+$$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
+const today=new Date().toISOString().slice(0,10); $$("input[type=date]").forEach(d=>d.min=today);
+$("#close").addEventListener("click",close); scrim.addEventListener("click",close);
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&sheet.classList.contains("on")) close(); });
+$("#again").addEventListener("click",close);
+
+
+form.addEventListener("submit", async e=>{
+  e.preventDefault(); err.classList.remove("on");
+  const picked=$$(".invites input:checked").map(c=>c.value);
+  if(!picked.length){ $("#i-tantrums").focus(); err.textContent="Please tick at least one invitation."; err.classList.add("on"); return; }
+  if(!form.reportValidity()) return;
+  const btn=$("#send"); btn.disabled=true; btn.textContent="Sending…";
+  const data=new FormData(form);
+  data.set("invitations", picked.join(","));
+  data.set("content", data.getAll("content").join(", "));
+  data.set("submitted_at", new Date().toISOString());
+  data.set("page", location.href);
+  try{
+    if(ENDPOINT){ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams(data)}); }
+    else{ await new Promise(r=>setTimeout(r,600)); console.log("[Wonder Collabs] no ENDPOINT set — would have sent:", Object.fromEntries(data)); }
+    form.style.display="none"; done.classList.add("on"); sheet.scrollTop=0;
+  }catch(x){ err.innerHTML='<b>Something went wrong.</b> Please try again or email your details to <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.'; err.classList.add("on"); }
+  finally{ btn.disabled=false; btn.textContent="Request invitations"; }
+});
+
+/* deep link from the email: ?op=brix opens the drawer with BRIX pre-ticked */
+const q=new URLSearchParams(location.search).get("op");
+if(q && OPS[q]) open(q); else syncDates();
+</script>
+</body>
+</html>
