@@ -387,20 +387,20 @@ body.locked{overflow:hidden}
         <div class="inv">
           <input type="checkbox" id="i-temper" name="invitations" value="temper"><label for="i-temper">Bottomless brunch · Temper</label>
           <div class="dates" id="dates-temper" hidden>
-            <div class="dl">Any Saturdays in mind? <i>optional</i></div>
+            <div class="dl">Which Saturdays suit? <i>optional</i></div>
             <div class="row2">
-              <div class="f"><label for="temper-d1">First choice</label><input id="temper-d1" name="temper_date_1" type="date"></div>
-              <div class="f"><label for="temper-d2">Second choice</label><input id="temper-d2" name="temper_date_2" type="date"></div>
+              <div class="f"><label for="temper-d1">First choice</label><select id="temper-d1" name="temper_date_1" class="pick"></select></div>
+              <div class="f"><label for="temper-d2">Second choice</label><select id="temper-d2" name="temper_date_2" class="pick"></select></div>
             </div>
           </div>
         </div>
         <div class="inv">
           <input type="checkbox" id="i-paradiso" name="invitations" value="paradiso"><label for="i-paradiso">Bottomless brunch · Paradiso</label>
           <div class="dates" id="dates-paradiso" hidden>
-            <div class="dl">Any weekend dates in mind? <i>optional</i></div>
+            <div class="dl">Which weekend dates suit? <i>optional</i></div>
             <div class="row2">
-              <div class="f"><label for="paradiso-d1">First choice</label><input id="paradiso-d1" name="paradiso_date_1" type="date"></div>
-              <div class="f"><label for="paradiso-d2">Second choice</label><input id="paradiso-d2" name="paradiso_date_2" type="date"></div>
+              <div class="f"><label for="paradiso-d1">First choice</label><select id="paradiso-d1" name="paradiso_date_1" class="pick"></select></div>
+              <div class="f"><label for="paradiso-d2">Second choice</label><select id="paradiso-d2" name="paradiso_date_2" class="pick"></select></div>
             </div>
           </div>
         </div>
@@ -409,10 +409,10 @@ body.locked{overflow:hidden}
           <div class="dates" id="dates-brix" hidden>
             <div class="dl">Which would you like to experience?</div>
             <div class="f"><select id="brix-service" name="brix_service" aria-label="BRIX experience"><option>Dinner (any evening)</option><option>Brunch (Saturdays)</option><option>Sunday roast (Sundays)</option></select></div>
-            <div class="dl">Any dates in mind? <i>optional</i></div>
+            <div class="dl">Which dates suit? <i>optional</i></div>
             <div class="row2">
-              <div class="f"><label for="brix-d1">First choice</label><input id="brix-d1" name="brix_date_1" type="date"></div>
-              <div class="f"><label for="brix-d2">Second choice</label><input id="brix-d2" name="brix_date_2" type="date"></div>
+              <div class="f"><label for="brix-d1">First choice</label><select id="brix-d1" name="brix_date_1" class="pick"></select></div>
+              <div class="f"><label for="brix-d2">Second choice</label><select id="brix-d2" name="brix_date_2" class="pick"></select></div>
             </div>
           </div>
         </div>
@@ -480,7 +480,7 @@ $$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
 function open(id){
   lastFocus=document.activeElement;
   const o=OPS[id]||OPS.tantrums; id=OPS[id]?id:"tantrums";
-  form.reset(); $("#i-"+id).checked=true; syncDates();
+  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix();
   $("#cover-img").src=o.img;
   form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
@@ -493,7 +493,27 @@ function close(){
   if(lastFocus) lastFocus.focus();
 }
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
-const today=new Date().toISOString().slice(0,10); $$("input[type=date]").forEach(d=>d.min=today);
+/* date dropdowns: only the days each venue actually does */
+const DAYS={temper:[6], paradiso:[6,0], brix:{ "Dinner (any evening)":[0,1,2,3,4,5,6], "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }};
+function upcoming(days,count){
+  const out=[], d=new Date(); d.setDate(d.getDate()+1);
+  while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
+  return out;
+}
+function fill(id,days){
+  const opts=upcoming(days, days.length>=7?21:8);
+  const fmt=x=>x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+  const iso=x=>x.toISOString().slice(0,10);
+  for(const n of ["d1","d2"]){
+    const sel=$("#"+id+"-"+n), cur=sel.value;
+    sel.innerHTML='<option value="">Leave it to us</option>'+opts.map(x=>`<option value="${iso(x)}">${fmt(x)}</option>`).join("");
+    if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
+  }
+}
+fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso);
+const brixSel=$("#brix-service");
+const fillBrix=()=>fill("brix",DAYS.brix[brixSel.value]||[0,1,2,3,4,5,6]);
+brixSel.addEventListener("change",fillBrix); fillBrix();
 $("#close").addEventListener("click",close); scrim.addEventListener("click",close);
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&sheet.classList.contains("on")) close(); });
 $("#again").addEventListener("click",close);
