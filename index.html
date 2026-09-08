@@ -74,7 +74,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .rule .count{font-family:var(--display);font-style:italic;color:var(--ink-3);font-size:20px;white-space:nowrap}
 
 /* ---------- opportunities ---------- */
-.op{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px clamp(32px,5vw,80px);padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);align-items:center}
+.op{scroll-margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px clamp(32px,5vw,80px);padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);align-items:center}
 .op.flip .pic{order:2}
 .pic{position:relative;aspect-ratio:4/5;margin:0;min-height:420px}
 .pic::before{content:"";position:absolute;inset:0;border:1px solid var(--gold-dim);transform:translate(14px,14px);pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
@@ -548,11 +548,9 @@ function open(id){
   form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
   sheet.scrollTop=0; setTimeout(()=>$("#name").focus(),420);
-  history.replaceState(null,"","?op="+id);
 }
 function close(){
   sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("locked");
-  history.replaceState(null,"",location.pathname);
   if(lastFocus) lastFocus.focus();
 }
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
@@ -611,9 +609,10 @@ form.addEventListener("submit", async e=>{
   finally{ btn.disabled=false; btn.textContent="Request invitations"; }
 });
 
-/* deep link from the email: ?op=brix opens the drawer with BRIX pre-ticked */
+/* deep link from the email: ?op=brix scrolls to that invitation (the button then opens the form with it pre-ticked) */
 const q=new URLSearchParams(location.search).get("op");
-if(q && OPS[q]) open(q); else syncDates();
+syncDates();
+if(q && OPS[q]){ const el=document.getElementById(q); if(el) setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),150); }
 </script>
 </body>
 </html>
