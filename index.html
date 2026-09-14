@@ -59,7 +59,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .btn:hover::after{transform:translateX(4px)}
 
 /* ---------- strip of what's on ---------- */
-.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:-1px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:-1px}
 .strip a{display:grid;gap:12px;align-content:start;padding:14px 16px 18px;background:var(--ground);text-decoration:none;transition:background .25s}
 .strip a:hover{background:var(--surface)}
 .strip img{width:100%;height:120px;object-fit:cover;border-radius:1px;transition:filter .3s}
@@ -79,12 +79,15 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .pic{position:relative;aspect-ratio:4/5;margin:0;min-height:420px}
 .pic::before{content:"";position:absolute;inset:0;border:1px solid var(--gold-dim);transform:translate(14px,14px);pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .pic .img{position:absolute;inset:0;overflow:hidden;background:var(--surface)}
+.pic .img::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 28%,transparent 70%,rgba(0,0,0,.55) 100%)}
 .pic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1);filter:saturate(.92)}
 .op:hover .pic img{transform:scale(1.045)}
 .op:hover .pic::before{transform:translate(20px,20px)}
 .pic figcaption{position:absolute;left:18px;bottom:16px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-2);text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .pic .num{position:absolute;top:-14px;left:-6px;font-family:var(--display);font-style:italic;font-size:64px;line-height:1;color:var(--gold);text-shadow:0 2px 20px rgba(0,0,0,.6);z-index:2}
 .copy .meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px}
+.copy .tag.new,.strip .new{background:var(--gold);color:#0a0a0a;border-color:var(--gold);font-weight:500}
+.strip .new{display:inline-block;font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:8px;vertical-align:middle}
 .copy .tag{color:var(--gold);border:1px solid var(--gold-dim);padding:6px 10px 5px;border-radius:2px;letter-spacing:.22em}
 .copy .venue{color:var(--ink);font-weight:400;letter-spacing:.08em}
 .copy h2{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.6vw,58px);line-height:1.02;margin:0 0 18px;letter-spacing:-.008em;text-wrap:balance}
@@ -128,6 +131,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .inv>input{position:absolute;opacity:0;width:0;height:0}
 .f .inv>label{cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;letter-spacing:.02em;text-transform:none;color:var(--ink-2);border:1px solid var(--line-strong);padding:13px 14px;border-radius:2px;transition:all .2s;user-select:none}
 .inv>label::before{content:"";width:16px;height:16px;border:1px solid var(--ink-3);border-radius:2px;flex:none;transition:all .2s}
+.inv .new{background:var(--gold);color:#0a0a0a;font-weight:500}
 .f .inv>input:checked+label{border-color:var(--gold);color:var(--ink);background:rgba(182,154,91,.08)}
 .f .inv>input:checked+label::before{background:var(--gold);border-color:var(--gold);box-shadow:inset 0 0 0 3px var(--surface)}
 .f .inv>input:focus-visible+label{box-shadow:0 0 0 3px rgba(182,154,91,.35)}
@@ -212,17 +216,19 @@ body.locked{overflow:hidden}
     <h1>Our favourite places. <em>Our favourite creators.</em></h1>
     <p class="lede">We look after some brilliant restaurants and bars across London — and we're inviting some of our favourite creators to experience them. Choose an invitation below, bring a plus one and enjoy everything listed <strong>on us</strong>, in exchange for a little content about your visit.</p>
     <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email.</p>
-    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Seven invitations available</small><small>Takes about a minute to request</small></div>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Nine invitations available</small><small>Takes about a minute to request</small></div>
   </div>
 </section>
 
 <div class="wrap">
   <nav class="strip" aria-label="Jump to an invitation">
+    <a href="#taka"><img src="img/taka.jpg" alt=""><div><span>After hours</span><b>Taka<span class="new">New</span></b></div></a>
     <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Tantrums</b></div></a>
     <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Brunch</span><b>Temper</b></div></a>
     <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Brunch</span><b>Paradiso</b></div></a>
     <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · roast</span><b>BRIX LDN</b></div></a>
     <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch</span><b>Notto</b></div></a>
+    <a href="#nottodine"><img src="img/nottodine.jpg" alt=""><div><span>Lunch · dinner</span><b>Notto</b></div></a>
     <a href="#kasakin"><img src="img/kasakin.jpg" alt=""><div><span>Feast</span><b>Kasa &amp; Kin</b></div></a>
     <a href="#centanni"><img src="img/centanni.jpg" alt=""><div><span>Lunch · dinner</span><b>Cent Anni</b></div></a>
   </nav>
@@ -232,9 +238,27 @@ body.locked{overflow:hidden}
     <div class="count">Choose → Request → We confirm → You visit → You share</div>
   </div>
 
+  <!-- Taka -->
+  <article class="op" id="taka">
+    <figure class="pic"><span class="num">I</span><div class="img"><img src="img/taka.jpg" alt="Late-night cocktails at Taka Marylebone"></div><figcaption>Taka · Marylebone</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag new">New</span><span class="tag">Late-night cocktails</span><span class="venue">Taka</span><span>Marylebone</span></div>
+      <h2>Taka, <em>after hours.</em></h2>
+      <p>What happens when a Japanese restaurant in the heart of the city stays open after hours? It becomes a late-night cocktail spot, of course.</p>
+      <p>Join us at Taka Marylebone on Fridays and Saturdays, 11pm to 1:30am, for Japanese-inspired cocktails, modern classics and an unbeatable atmosphere. The perfect date night or late-night catch-up. Bring a plus one, work your way through the cocktail list, and capture it in a reel.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Taka · Marylebone</span></li>
+        <li><span class="k">When</span><span class="v"><b>Fridays &amp; Saturdays</b> · 23:00–01:30</span></li>
+        <li><span class="k">Your invite</span><span class="v">A range of cocktails for you and a plus one</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the night + one reel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="taka">Request a night</button><small>Pick your Friday or Saturday, or let us suggest</small></div>
+    </div>
+  </article>
+
   <!-- I -->
-  <article class="op" id="tantrums">
-    <figure class="pic"><span class="num">I</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+  <article class="op flip" id="tantrums">
+    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Opening night</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
       <h2>Be there for <em>opening night.</em></h2>
@@ -252,8 +276,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- II -->
-  <article class="op flip" id="temper">
-    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Temper · Soho</figcaption></figure>
+  <article class="op" id="temper">
+    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Temper · Soho</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Temper</span><span>Soho</span></div>
       <h2>Steak, lobster &amp; <em>90 minutes bottomless.</em></h2>
@@ -270,8 +294,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- III -->
-  <article class="op" id="paradiso">
-    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
+  <article class="op flip" id="paradiso">
+    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Paradiso</span><span>Covent Garden</span></div>
       <h2>Brunch with <em>bottomless cocktails.</em></h2>
@@ -288,8 +312,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- IV -->
-  <article class="op flip" id="brix">
-    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
+  <article class="op" id="brix">
+    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Dinner · brunch · Sunday roast</span><span class="venue">BRIX LDN</span><span>London Bridge</span></div>
       <h2>Your choice: <em>dinner, brunch or roast.</em></h2>
@@ -307,8 +331,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- V -->
-  <article class="op" id="notto">
-    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
+  <article class="op flip" id="notto">
+    <figure class="pic"><span class="num">VI</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Relaunch party</span><span class="venue">Notto</span><span>Piccadilly</span></div>
       <h2>A new look for <em>Notto Piccadilly.</em></h2>
@@ -324,9 +348,27 @@ body.locked{overflow:hidden}
     </div>
   </article>
 
+  <!-- Notto dining -->
+  <article class="op" id="nottodine">
+    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/nottodine.jpg" alt="Fresh pasta at Notto"></div><figcaption>Notto · Piccadilly &amp; Covent Garden</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag">Lunch · dinner</span><span class="venue">Notto</span><span>Piccadilly · Covent Garden</span></div>
+      <h2>Fresh pasta at Notto, <em>whenever suits.</em></h2>
+      <p>Can't make the relaunch, or just want a proper sit-down with Phil Howard's pasta? Notto is opening its doors to you and a plus one any day of the week, lunch or dinner.</p>
+      <p>Hand-made pasta, the kind of plates that stop a scroll, and a glass or two to go with them. Choose your restaurant and tell us when suits.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Notto · Piccadilly or Covent Garden</span></li>
+        <li><span class="k">When</span><span class="v"><b>Any day</b> · lunch or dinner — you choose</span></li>
+        <li><span class="k">Your invite</span><span class="v">Starters, pasta and drinks for two</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="nottodine">Request a table</button><small>Pick your dates, or let us suggest</small></div>
+    </div>
+  </article>
+
   <!-- VI -->
   <article class="op flip" id="kasakin">
-    <figure class="pic"><span class="num">VI</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
+    <figure class="pic"><span class="num">VIII</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Filipino feast</span><span class="venue">Kasa &amp; Kin</span><span>Soho</span></div>
       <h2>London's home of ube, <em>on us.</em></h2>
@@ -344,7 +386,7 @@ body.locked{overflow:hidden}
 
   <!-- VII -->
   <article class="op" id="centanni">
-    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
+    <figure class="pic"><span class="num">IX</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Lunch · roast · dinner</span><span class="venue">Cent Anni</span><span>St John's Wood · Wimbledon Village</span></div>
       <h2>Italian, <em>your way.</em></h2>
@@ -419,6 +461,16 @@ body.locked{overflow:hidden}
         <legend>Which would you like to request? <i>tick as many as you like</i></legend>
         <div class="invites">
         <div class="inv">
+          <input type="checkbox" id="i-taka" name="invitations" value="taka"><label for="i-taka">Taka · late-night cocktails <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
+          <div class="dates" id="dates-taka" hidden>
+            <div class="dl">Which Friday or Saturday suits? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="taka-d1">First choice</label><select id="taka-d1" name="taka_date_1" class="pick"></select></div>
+              <div class="f"><label for="taka-d2">Second choice</label><select id="taka-d2" name="taka_date_2" class="pick"></select></div>
+            </div>
+          </div>
+        </div>
+        <div class="inv">
           <input type="checkbox" id="i-tantrums" name="invitations" value="tantrums"><label for="i-tantrums">Temper Tantrums opening night</label>
         </div>
         <div class="inv">
@@ -455,6 +507,20 @@ body.locked{overflow:hidden}
         </div>
         <div class="inv">
           <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party</label>
+        </div>
+        <div class="inv">
+          <input type="checkbox" id="i-nottodine" name="invitations" value="nottodine"><label for="i-nottodine">Notto · lunch or dinner, any day</label>
+          <div class="dates" id="dates-nottodine" hidden>
+            <div class="dl">Which restaurant?</div>
+            <div class="f"><select id="nottodine-location" name="nottodine_location" aria-label="Notto location"><option>Piccadilly</option><option>Covent Garden</option></select></div>
+            <div class="dl">Lunch or dinner?</div>
+            <div class="f"><select id="nottodine-service" name="nottodine_service" aria-label="Notto service"><option>Dinner</option><option>Lunch</option></select></div>
+            <div class="dl">Which dates suit? <i>optional</i></div>
+            <div class="row2">
+              <div class="f"><label for="nottodine-d1">First choice</label><select id="nottodine-d1" name="nottodine_date_1" class="pick"></select></div>
+              <div class="f"><label for="nottodine-d2">Second choice</label><select id="nottodine-d2" name="nottodine_date_2" class="pick"></select></div>
+            </div>
+          </div>
         </div>
         <div class="inv">
           <input type="checkbox" id="i-kasakin" name="invitations" value="kasakin"><label for="i-kasakin">Kasa &amp; Kin · Filipino feast</label>
@@ -525,11 +591,13 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uT
 /* -------------------------------------------------------------------- */
 
 const OPS = {
+  taka:    {title:"Taka Marylebone — late-night cocktails", img:"img/taka.jpg"},
   tantrums:{title:"Temper Tantrums opening night", img:"img/tantrums.jpg"},
   temper:  {title:"Bottomless brunch — Temper", img:"img/temper.jpg"},
   paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
   brix:    {title:"BRIX LDN — dinner, brunch or Sunday roast", img:"img/brix.jpg"},
   notto:   {title:"Notto Piccadilly relaunch party", img:"img/notto.jpg"},
+  nottodine:{title:"Notto — lunch or dinner", img:"img/nottodine.jpg"},
   kasakin: {title:"Kasa & Kin — Filipino feast", img:"img/kasakin.jpg"},
   centanni:{title:"Cent Anni — set lunch, Sunday roast or dinner", img:"img/centanni.jpg"}
 };
@@ -537,7 +605,7 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), err=$("#err");
 let lastFocus=null;
 
-function syncDates(){ for(const id of ["temper","paradiso","brix","kasakin","centanni"]) $("#dates-"+id).hidden=!$("#i-"+id).checked; }
+function syncDates(){ for(const id of ["taka","temper","paradiso","brix","kasakin","centanni","nottodine"]) $("#dates-"+id).hidden=!$("#i-"+id).checked; }
 $$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
 
 function open(id){
@@ -556,7 +624,7 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={temper:[6], paradiso:[6,0], kasakin:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 function upcoming(days,count){
   const out=[], d=new Date(); d.setDate(d.getDate()+1);
   while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
@@ -572,7 +640,7 @@ function fill(id,days){
     if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
   }
 }
-fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin);
+fill("taka",DAYS.taka); fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin); fill("nottodine",DAYS.nottodine);
 const brixSel=$("#brix-service");
 const fillBrix=()=>fill("brix",DAYS.brix[brixSel.value]||ALL);
 brixSel.addEventListener("change",fillBrix); fillBrix();
