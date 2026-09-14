@@ -77,7 +77,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .strip img{width:100%;height:120px;object-fit:cover;border-radius:1px;transition:filter .3s}
 .strip a:hover img{filter:brightness(1.15)}
 .strip b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.1;color:var(--ink);margin-top:3px}
-.strip span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.strip span{display:flex;align-items:flex-end;min-height:2.6em;font-size:10px;letter-spacing:.16em;line-height:1.3;text-transform:uppercase;color:var(--gold)}
+.strip.events span{min-height:0}
+.strip b .new{display:inline-block}
 
 /* ---------- section title ---------- */
 .rule{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:clamp(56px,8vw,104px) 0 clamp(20px,3vw,32px)}
@@ -154,6 +156,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .f .sub{color:var(--ink-3);font-size:12px;margin:0;letter-spacing:0;text-transform:none}
 .facts .v small{display:block;color:var(--ink-2)}
 footer .tag{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-2)}
+footer .follow{display:inline-block;margin-top:8px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--gold-dim);padding-bottom:2px}
+footer .follow:hover{border-color:var(--gold-bright)}
 
 /* ---------- footer ---------- */
 footer{position:relative;margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line-strong);padding:40px 0 56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px 40px;align-items:center;color:var(--ink-3);font-size:12px;letter-spacing:.06em}
@@ -240,16 +244,16 @@ body.locked{overflow:hidden}
     <div class="group">
       <div class="glabel"><span>Events</span><small>Fixed dates · limited places</small></div>
       <div class="strip events">
-        <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Temper Tantrums</b><small>Marylebone · date coming soon</small></div></a>
-        <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch party</span><b>Notto Piccadilly</b><small>With Phil Howard · date coming soon</small></div></a>
+        <a href="#tantrums"><img src="img/tantrums.jpg" alt=""><div><span>Opening night</span><b>Temper Tantrums</b><small>Wednesday 30 September · Marylebone</small></div></a>
+        <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch party</span><b>Notto Piccadilly</b><small>Thursday 1 October · with Phil Howard</small></div></a>
       </div>
     </div>
     <div class="group">
       <div class="glabel"><span>Experiences</span><small>Book a visit that suits you</small></div>
       <div class="strip">
         <a href="#taka"><img src="img/taka.jpg" alt=""><div><span>After hours</span><b>Taka<span class="new">New</span></b></div></a>
-        <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Brunch</span><b>Temper</b></div></a>
-        <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Brunch</span><b>Paradiso</b></div></a>
+        <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Bottomless brunch</span><b>Temper</b></div></a>
+        <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
         <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · roast</span><b>BRIX LDN</b></div></a>
         <a href="#nottodine"><img src="img/nottodine.jpg" alt=""><div><span>Lunch · dinner</span><b>Notto</b></div></a>
         <a href="#kasakin"><img src="img/kasakin.jpg" alt=""><div><span>Feast</span><b>Kasa &amp; Kin</b></div></a>
@@ -283,7 +287,7 @@ body.locked{overflow:hidden}
 
   <!-- I -->
   <article class="op flip" id="tantrums">
-    <figure class="pic"><span class="num">II</span><span class="ribbon">Event · one night only</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+    <figure class="pic"><span class="num">II</span><span class="ribbon">Event · Wed 30 Sept</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag event">Event</span><span class="tag">Opening night</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
       <h2>Be there for <em>opening night.</em></h2>
@@ -292,7 +296,7 @@ body.locked{overflow:hidden}
       <p>Come with a plus one, discover the new space and be among the first through the doors.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">Temper Tantrums · Wimpole Street, Marylebone W1</span></li>
-        <li><span class="k">When</span><span class="v"><b>One evening</b> · date coming soon</span></li>
+        <li><span class="k">When</span><span class="v"><b>Wednesday 30 September</b> · evening, timings with your confirmation</span></li>
         <li><span class="k">Your invite</span><span class="v">Drinks, small plates and live music for you + one</span></li>
         <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
       </ul>
@@ -357,7 +361,7 @@ body.locked{overflow:hidden}
 
   <!-- V -->
   <article class="op flip" id="notto">
-    <figure class="pic"><span class="num">VI</span><span class="ribbon">Event · one night only</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
+    <figure class="pic"><span class="num">VI</span><span class="ribbon">Event · Thu 1 Oct</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag event">Event</span><span class="tag">Relaunch party</span><span class="venue">Notto</span><span>Piccadilly</span></div>
       <h2>A new look for <em>Notto Piccadilly.</em></h2>
@@ -365,7 +369,7 @@ body.locked{overflow:hidden}
       <p>Join Michelin-starred chef and co-founder Phil Howard for an evening of brilliant pasta, drinks and a few surprises. Bring a plus one and celebrate the new chapter with us.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">Notto · Piccadilly W1</span></li>
-        <li><span class="k">When</span><span class="v"><b>One evening</b> · date coming soon</span></li>
+        <li><span class="k">When</span><span class="v"><b>Thursday 1 October</b> · evening, timings with your confirmation</span></li>
         <li><span class="k">Your invite</span><span class="v">Dinner + drinks for you and a plus one</span></li>
         <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
       </ul>
@@ -433,7 +437,7 @@ body.locked{overflow:hidden}
       <li><div><b>Choose</b>Find the invitations you'd like to experience, tick as many as you want, and hit request. Add dates if you have them in mind — if not, we'll suggest some.</div></li>
       <li><div><b>We confirm</b>We'll check with the venue and email you to confirm your date and time, or to offer you some. Your visit isn't booked until you receive our confirmation email.</div></li>
       <li><div><b>Enjoy</b>Turn up with your plus one and enjoy everything included in your invitation — it's on us. If you order anything outside the invitation, you'll just pay for that separately.</div></li>
-      <li><div><b>Share</b>Create the content listed on your invitation and share it within 7 days, tagging the venue and <b class="in">@thewonderagency</b>. We'll include all the handles and details in your confirmation.</div></li>
+      <li><div><b>Share</b>Create the content listed on your invitation and share it within 7 days, tagging the venue. We'll include the handles and details in your confirmation.</div></li>
     </ol>
   </section>
 
@@ -444,13 +448,14 @@ body.locked{overflow:hidden}
       <div><dt>Can I request more than one invitation?</dt><dd>Absolutely — tick as many as you like on the form. Each one is confirmed separately, and because places are limited we can't guarantee every request.</dd></div>
       <div><dt>Is my visit booked when I submit the form?</dt><dd>Not yet. We check every request with the venue and email you, either confirming your date or offering some. Please wait for our confirmation before making plans or contacting the venue.</dd></div>
       <div><dt>What if I need to cancel?</dt><dd>Just reply to your confirmation email as soon as you can — ideally at least 48 hours before your visit — so we can offer the space to someone else.</dd></div>
+      <div><dt>How do I hear about the next ones?</dt><dd>Follow <a href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener">@the.wonder.list</a> on Instagram — new invitations go up there first.</dd></div>
       <div><dt>Who should I contact?</dt><dd>Once confirmed, we'll send you everything you need for your visit. For anything else, email <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</dd></div>
     </dl>
   </section>
 
   <footer>
     <div><img src="mark.png" alt="The Wonder Agency"></div>
-    <div class="tag">Great hospitality deserves to be talked about.</div>
+    <div class="tag">Great hospitality deserves to be talked about.<br><a class="follow" href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener">Follow @the.wonder.list for more invitations →</a></div>
     <div>Questions? <a href="mailto:hello@thewonder.group">hello@thewonder.group</a><br>© 2026 The Wonder Agency · London</div>
   </footer>
 </div>
@@ -496,7 +501,7 @@ body.locked{overflow:hidden}
           </div>
         </div>
         <div class="inv">
-          <input type="checkbox" id="i-tantrums" name="invitations" value="tantrums"><label for="i-tantrums">Temper Tantrums opening night</label>
+          <input type="checkbox" id="i-tantrums" name="invitations" value="tantrums"><label for="i-tantrums">Temper Tantrums opening night · Wed 30 Sept</label>
         </div>
         <div class="inv">
           <input type="checkbox" id="i-temper" name="invitations" value="temper"><label for="i-temper">Bottomless brunch · Temper</label>
@@ -531,7 +536,7 @@ body.locked{overflow:hidden}
           </div>
         </div>
         <div class="inv">
-          <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party</label>
+          <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party · Thu 1 Oct</label>
         </div>
         <div class="inv">
           <input type="checkbox" id="i-nottodine" name="invitations" value="nottodine"><label for="i-nottodine">Notto · lunch or dinner, any day</label>
@@ -572,7 +577,7 @@ body.locked{overflow:hidden}
           </div>
         </div>
         </div>
-        <p class="sub">Dates are optional — if you leave them blank, we'll suggest some when we confirm. The launch parties are fixed dates, which we'll email you as soon as they're set.</p>
+        <p class="sub">Dates are optional — if you leave them blank, we'll suggest some when we confirm. The launch parties are fixed dates — Temper Tantrums on Wednesday 30 September, Notto on Thursday 1 October.</p>
       </fieldset>
 
       <div class="grp">Dietary</div>
@@ -604,6 +609,7 @@ body.locked{overflow:hidden}
       <h3>You're on the list.</h3>
       <p>Thanks — we've got your requests. We'll check with each venue and email you. Nothing is booked until you receive our confirmation.</p>
       <button class="btn" id="again">Explore more invitations</button>
+      <p class="hint" style="margin-top:18px">Follow <a href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener" style="color:var(--gold-bright)">@the.wonder.list</a> for the next round of invitations.</p>
     </div>
   </div>
 </aside>
