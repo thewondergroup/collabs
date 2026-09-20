@@ -115,11 +115,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .facts .k{color:var(--ink-3);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px}
 .facts .v{color:var(--ink-2)}
 .facts .v b{font-weight:400;color:var(--ink)}
+.dl-link{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--gold-dim)}
+.dl-link:hover{border-color:var(--gold-bright)}
 .cta{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
 .cta small{color:var(--ink-3);font-size:12px;letter-spacing:.04em}
 
 /* ---------- how it works ---------- */
-.deal{position:relative;margin:clamp(48px,8vw,96px) 0 0;padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line-strong);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(32px,6vw,96px)}
+.deal{position:relative;margin:clamp(32px,5vw,56px) 0 0;padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line-strong);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(32px,6vw,96px)}
 .deal::before{content:"";position:absolute;left:50%;top:0;width:min(900px,120vw);height:100%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 0%,rgba(182,154,91,.10),transparent 60%);pointer-events:none}
 .deal h3{font-family:var(--display);font-weight:300;font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin:12px 0 0;text-wrap:balance}
 .deal h3 em{font-style:italic;color:var(--gold-bright)}
@@ -129,6 +131,24 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .deal li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-style:italic;font-size:26px;color:var(--gold);line-height:1;padding-top:1px}
 .deal li b{font-weight:400;color:var(--ink);display:block;margin-bottom:2px}
 .deal li b.in{display:inline;margin:0}
+
+/* ---------- deliverables ---------- */
+.deliv{margin:clamp(48px,8vw,96px) 0 0;padding:clamp(48px,7vw,88px) 0 0;border-top:1px solid var(--line-strong);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px clamp(32px,6vw,96px)}
+.deliv h3{font-family:var(--display);font-weight:300;font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin:12px 0 0;text-wrap:balance}
+.deliv h3 em{font-style:italic;color:var(--gold-bright)}
+.deliv .dnote{color:var(--ink-3);font-size:14px;margin:16px 0 0;max-width:36ch}
+.deliv ol{margin:0;padding:0;list-style:none;counter-reset:d;display:grid}
+.deliv li{counter-increment:d;display:grid;grid-template-columns:48px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:15px}
+.deliv li:last-child{border-bottom:1px solid var(--line)}
+.deliv li::before{content:counter(d,decimal-leading-zero);font-family:var(--display);font-style:italic;font-size:26px;color:var(--gold);line-height:1;padding-top:1px}
+.deliv li b{font-weight:400;color:var(--ink);display:block;margin-bottom:2px}
+.howto{margin-top:12px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface)}
+.howto summary{cursor:pointer;padding:10px 14px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-bright);list-style:none}
+.howto summary::before{content:"+ ";color:var(--gold-dim)}
+.howto[open] summary::before{content:"– "}
+.howto p{margin:0;padding:0 14px 12px;font-size:14px;color:var(--ink-2)}
+.howto p b{display:inline;color:var(--ink)}
+@media (max-width:860px){.deliv{grid-template-columns:1fr;gap:24px}}
 
 /* ---------- faq ---------- */
 .faq{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line-strong);padding-top:clamp(36px,5vw,56px)}
@@ -196,6 +216,9 @@ fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
 .chips input{position:absolute;opacity:0;width:0;height:0}
 .chips input:checked+label{border-color:var(--gold);color:var(--gold-bright);background:rgba(182,154,91,.08)}
 .chips input:focus-visible+label{box-shadow:0 0 0 3px rgba(182,154,91,.35)}
+.agree{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start;padding:14px;border:1px solid var(--line-strong);border-radius:2px;background:var(--raise)}
+.agree input{margin:3px 0 0;accent-color:var(--gold);width:16px;height:16px}
+.agree label{font-size:13px;color:var(--ink-2);line-height:1.5;text-transform:none;letter-spacing:0}
 .hint{color:var(--ink-3);font-size:12px;margin:0}
 .actions{display:grid;gap:12px;margin-top:8px}
 .actions .btn{justify-content:center}
@@ -279,7 +302,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Taka · Marylebone</span></li>
         <li><span class="k">When</span><span class="v"><b>Fridays &amp; Saturdays</b> · 23:00–01:30</span></li>
         <li><span class="k">Your invite</span><span class="v">A range of cocktails for you and a plus one</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the night + one reel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="taka">Request a night</button><small>Pick your Friday or Saturday and a time</small></div>
     </div>
@@ -298,7 +321,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Temper Tantrums · Wimpole Street, Marylebone W1</span></li>
         <li><span class="k">When</span><span class="v"><b>Wednesday 30 September</b> · evening, timings with your confirmation</span></li>
         <li><span class="k">Your invite</span><span class="v">Drinks, small plates and live music for you + one</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="tantrums">Request an invite</button><small>Limited invitations · subject to availability</small></div>
     </div>
@@ -316,7 +339,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Temper · Soho</span></li>
         <li><span class="k">When</span><span class="v"><b>Saturdays</b> · 12:00–16:00</span></li>
         <li><span class="k">Your invite</span><span class="v">Surf &amp; turf brunch + 90 minutes of bottomless drinks for two</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="temper">Request a brunch</button><small>Pick your Saturday and a time</small></div>
     </div>
@@ -334,7 +357,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Paradiso · Covent Garden</span></li>
         <li><span class="k">When</span><span class="v"><b>Every Saturday &amp; Sunday</b> · 12:00–16:00</span></li>
         <li><span class="k">Your invite</span><span class="v">Brunch + 90 minutes of bottomless cocktails, beer and wine for two</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="paradiso">Request a brunch</button><small>Pick your date and a time</small></div>
     </div>
@@ -353,7 +376,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">BRIX LDN · London Bridge SE1</span></li>
         <li><span class="k">When</span><span class="v"><b>Dinner</b> · any evening<small><b>Brunch</b> · Saturdays, 10:00–14:30</small><small><b>Sunday roast</b> · Sundays</small></span></li>
         <li><span class="k">Your invite</span><span class="v">Your chosen experience for two — three courses and cocktails at dinner, or brunch, or the Sunday roast, with drinks</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="brix">Choose your BRIX experience</button><small>Dinner, brunch or Sunday roast</small></div>
     </div>
@@ -371,7 +394,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Notto · Piccadilly W1</span></li>
         <li><span class="k">When</span><span class="v"><b>Thursday 1 October</b> · evening, timings with your confirmation</span></li>
         <li><span class="k">Your invite</span><span class="v">Dinner + drinks for you and a plus one</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the night + one reel or carousel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="notto">Request an invite</button><small>Limited invitations · subject to availability</small></div>
     </div>
@@ -389,7 +412,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Notto · Piccadilly or Covent Garden</span></li>
         <li><span class="k">When</span><span class="v"><b>Any day</b> · lunch or dinner — you choose</span></li>
         <li><span class="k">Your invite</span><span class="v">Starters, pasta and drinks for two</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="nottodine">Request a table</button><small>Pick your date and a time</small></div>
     </div>
@@ -407,7 +430,7 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Kasa &amp; Kin · Soho</span></li>
         <li><span class="k">When</span><span class="v"><b>Any day</b> · lunch or dinner</span></li>
         <li><span class="k">Your invite</span><span class="v">Three courses + an ube cocktail each, for two</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days, featuring the ube and sizzle &amp; grill dishes</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="kasakin">Request a table</button><small>Pick your date and a time</small></div>
     </div>
@@ -425,19 +448,35 @@ body.locked{overflow:hidden}
         <li><span class="k">Where</span><span class="v">Cent Anni · St John's Wood or Wimbledon Village</span></li>
         <li><span class="k">When</span><span class="v"><b>Set lunch</b> · Monday–Friday<small><b>Sunday roast</b> · Sundays, St John's Wood only</small><small><b>Dinner</b> · any evening</small></span></li>
         <li><span class="k">Your invite</span><span class="v">Your chosen meal with drinks, for two</span></li>
-        <li><span class="k">In return</span><span class="v">Stories on the day + one reel or carousel within 7 days</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
       <div class="cta"><button class="btn" data-op="centanni">Choose your Cent Anni visit</button><small>Set lunch, Sunday roast or dinner</small></div>
     </div>
   </article>
 
+  <section class="deliv" id="deliverables">
+    <div><div class="eyebrow">What we ask for</div><h3>Four deliverables, <em>every visit.</em></h3>
+      <p class="dnote">The same for all nine invitations. Please share everything within 7 days of your visit and send Ciara the links.</p></div>
+    <ol>
+      <li><div><b>A reel or a carousel</b>One or the other — your call. Tell us which when you request. No copyrighted music on the reel (see 4).</div></li>
+      <li><div><b>Stories on the day</b>A few stories while you're there, tagging the venue.</div></li>
+      <li><div><b>Add the venue as a collaborator</b>On the reel or carousel, use Instagram's <em>Invite collaborator</em> so it appears on the venue's profile too. We'll send the handle with your confirmation.</div></li>
+      <li><div><b>Share a partnership ad code</b>We'd love to put a little spend behind your content so more people see it. To do that we need the ad code from your reel or carousel — and Instagram won't allow boosted content with copyrighted music, so please use original or royalty-free audio.
+        <details class="howto"><summary>How to get the ad code</summary>
+          <p><b>On a post you've already shared:</b> open it from your profile → tap the three dots (top right) → <em>Partnership label &amp; ads</em> → turn on <em>Get partnership ad code</em> → tap <em>Copy</em>, or <em>Share</em> to DM it to us.</p>
+          <p><b>While creating:</b> before you post, tap <em>Partnership label &amp; ads</em> (for stories, the label icon at the top) → turn on <em>Get partnership ad code</em> → share as normal. Once it's live, copy the code or share it with us.</p>
+          <p>You can turn the toggle off at any time to stop new ads being made; anything already running carries on.</p>
+        </details></div></li>
+    </ol>
+  </section>
+
   <section class="deal">
     <div><div class="eyebrow">How it works</div><h3>From invitation to table <em>in four steps.</em></h3></div>
     <ol>
-      <li><div><b>Choose</b>Find the invitations you'd like to experience, tick as many as you want, give us a date and time for each visit, and hit request.</div></li>
+      <li><div><b>Choose</b>Find the invitations you'd like to experience, tick as many as you want, give us a date and time for each visit (at least a week ahead), and hit request.</div></li>
       <li><div><b>We confirm</b>We'll check your date with the venue and email you to confirm — or offer an alternative if it's full. Your visit isn't booked until you receive our confirmation email.</div></li>
       <li><div><b>Enjoy</b>Turn up with your plus one and enjoy everything included in your invitation — it's on us. If you order anything outside the invitation, you'll just pay for that separately.</div></li>
-      <li><div><b>Share</b>Create the content listed on your invitation and share it within 7 days, tagging the venue. We'll include the handles and details in your confirmation.</div></li>
+      <li><div><b>Share</b>The four deliverables above — reel or carousel, stories, venue added as collaborator, ad code — within 7 days. We'll include the handles and details in your confirmation.</div></li>
     </ol>
   </section>
 
@@ -445,6 +484,7 @@ body.locked{overflow:hidden}
     <div class="eyebrow">Good to know</div>
     <dl>
       <div><dt>Is everything complimentary?</dt><dd>Yes. Everything listed under Your Invite is covered for you and your plus one. Anything additional you order is yours to pay for.</dd></div>
+      <div><dt>Why do you need an ad code?</dt><dd>So we can put a small budget behind your post and get it in front of more people — it runs from the venue's account with your name on it, and you keep full control of the toggle. It just means no copyrighted music on the reel.</dd></div>
       <div><dt>Can I request more than one invitation?</dt><dd>Absolutely — tick as many as you like on the form. Each one is confirmed separately, and because places are limited we can't guarantee every request.</dd></div>
       <div><dt>Is my visit booked when I submit the form?</dt><dd>Not yet. We check your date and time with the venue and email you to confirm, or offer an alternative if it's full. Please wait for our confirmation before making plans or contacting the venue.</dd></div>
       <div><dt>What if I need to cancel?</dt><dd>Just reply to your confirmation email as soon as you can — ideally at least 48 hours before your visit — so we can offer the space to someone else.</dd></div>
@@ -584,7 +624,7 @@ body.locked{overflow:hidden}
           </div>
         </div>
         </div>
-        <p class="sub">For each visit, give us a first-choice date and time (a second date helps if the first is full). The two events are fixed: Temper Tantrums on Wednesday 30 September, Notto on Thursday 1 October.</p>
+        <p class="sub">For each visit, give us a first-choice date and time (a second date helps if the first is full). Restaurant visits need at least a week's notice, so dates start from next week. The two events are fixed — Temper Tantrums on Wednesday 30 September, Notto on Thursday 1 October — and you can request those right up to the day.</p>
       </fieldset>
 
       <div class="grp">Dietary</div>
@@ -592,16 +632,24 @@ body.locked{overflow:hidden}
 
       <div class="grp">Content</div>
       <fieldset class="f">
-        <legend>What would you like to create?</legend>
+        <legend>Reel or carousel?</legend>
         <div class="chips">
-          <input type="checkbox" id="c1" name="content" value="Stories" checked><label for="c1">Stories</label>
-          <input type="checkbox" id="c2" name="content" value="Reel" checked><label for="c2">Reel</label>
-          <input type="checkbox" id="c3" name="content" value="Carousel"><label for="c3">Carousel</label>
-          <input type="checkbox" id="c4" name="content" value="TikTok"><label for="c4">TikTok</label>
-          <input type="checkbox" id="c5" name="content" value="Google review"><label for="c5">Google review</label>
+          <input type="radio" id="fmt-reel" name="format" value="Reel" checked><label for="fmt-reel">Reel</label>
+          <input type="radio" id="fmt-car" name="format" value="Carousel"><label for="fmt-car">Carousel</label>
         </div>
-        <p class="sub">Your invitation includes the minimum content shown above. Tick anything else you'd also be interested in creating.</p>
       </fieldset>
+      <fieldset class="f">
+        <legend>Anything extra you'd like to add? <i>optional</i></legend>
+        <div class="chips">
+          <input type="checkbox" id="c4" name="extras" value="TikTok"><label for="c4">TikTok</label>
+          <input type="checkbox" id="c5" name="extras" value="Google review"><label for="c5">Google review</label>
+          <input type="checkbox" id="c6" name="extras" value="Both reel and carousel"><label for="c6">Both reel and carousel</label>
+        </div>
+      </fieldset>
+      <div class="agree">
+        <input type="checkbox" id="agree" name="agree" value="yes" required>
+        <label for="agree">I'll deliver the four things for each visit: a reel or carousel (no copyrighted music), stories on the day, the venue added as collaborator, and a partnership ad code — all within 7 days. <a href="#deliverables" class="dl-link" id="agree-link">See the details</a>.</label>
+      </div>
       <div class="f"><label for="notes">Anything else?</label><textarea id="notes" name="notes" placeholder="Timings, ideas, collaboration pitches, dates to avoid or anything else we should know."></textarea></div>
 
       <div class="err" id="err"><b>Something went wrong.</b> Please try again or email your details to <a href="mailto:hello@thewonder.group">hello@thewonder.group</a>.</div>
@@ -668,8 +716,10 @@ $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
 const DAYS={taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+/* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
+const MIN_NOTICE_DAYS=7;
 function upcoming(days,count){
-  const out=[], d=new Date(); d.setDate(d.getDate()+1);
+  const out=[], d=new Date(); d.setDate(d.getDate()+MIN_NOTICE_DAYS);
   while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
   return out;
 }
@@ -712,6 +762,7 @@ caSel.addEventListener("change",fillCA); fillCA();
 $("#close").addEventListener("click",close); scrim.addEventListener("click",close);
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&sheet.classList.contains("on")) close(); });
 $("#again").addEventListener("click",close);
+$("#agree-link").addEventListener("click",e=>{ e.preventDefault(); close(); setTimeout(()=>document.getElementById("deliverables").scrollIntoView({behavior:"smooth"}),300); });
 
 
 form.addEventListener("submit", async e=>{
@@ -722,7 +773,8 @@ form.addEventListener("submit", async e=>{
   const btn=$("#send"); btn.disabled=true; btn.textContent="Sending…";
   const data=new FormData(form);
   data.set("invitations", picked.join(","));
-  data.set("content", data.getAll("content").join(", "));
+  data.set("content", [data.get("format"), "Stories", "Collaborator tag", "Ad code"].concat(data.getAll("extras")).join(", "));
+  data.delete("extras"); data.delete("agree");
   data.set("submitted_at", new Date().toISOString());
   data.set("page", location.href);
   try{
