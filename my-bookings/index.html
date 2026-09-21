@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your bookings · Wonder Collabs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+:root{--ground:#080808;--surface:#111110;--raise:#171716;--line:#242320;--line-strong:#3a3833;--ink:#f3efe6;--ink-2:#bdb7aa;--ink-3:#847f75;--gold:#b69a5b;--gold-bright:#dcc07c;--gold-dim:#6f5d38;--ok:#8fbf8a;--warn:#d9a86a;--bad:#c8837a;--display:"Cormorant Garamond","Times New Roman",Georgia,serif;--sans:"Jost","Futura","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{color-scheme:dark}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 clamp(20px,5vw,40px) 80px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:28px 0 0}
+.top img{height:34px}
+.top .who{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-top:64px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,7vw,64px);line-height:1;margin:14px 0 12px;letter-spacing:-.01em}
+h1 em{font-style:italic;color:var(--gold-bright)}
+.lede{color:var(--ink-2);margin:0 0 36px;max-width:52ch}
+.state{color:var(--ink-3);font-size:14px;padding:32px 0}
+.card{border:1px solid var(--line-strong);border-radius:2px;background:var(--surface);padding:22px 22px 20px;margin-bottom:14px;display:grid;gap:10px}
+.card .head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.card h2{font-family:var(--display);font-weight:300;font-size:28px;line-height:1.1;margin:0;text-wrap:balance}
+.pill{flex:none;font-size:10px;letter-spacing:.22em;text-transform:uppercase;padding:6px 10px 5px;border-radius:2px;border:1px solid var(--line-strong);color:var(--ink-2);margin-top:6px;white-space:nowrap}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.pill.gold{border-color:var(--gold);color:var(--gold-bright)}
+.facts{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px}
+.facts li{display:grid;grid-template-columns:96px 1fr;gap:14px}
+.facts .k{color:var(--ink-3);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px}
+.facts .v b{font-weight:400;color:var(--ink)}
+.note{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.btn{appearance:none;background:var(--gold);border:1px solid var(--gold);color:#0a0a0a;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:12px 18px 11px;border-radius:2px;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--gold-bright)}
+.btn.ghost{background:none;color:var(--ink-2);border-color:var(--line-strong)}
+.btn.ghost:hover{border-color:var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.change{border-top:1px solid var(--line);padding-top:16px;margin-top:6px;display:grid;gap:12px}
+.change .dl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:grid;gap:6px}
+.f label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+.f select,.f input{width:100%;background:var(--raise);border:1px solid var(--line-strong);color:var(--ink);font:inherit;font-weight:300;font-size:15px;padding:12px 14px;border-radius:2px}
+.f select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.f select:focus,.f input:focus{outline:none;border-color:var(--gold)}
+.hint{font-size:12px;color:var(--ink-3);margin:0}
+.help{margin-top:48px;border-top:1px solid var(--line-strong);padding-top:24px;color:var(--ink-3);font-size:13px}
+.help a{color:var(--ink-2)}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.facts li{grid-template-columns:82px 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../mark.png" alt="The Wonder Agency"><div class="who">Wonder Collabs</div></div>
+
+  <div class="eyebrow">Your bookings</div>
+  <h1 id="title">Hello<em>.</em></h1>
+  <p class="lede" id="lede">Everything you've requested with us, and where each one is up to. If a date no longer works, request a change here and we'll sort it with the venue.</p>
+
+  <div id="list"><div class="state">Loading your bookings…</div></div>
+
+  <div class="help">
+    Questions? Email Ciara at <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a> · See what's on at <a href="../">collabs.thewonder.group</a> · Follow <a href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener">@the.wonder.list</a>
+  </div>
+</div>
+
+<script>
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uTfgkSas2vIHH5XiOcU_2OkzXNiznS3nWopWYCXk18JnlbV/exec";
+const token = new URLSearchParams(location.search).get("t") || "";
+const list = document.getElementById("list");
+const $ = s => document.querySelector(s);
+
+/* same day rules as the main page */
+const ALL=[0,1,2,3,4,5,6];
+const DAYS={taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:ALL, centanni:ALL};
+const TIMES={taka:[23,25], temper:[12,14.5], paradiso:[12,14.5], kasakin:[12,21.5], nottodine:[12,21.5], brix:[10,21.5], centanni:[12,21.5]};
+const MIN_NOTICE_DAYS=7;
+const EVENTS=["tantrums","notto"];
+
+function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function pill(st){
+  const m={ "Requested":["warn","Requested — awaiting confirmation"], "Dates sent":["warn","Dates offered — check your email"], "Confirmed":["ok","Confirmed"], "Change requested":["gold","Change requested"], "Declined":["bad","Not this time"], "Attended":["ok","Attended"], "Content received":["ok","Complete — thank you"], "No show":["bad","No show"] };
+  const [cls,label]=m[st]||["",st||"—"]; return `<span class="pill ${cls}">${esc(label)}</span>`;
+}
+function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
+function dateOpts(op){
+  const days=DAYS[op]||ALL, out=[], d=new Date(); d.setDate(d.getDate()+MIN_NOTICE_DAYS);
+  while(out.length<(days.length>=7?21:8)){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); }
+  return out.map(x=>`<option value="${x.toISOString().slice(0,10)}">${x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</option>`).join("");
+}
+function timeOpts(op){
+  const r=TIMES[op]||[12,21.5], out=[];
+  for(let t=r[0];t<=r[1];t+=0.5){ const h=Math.floor(t)%24, m=t%1?"30":"00"; out.push(`${String(h).padStart(2,"0")}:${m}`); }
+  return out.map(t=>`<option>${t}</option>`).join("");
+}
+
+function card(b){
+  const isEvent=EVENTS.includes(b.opId);
+  const when = b.confirmed ? `<b>${esc(b.confirmed)}</b>` : (b.date1 ? `${fmtDate(b.date1)}${b.time?" at "+esc(b.time):""}${b.date2?` <span style="color:var(--ink-3)">(or ${fmtDate(b.date2)})</span>`:""} <span style="color:var(--ink-3)">— requested, not yet confirmed</span>` : `<span style="color:var(--ink-3)">Fixed date — see the invitation</span>`);
+  const canChange = ["Requested","Dates sent","Confirmed"].includes(b.status);
+  return `<div class="card" data-id="${esc(b.id)}" data-op="${esc(b.opId)}">
+    <div class="head"><h2>${esc(b.title)}</h2>${pill(b.status)}</div>
+    <ul class="facts">
+      <li><span class="k">Where</span><span class="v">${esc(b.venue)}${b.service?" · "+esc(b.service):""}</span></li>
+      <li><span class="k">When</span><span class="v">${when}</span></li>
+      ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details).replace(/\n/g,"<br>")}</span></li>`:""}
+      ${b.status==="Dates sent"&&b.offered?`<li><span class="k">Offered</span><span class="v">${esc(b.offered).replace(/\n/g,"<br>")} — reply to our email with the one that suits</span></li>`:""}
+      ${b.status==="Change requested"?`<li><span class="k">Asked for</span><span class="v">${esc(b.change)} — we're checking with the venue; your original booking stands until you hear from us</span></li>`:""}
+    </ul>
+    ${b.status==="Confirmed"?`<div class="note">Please bring this confirmation. Anything not listed is on you. Content due within 7 days of your visit.</div>`:""}
+    ${canChange?`<div class="actions">${isEvent?"":`<button class="btn ghost" data-act="open">Request a different date or time</button>`}<button class="btn ghost" data-act="cancel">Cancel this one</button></div>
+    <div class="change" hidden>
+      <div class="dl">New date and time</div>
+      <div class="row2">
+        <div class="f"><label>Date</label><select data-f="date">${dateOpts(b.opId)}</select></div>
+        <div class="f"><label>Time</label><select data-f="time">${timeOpts(b.opId)}</select></div>
+      </div>
+      <div class="f"><label>Anything we should know <span style="text-transform:none;letter-spacing:0;color:var(--gold-dim)">optional</span></label><input data-f="note" placeholder="e.g. running late from a meeting until 6:30"></div>
+      <div class="actions"><button class="btn" data-act="send">Send change request</button><button class="btn ghost" data-act="close">Never mind</button></div>
+      <p class="hint">We'll check with the venue and email you a new confirmation. Your current booking stands until then.</p>
+    </div>`:""}
+  </div>`;
+}
+
+async function load(){
+  if(!token){ list.innerHTML='<div class="state">This page needs your personal link — it\'s in every email we\'ve sent you. If you can\'t find it, email <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>'; return; }
+  try{
+    const r=await fetch(ENDPOINT+"?t="+encodeURIComponent(token)); const d=await r.json();
+    if(d.error||!d.rows){ throw new Error(d.error||"bad"); }
+    if(d.name) $("#title").innerHTML=`Hello ${esc(d.name)}<em>.</em>`;
+    if(!d.rows.length){ list.innerHTML='<div class="state">Nothing here yet. <a href="../">See what\'s on →</a></div>'; return; }
+    const order={"Confirmed":0,"Change requested":1,"Dates sent":2,"Requested":3,"Attended":4,"Content received":5,"Declined":6,"No show":7};
+    d.rows.sort((a,b)=>(order[a.status]??9)-(order[b.status]??9));
+    list.innerHTML=d.rows.map(card).join("");
+  }catch(e){
+    list.innerHTML='<div class="state">We couldn\'t load your bookings just now — try again in a minute, or email <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>';
+  }
+}
+
+list.addEventListener("click", async e=>{
+  const btn=e.target.closest("button[data-act]"); if(!btn) return;
+  const card=btn.closest(".card"), act=btn.dataset.act, panel=card.querySelector(".change");
+  if(act==="open"){ panel.hidden=false; return; }
+  if(act==="close"){ panel.hidden=true; return; }
+  const body=new URLSearchParams({t:token, id:card.dataset.id});
+  if(act==="cancel"){
+    if(!confirm("Cancel this booking? We'll let the venue know.")) return;
+    body.set("action","cancel");
+  }else{
+    body.set("action","change");
+    const dsel=card.querySelector('[data-f=date]'); body.set("date", dsel.options[dsel.selectedIndex].textContent+" ("+dsel.value+")");
+    body.set("time", card.querySelector('[data-f=time]').value);
+    body.set("note", card.querySelector('[data-f=note]').value);
+  }
+  card.querySelectorAll("button").forEach(b=>b.disabled=true); btn.textContent="Sending…";
+  try{
+    await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body});
+    setTimeout(load,1500);
+  }catch(x){ alert("That didn't send — please try again or email ciara@thewonder.group."); card.querySelectorAll("button").forEach(b=>b.disabled=false); }
+});
+
+load();
+</script>
+</body>
+</html>
