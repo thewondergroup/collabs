@@ -57,6 +57,12 @@ h1 em{font-style:italic;color:var(--gold-bright)}
 .sec{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:40px 0 12px;display:flex;align-items:center;gap:12px}
 .sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .sec b{font-weight:400;color:var(--ink-3);letter-spacing:.1em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 -16px}
+.chip{appearance:none;background:none;border:1px solid var(--line-strong);color:var(--ink-2);font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px 8px;border-radius:999px;cursor:pointer}
+.chip b{font-weight:400;color:var(--gold);margin-left:6px}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#0a0a0a}
+.chip.on b{color:#0a0a0a}
+.site{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:-6px}
 .card.new{border-color:var(--gold-dim);box-shadow:0 0 0 1px rgba(182,154,91,.15)}
 .creator{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2)}
 .creator a{color:var(--gold-bright);text-decoration:none}
@@ -90,6 +96,7 @@ const vt = new URLSearchParams(location.search).get("v") || "";
 const list = document.getElementById("list");
 const $ = s => document.querySelector(s);
 const EVENTS=["tantrums","notto"];
+let DATA=null, FILTER="", MULTI=false;
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 function pill(st){
@@ -101,6 +108,9 @@ function bracket(f){
   let n=parseFloat(m[1]); if(m[2]==="k") n*=1e3; if(m[2]==="m") n*=1e6;
   if(n<5e3) return "Under 5k"; if(n<1e4) return "5k–10k"; if(n<2.5e4) return "10k–25k"; if(n<5e4) return "25k–50k"; if(n<1e5) return "50k–100k"; if(n<2.5e5) return "100k–250k"; return "250k+";
 }
+let SITEMAP={};
+function buildSites(rows){ const byBase={}; rows.forEach(b=>{ const v=String(b.venue||"").trim(); const base=v.split(",")[0].trim(); (byBase[base]=byBase[base]||new Set()).add(v); }); SITEMAP={}; Object.entries(byBase).forEach(([base,set])=>set.forEach(v=>{ SITEMAP[v]=set.size>1?v.replace(/,\s*/g," "):base; })); }
+function site(b){ return SITEMAP[String(b.venue||"").trim()]||String(b.venue||"").split(",")[0].trim(); }
 function creatorLine(b){
   const ig=b.instagram?`<a href="https://instagram.com/${esc(b.instagram.replace('@',''))}" target="_blank" rel="noopener">${esc(b.instagram.startsWith('@')?b.instagram:'@'+b.instagram)}</a>`:"";
   const tt=b.tiktok?`<span>TikTok ${esc(b.tiktok)}</span>`:"";
@@ -111,7 +121,8 @@ function card(b){
   const isEvent = EVENTS.includes(b.opId);
   const asked = b.status==="Change requested" ? `<b>${esc(b.change)}</b> <span style="color:var(--ink-3)">(currently ${esc(b.confirmed||"unconfirmed")})</span>`
               : (b.confirmed ? `<b>${esc(b.confirmed)}</b>` : (isEvent ? `<b>Event night</b>` : `<b>${fmtDate(b.date1)}${b.time?" at "+esc(b.time):""}</b>${b.date2?` <span style="color:var(--ink-3)">(or ${fmtDate(b.date2)})</span>`:""}`));
-  return `<div class="card ${needs?"new":""}" data-id="${esc(b.id)}">
+  return `<div class="card ${needs?"new":""}" data-id="${esc(b.id)}" data-site="${esc(site(b))}">
+    ${MULTI?`<div class="site">${esc(site(b))}</div>`:""}
     <div class="head"><h2>${esc(b.title)}</h2>${pill(b.status)}</div>
     ${creatorLine(b)}
     <ul class="facts">
@@ -149,14 +160,25 @@ async function load(){
     const r=await fetch(ENDPOINT+"?v="+encodeURIComponent(vt)); const d=await r.json();
     if(d.error) throw new Error(d.error);
     $("#title").innerHTML=`${esc(d.client)}<em>.</em>`;
-    const needs=d.rows.filter(b=>["Requested","Sent to venue","Change requested"].includes(b.status));
-    const pending=d.rows.filter(b=>b.status==="Dates sent");
-    const upcoming=d.rows.filter(b=>b.status==="Confirmed").sort((a,b)=>new Date(a.confirmed)-new Date(b.confirmed));
-    const past=d.rows.filter(b=>["Attended","Content received","No show","Declined"].includes(b.status));
-    const sec=(t,arr,empty)=>`<div class="sec">${t} <b>${arr.length}</b></div>${arr.length?arr.map(card).join(""):`<div class="empty">${empty}</div>`}`;
-    list.innerHTML = sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
+    DATA=d; render();
   }catch(e){ list.innerHTML='<div class="state">Couldn\'t load just now — try again in a minute or email <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>'; }
 }
+function render(){
+  const d=DATA; if(!d) return; buildSites(d.rows);
+  const sites=[...new Set(d.rows.map(site).filter(Boolean))].sort();
+  MULTI=sites.length>1;
+  const rows=FILTER?d.rows.filter(b=>site(b)===FILTER):d.rows;
+  const isNeed=b=>["Requested","Sent to venue","Change requested"].includes(b.status);
+  const needs=rows.filter(isNeed);
+  const pending=rows.filter(b=>b.status==="Dates sent");
+  const upcoming=rows.filter(b=>b.status==="Confirmed").sort((a,b)=>new Date(a.confirmed)-new Date(b.confirmed));
+  const past=rows.filter(b=>["Attended","Content received","No show","Declined"].includes(b.status));
+  const sec=(t,arr,empty)=>`<div class="sec">${t} <b>${arr.length}</b></div>${arr.length?arr.map(card).join(""):`<div class="empty">${empty}</div>`}`;
+  const chip=(label,val)=>{ const n=d.rows.filter(b=>(!val||site(b)===val)&&isNeed(b)).length; return `<button class="chip ${FILTER===val?"on":""}" data-site="${esc(val)}">${esc(label)}${n?`<b>${n}</b>`:""}</button>`; };
+  const chips=MULTI?`<div class="chips">${chip("All venues","")}${sites.map(v=>chip(v,v)).join("")}</div>`:"";
+  list.innerHTML = chips + sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
+}
+list.addEventListener("click", e=>{ const c=e.target.closest(".chip"); if(!c) return; FILTER=c.dataset.site; render(); });
 list.addEventListener("click", async e=>{
   const btn=e.target.closest("button[data-act]"); if(!btn) return;
   const card=btn.closest(".card"), act=btn.dataset.act;
