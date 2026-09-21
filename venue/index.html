@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator visits · Wonder Collabs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+:root{--ground:#080808;--surface:#111110;--raise:#171716;--line:#242320;--line-strong:#3a3833;--ink:#f3efe6;--ink-2:#bdb7aa;--ink-3:#847f75;--gold:#b69a5b;--gold-bright:#dcc07c;--gold-dim:#6f5d38;--ok:#8fbf8a;--warn:#d9a86a;--bad:#c8837a;--display:"Cormorant Garamond","Times New Roman",Georgia,serif;--sans:"Jost","Futura","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{color-scheme:dark}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 clamp(20px,5vw,40px) 80px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:28px 0 0}
+.top img{height:34px}
+.top .who{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-top:64px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,7vw,64px);line-height:1;margin:14px 0 12px;letter-spacing:-.01em}
+h1 em{font-style:italic;color:var(--gold-bright)}
+.lede{color:var(--ink-2);margin:0 0 36px;max-width:52ch}
+.state{color:var(--ink-3);font-size:14px;padding:32px 0}
+.card{border:1px solid var(--line-strong);border-radius:2px;background:var(--surface);padding:22px 22px 20px;margin-bottom:14px;display:grid;gap:10px}
+.card .head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.card h2{font-family:var(--display);font-weight:300;font-size:28px;line-height:1.1;margin:0;text-wrap:balance}
+.pill{flex:none;font-size:10px;letter-spacing:.22em;text-transform:uppercase;padding:6px 10px 5px;border-radius:2px;border:1px solid var(--line-strong);color:var(--ink-2);margin-top:6px;white-space:nowrap}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.pill.gold{border-color:var(--gold);color:var(--gold-bright)}
+.facts{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px}
+.facts li{display:grid;grid-template-columns:96px 1fr;gap:14px}
+.facts .k{color:var(--ink-3);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px}
+.facts .v b{font-weight:400;color:var(--ink)}
+.note{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.btn{appearance:none;background:var(--gold);border:1px solid var(--gold);color:#0a0a0a;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:12px 18px 11px;border-radius:2px;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--gold-bright)}
+.btn.ghost{background:none;color:var(--ink-2);border-color:var(--line-strong)}
+.btn.ghost:hover{border-color:var(--bad);color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.change{border-top:1px solid var(--line);padding-top:16px;margin-top:6px;display:grid;gap:12px}
+.change .dl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:grid;gap:6px}
+.f label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+.f select,.f input{width:100%;background:var(--raise);border:1px solid var(--line-strong);color:var(--ink);font:inherit;font-weight:300;font-size:15px;padding:12px 14px;border-radius:2px}
+.f select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.f select:focus,.f input:focus{outline:none;border-color:var(--gold)}
+.hint{font-size:12px;color:var(--ink-3);margin:0}
+.help{margin-top:48px;border-top:1px solid var(--line-strong);padding-top:24px;color:var(--ink-3);font-size:13px}
+.help a{color:var(--ink-2)}
+.sec{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:40px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+.sec b{font-weight:400;color:var(--ink-3);letter-spacing:.1em}
+.card.new{border-color:var(--gold-dim);box-shadow:0 0 0 1px rgba(182,154,91,.15)}
+.creator{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2)}
+.creator a{color:var(--gold-bright);text-decoration:none}
+.btn.ok{background:var(--ok);border-color:var(--ok)}
+.btn.ok:hover{background:#a6d3a1}
+textarea{width:100%;background:var(--raise);border:1px solid var(--line-strong);color:var(--ink);font:inherit;font-weight:300;font-size:15px;padding:12px 14px;border-radius:2px;min-height:70px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--gold)}
+.empty{color:var(--ink-3);font-size:14px;padding:18px 0}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.facts li{grid-template-columns:82px 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../mark.png" alt="The Wonder Agency"><div class="who">Wonder Collabs</div></div>
+
+  <div class="eyebrow">Creator visits</div>
+  <h1 id="title">Loading<em>…</em></h1>
+  <p class="lede">Creators The Wonder Agency would like to bring in. Approve a visit and they're emailed a confirmation straight away; suggest another slot if the time doesn't work. Nothing is confirmed to a creator until you press a button here.</p>
+
+  <div id="list"><div class="state">Loading…</div></div>
+
+  <div class="help">
+    This is your private link — please don't forward it outside your team. Questions: Ciara at <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.
+  </div>
+</div>
+
+<script>
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uTfgkSas2vIHH5XiOcU_2OkzXNiznS3nWopWYCXk18JnlbV/exec";
+const vt = new URLSearchParams(location.search).get("v") || "";
+const list = document.getElementById("list");
+const $ = s => document.querySelector(s);
+const EVENTS=["tantrums","notto"];
+function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
+function pill(st){
+  const m={"Sent to venue":["gold","Awaiting your approval"],"Change requested":["gold","Wants to change — needs your approval"],"Dates sent":["warn","You suggested a slot — awaiting creator"],"Confirmed":["ok","Confirmed"],"Declined":["bad","Declined"],"Attended":["ok","Attended"],"Content received":["ok","Content received"],"No show":["bad","No show"]};
+  const [cls,label]=m[st]||["",st]; return `<span class="pill ${cls}">${esc(label)}</span>`;
+}
+function creatorLine(b){
+  const ig=b.instagram?`<a href="https://instagram.com/${esc(b.instagram.replace('@',''))}" target="_blank" rel="noopener">${esc(b.instagram.startsWith('@')?b.instagram:'@'+b.instagram)}</a>`:"";
+  const tt=b.tiktok?`<span>TikTok ${esc(b.tiktok)}</span>`:"";
+  return `<div class="creator"><b style="font-weight:400;color:var(--ink)">${esc(b.name)}</b>${ig}${tt}<span>${esc(b.followers)} followers</span></div>`;
+}
+function card(b){
+  const needs = b.status==="Sent to venue" || b.status==="Change requested";
+  const isEvent = EVENTS.includes(b.opId);
+  const asked = b.status==="Change requested" ? `<b>${esc(b.change)}</b> <span style="color:var(--ink-3)">(currently ${esc(b.confirmed||"unconfirmed")})</span>`
+              : (b.confirmed ? `<b>${esc(b.confirmed)}</b>` : (isEvent ? `<b>Event night</b>` : `<b>${fmtDate(b.date1)}${b.time?" at "+esc(b.time):""}</b>${b.date2?` <span style="color:var(--ink-3)">(or ${fmtDate(b.date2)})</span>`:""}`));
+  return `<div class="card ${needs?"new":""}" data-id="${esc(b.id)}">
+    <div class="head"><h2>${esc(b.title)}</h2>${pill(b.status)}</div>
+    ${creatorLine(b)}
+    <ul class="facts">
+      <li><span class="k">When</span><span class="v">${asked}</span></li>
+      ${b.service?`<li><span class="k">What</span><span class="v">${esc(b.service)}${b.venue&&/,/.test(b.venue)?" · "+esc(b.venue.split(",").pop().trim()):""}</span></li>`:""}
+      <li><span class="k">Party</span><span class="v">2 (creator + guest)${b.dietary?` · ${esc(b.dietary)}`:""}</span></li>
+      <li><span class="k">They'll post</span><span class="v">${esc(b.content)}</span></li>
+      ${b.notes?`<li><span class="k">Notes</span><span class="v">${esc(b.notes)}</span></li>`:""}
+      ${b.status==="Dates sent"?`<li><span class="k">Offered</span><span class="v">${esc(b.offered)}</span></li>`:""}
+      ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details)}</span></li>`:""}
+    </ul>
+    ${needs?`
+    <div class="actions"><button class="btn ok" data-act="approve">Approve${isEvent?"":" this time"}</button>${isEvent?"":`<button class="btn ghost" data-act="open-suggest">Suggest another slot</button>`}<button class="btn ghost" data-act="open-decline">Can't host</button></div>
+    <div class="change" data-panel="approve" hidden>
+      <div class="dl">Anything the creator should know? <span style="text-transform:none;letter-spacing:0;color:var(--ink-3)">optional</span></div>
+      <textarea data-f="details" placeholder="e.g. Ask for Marco on arrival. Table for two, set menu."></textarea>
+      <div class="actions"><button class="btn ok" data-act="approve-go">Confirm and email them</button><button class="btn ghost" data-act="close">Back</button></div>
+    </div>
+    <div class="change" data-panel="suggest" hidden>
+      <div class="dl">What can you do instead?</div>
+      <textarea data-f="offered" placeholder="e.g. Sat 26 Sept 13:30, or Sun 27 Sept 12:00"></textarea>
+      <div class="actions"><button class="btn" data-act="suggest-go">Send to creator</button><button class="btn ghost" data-act="close">Back</button></div>
+      <p class="hint">They'll be emailed the options and reply to Ciara, who'll confirm the one they choose.</p>
+    </div>
+    <div class="change" data-panel="decline" hidden>
+      <div class="dl">Reason <span style="text-transform:none;letter-spacing:0;color:var(--ink-3)">optional, not shown to the creator</span></div>
+      <textarea data-f="reason" placeholder="e.g. Fully booked that week"></textarea>
+      <div class="actions"><button class="btn ghost" data-act="decline-go">Decline</button><button class="btn ghost" data-act="close">Back</button></div>
+    </div>`:""}
+  </div>`;
+}
+async function load(){
+  if(!vt){ list.innerHTML='<div class="state">This page needs your venue link — ask Ciara at <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>'; return; }
+  try{
+    const r=await fetch(ENDPOINT+"?v="+encodeURIComponent(vt)); const d=await r.json();
+    if(d.error) throw new Error(d.error);
+    $("#title").innerHTML=`${esc(d.client)}<em>.</em>`;
+    const needs=d.rows.filter(b=>["Sent to venue","Change requested"].includes(b.status));
+    const pending=d.rows.filter(b=>b.status==="Dates sent");
+    const upcoming=d.rows.filter(b=>b.status==="Confirmed").sort((a,b)=>new Date(a.confirmed)-new Date(b.confirmed));
+    const past=d.rows.filter(b=>["Attended","Content received","No show","Declined"].includes(b.status));
+    const sec=(t,arr,empty)=>`<div class="sec">${t} <b>${arr.length}</b></div>${arr.length?arr.map(card).join(""):`<div class="empty">${empty}</div>`}`;
+    list.innerHTML = sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
+  }catch(e){ list.innerHTML='<div class="state">Couldn\'t load just now — try again in a minute or email <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>'; }
+}
+list.addEventListener("click", async e=>{
+  const btn=e.target.closest("button[data-act]"); if(!btn) return;
+  const card=btn.closest(".card"), act=btn.dataset.act;
+  const show=n=>{ card.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==n); };
+  if(act==="open-suggest") return show("suggest");
+  if(act==="open-decline") return show("decline");
+  if(act==="approve") return show("approve");
+  if(act==="close") return show("");
+  const body=new URLSearchParams({v:vt,id:card.dataset.id});
+  if(act==="approve-go"){ body.set("action","approve"); body.set("details",card.querySelector('[data-f=details]').value); }
+  if(act==="suggest-go"){ const o=card.querySelector('[data-f=offered]').value.trim(); if(!o){alert("Type at least one alternative slot.");return;} body.set("action","suggest"); body.set("offered",o); }
+  if(act==="decline-go"){ if(!confirm("Decline this visit? The creator will be told politely.")) return; body.set("action","decline"); body.set("reason",card.querySelector('[data-f=reason]').value); }
+  card.querySelectorAll("button").forEach(b=>b.disabled=true); btn.textContent="Sending…";
+  try{ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body}); setTimeout(load,1800); }
+  catch(x){ alert("That didn't send — please try again."); card.querySelectorAll("button").forEach(b=>b.disabled=false); }
+});
+load();
+</script>
+</body>
+</html>
