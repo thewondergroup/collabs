@@ -180,7 +180,7 @@ function render(){
 }
 list.addEventListener("click", e=>{ const c=e.target.closest(".chip"); if(!c) return; FILTER=c.dataset.site; render(); });
 list.addEventListener("click", async e=>{
-  const btn=e.target.closest("button[data-act]"); if(!btn) return;
+  const btn=e.target.closest("button[data-act]"); if(!btn) return; if(!btn.dataset.label) btn.dataset.label=btn.textContent;
   const card=btn.closest(".card"), act=btn.dataset.act;
   const show=n=>{ card.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==n); };
   if(act==="open-suggest") return show("suggest");
@@ -191,9 +191,29 @@ list.addEventListener("click", async e=>{
   if(act==="approve-go"){ body.set("action","approve"); body.set("details",card.querySelector('[data-f=details]').value); }
   if(act==="suggest-go"){ const o=card.querySelector('[data-f=offered]').value.trim(); if(!o){alert("Type at least one alternative slot.");return;} body.set("action","suggest"); body.set("offered",o); }
   if(act==="decline-go"){ if(!confirm("Decline this visit? The creator will be told politely.")) return; body.set("action","decline"); body.set("reason",card.querySelector('[data-f=reason]').value); }
-  card.querySelectorAll("button").forEach(b=>b.disabled=true); btn.textContent="Sending…";
-  try{ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body}); setTimeout(load,1800); }
-  catch(x){ alert("That didn't send — please try again."); card.querySelectorAll("button").forEach(b=>b.disabled=false); }
+  card.querySelectorAll("button").forEach(b=>b.disabled=true); btn.textContent="Working…";
+  const done=(label)=>{ const st=card.querySelector(".head .pill"); if(st){ st.className="pill ok"; st.textContent=label; } card.classList.remove("new"); card.querySelectorAll(".actions,[data-panel]").forEach(el=>el.remove()); const n=document.createElement("p"); n.className="hint"; n.style.color="var(--ok)"; n.textContent="Done — the creator has been emailed."; card.appendChild(n); };
+  const labels={approve:"Confirmed",suggest:"You suggested a slot — awaiting creator",decline:"Declined"};
+  const act2=body.get("action");
+  let ok=false;
+  try{
+    const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),45000);
+    const r=await fetch(ENDPOINT,{method:"POST",body,signal:ctrl.signal,redirect:"follow"}); clearTimeout(t);
+    const d=await r.json();
+    if(d.error) throw new Error(d.error);
+    ok=true; done(labels[act2]||d.status);
+    if(d.emailError) alert("Saved, but the creator's email didn't send — Ciara has been told and will follow up.");
+  }catch(x){
+    // Couldn't read the reply (network hiccup or slow script) — check the sheet a few times before giving up
+    for(let i=0;i<6 && !ok;i++){
+      await new Promise(res=>setTimeout(res,3000));
+      try{ const r=await fetch(ENDPOINT+"?v="+encodeURIComponent(vt)); const d=await r.json(); const row=(d.rows||[]).find(b=>b.id===card.dataset.id);
+        const want={approve:"Confirmed",suggest:"Dates sent",decline:"Declined"}[act2];
+        if(row && row.status===want){ ok=true; done(labels[act2]); } }catch(y){}
+    }
+    if(!ok){ alert("That didn't go through — please try once more. If it keeps happening, email ciara@thewonder.group and she'll do it for you."); card.querySelectorAll("button").forEach(b=>b.disabled=false); btn.textContent=btn.dataset.label||"Try again"; }
+  }
+  if(ok) setTimeout(load,1500);
 });
 load();
 </script>
