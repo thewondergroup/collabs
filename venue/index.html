@@ -206,7 +206,7 @@ list.addEventListener("click", async e=>{
     const r=await fetch(ENDPOINT,{method:"POST",body,signal:ctrl.signal,redirect:"follow"}); clearTimeout(t);
     const d=await r.json();
     if(d.error) throw new Error(d.error);
-    ok=true; finish();
+    ok=true; if(d.duplicate){ note.style.color="var(--ink-3)"; note.textContent="Already confirmed for this creator on another request — this duplicate has been closed."; if(st){st.className="pill";st.textContent="Duplicate";} } else finish();
     if(d.emailError) alert("Saved, but the creator's email didn't send — Ciara has been told and will follow up.");
   }catch(x){
     for(let i=0;i<6 && !ok;i++){
