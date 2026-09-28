@@ -370,11 +370,11 @@ body.locked{overflow:hidden}
       <div class="meta"><span class="tag">Dinner · brunch · Sunday roast</span><span class="venue">BRIX LDN</span><span>London Bridge</span></div>
       <h2>Your choice: <em>dinner, brunch or roast.</em></h2>
       <p>BRIX is all about smoke, fire, big flavours and very good cocktails. And we're giving you three ways to experience it.</p>
-      <p>Come for dinner and get stuck into the BRIX sharing board, flame-grilled meats and cocktails. Make it Saturday brunch for chicken &amp; waffles with hot honey, short rib &amp; eggs and more. Or spend Sunday around the table with smoky meats, all the trimmings and a proper Sunday roast.</p>
+      <p>Come for dinner and get stuck into the BRIX sharing board, flame-grilled meats and cocktails. Make it weekend brunch for chicken &amp; waffles with hot honey, short rib &amp; eggs and more. Or spend Sunday around the table with smoky meats, all the trimmings and a proper Sunday roast.</p>
       <p>You choose. We'll host you and a plus one.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">BRIX LDN · London Bridge SE1</span></li>
-        <li><span class="k">When</span><span class="v"><b>Dinner</b> · any evening<small><b>Brunch</b> · Saturdays, 10:00–14:30</small><small><b>Sunday roast</b> · Sundays</small></span></li>
+        <li><span class="k">When</span><span class="v"><b>Dinner</b> · any evening<small><b>Brunch</b> · Saturdays &amp; Sundays, 10:00–14:00</small><small><b>Sunday roast</b> · Sundays, 12:00–18:00</small></span></li>
         <li><span class="k">Your invite</span><span class="v">Your chosen experience for two — three courses and cocktails at dinner, or brunch, or the Sunday roast, with drinks</span></li>
         <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
@@ -570,7 +570,7 @@ body.locked{overflow:hidden}
           <input type="checkbox" id="i-brix" name="invitations" value="brix"><label for="i-brix">BRIX LDN · dinner, brunch or roast</label>
           <div class="dates" id="dates-brix" hidden>
             <div class="dl">Which would you like to experience?</div>
-            <div class="f"><select id="brix-service" name="brix_service" aria-label="BRIX experience"><option>Dinner (any evening)</option><option>Brunch (Saturdays)</option><option>Sunday roast (Sundays)</option></select></div>
+            <div class="f"><select id="brix-service" name="brix_service" aria-label="BRIX experience"><option>Dinner (any evening)</option><option>Brunch (Saturdays &amp; Sundays)</option><option>Sunday roast (Sundays)</option></select></div>
             <div class="dl">Which date suits?</div>
             <div class="row2">
               <div class="f"><label for="brix-d1">First choice date</label><select id="brix-d1" name="brix_date_1" class="pick"></select></div>
@@ -715,7 +715,7 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays)":[6], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 function upcoming(days,count){
@@ -735,7 +735,7 @@ function fill(id,days){
 }
 /* time slots per venue / service: [start hour, end hour], half-hour steps */
 const TIMES={taka:[23,25], temper:[12,14.5], paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
-  brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays)":[10,13],"Sunday roast (Sundays)":[12,17]},
+  brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays & Sundays)":[10,13],"Sunday roast (Sundays)":[12,17]},
   centanni:{"Set lunch (Monday–Friday)":[12,14.5],"Sunday roast (Sundays, St John's Wood only)":[12,17],"Dinner (any evening)":[17.5,21.5]}};
 function fillTime(id,range){
   const sel=$("#"+id+"-time"), cur=sel.value, out=[];
