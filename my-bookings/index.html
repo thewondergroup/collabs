@@ -68,7 +68,7 @@ h1 em{font-style:italic;color:var(--gold-bright)}
   <div id="list"><div class="state">Loading your bookings…</div></div>
 
   <div class="help">
-    Questions? Email Ciara at <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a> · See what's on at <a href="../">collabs.thewonder.group</a> · Follow <a href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener">@the.wonder.list</a>
+    This page is the quickest way to manage your bookings — changes here reach the venue straight away. Something it can't do? Email Ciara at <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a> · See what's on at <a href="../">collabs.thewonder.group</a> · Follow <a href="https://www.instagram.com/the.wonder.list/" target="_blank" rel="noopener">@the.wonder.list</a>
   </div>
 </div>
 
@@ -87,7 +87,7 @@ const EVENTS=["tantrums","notto"];
 
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function pill(st){
-  const m={ "Requested":["warn","Requested — awaiting confirmation"], "Dates sent":["warn","Dates offered — check your email"], "Confirmed":["ok","Confirmed"], "Change requested":["gold","Change requested"], "Declined":["bad","Not this time"], "Attended":["ok","Attended"], "Content received":["ok","Complete — thank you"], "No show":["bad","No show"] };
+  const m={ "Requested":["warn","Requested — awaiting confirmation"], "Sent to venue":["warn","Requested — with the venue"], "Dates sent":["warn","Pick a slot below"], "Confirmed":["ok","Confirmed"], "Change requested":["gold","Change requested"], "Declined":["bad","Not this time"], "Attended":["ok","Attended"], "Content received":["ok","Complete — thank you"], "No show":["bad","No show"] };
   const [cls,label]=m[st]||["",st||"—"]; return `<span class="pill ${cls}">${esc(label)}</span>`;
 }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
@@ -102,21 +102,23 @@ function timeOpts(op){
   return out.map(t=>`<option>${t}</option>`).join("");
 }
 
+function splitOffers(t){ return String(t||"").split(/\n|;|,(?![^(]*\))| or /i).map(x=>x.trim()).filter(Boolean); }
 function card(b){
   const isEvent=EVENTS.includes(b.opId);
   const when = b.confirmed ? `<b>${esc(b.confirmed)}</b>` : (b.date1 ? `${fmtDate(b.date1)}${b.time?" at "+esc(b.time):""}${b.date2?` <span style="color:var(--ink-3)">(or ${fmtDate(b.date2)})</span>`:""} <span style="color:var(--ink-3)">— requested, not yet confirmed</span>` : `<span style="color:var(--ink-3)">Fixed date — see the invitation</span>`);
-  const canChange = ["Requested","Dates sent","Confirmed"].includes(b.status);
+  const pending = ["Requested","Sent to venue","Dates sent","Change requested"].includes(b.status);
+  const canChange = pending || b.status==="Confirmed";
   return `<div class="card" data-id="${esc(b.id)}" data-op="${esc(b.opId)}">
     <div class="head"><h2>${esc(b.title)}</h2>${pill(b.status)}</div>
     <ul class="facts">
       <li><span class="k">Where</span><span class="v">${esc(b.venue)}${b.service?" · "+esc(b.service):""}</span></li>
       <li><span class="k">When</span><span class="v">${when}</span></li>
       ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details).replace(/\n/g,"<br>")}</span></li>`:""}
-      ${b.status==="Dates sent"&&b.offered?`<li><span class="k">Offered</span><span class="v">${esc(b.offered).replace(/\n/g,"<br>")} — reply to our email with the one that suits</span></li>`:""}
+      ${b.status==="Dates sent"&&b.offered?`<li><span class="k">Offered</span><span class="v">The venue can do any of these — tap one to confirm it:<div class="actions" style="margin-top:10px">${splitOffers(b.offered).map(o=>`<button class="btn" data-act="pick" data-slot="${esc(o)}">${esc(o)}</button>`).join("")}</div><span style="color:var(--ink-3);font-size:12px">None of them work? Use "Change date or time" below and we'll go back to the venue.</span></span></li>`:""}
       ${b.status==="Change requested"?`<li><span class="k">Asked for</span><span class="v">${esc(b.change)} — we're checking with the venue; your original booking stands until you hear from us</span></li>`:""}
     </ul>
     ${b.status==="Confirmed"?`<div class="note">Please bring this confirmation. Anything not listed is on you. Content due within 7 days of your visit.</div>`:""}
-    ${canChange?`<div class="actions">${isEvent?"":`<button class="btn ghost" data-act="open">Request a different date or time</button>`}<button class="btn ghost" data-act="cancel">Cancel this one</button></div>
+    ${canChange?`<div class="actions">${isEvent?"":`<button class="btn ghost" data-act="open">${pending?"Change date or time":"Request a different date or time"}</button>`}<button class="btn ghost" data-act="cancel">${pending?"Withdraw this request":"Cancel this one"}</button></div>
     <div class="change" hidden>
       <div class="dl">New date and time</div>
       <div class="row2">
@@ -124,8 +126,8 @@ function card(b){
         <div class="f"><label>Time</label><select data-f="time">${timeOpts(b.opId)}</select></div>
       </div>
       <div class="f"><label>Anything we should know <span style="text-transform:none;letter-spacing:0;color:var(--gold-dim)">optional</span></label><input data-f="note" placeholder="e.g. running late from a meeting until 6:30"></div>
-      <div class="actions"><button class="btn" data-act="send">Send change request</button><button class="btn ghost" data-act="close">Never mind</button></div>
-      <p class="hint">We'll check with the venue and email you a new confirmation. Your current booking stands until then.</p>
+      <div class="actions"><button class="btn" data-act="send">${pending?"Update my request":"Send change request"}</button><button class="btn ghost" data-act="close">Never mind</button></div>
+      <p class="hint">${pending?"Your request is updated straight away and the venue sees the new date.":"We'll check with the venue and email you a new confirmation. Your current booking stands until then."}</p>
     </div>`:""}
   </div>`;
 }
@@ -151,8 +153,12 @@ list.addEventListener("click", async e=>{
   if(act==="open"){ panel.hidden=false; return; }
   if(act==="close"){ panel.hidden=true; return; }
   const body=new URLSearchParams({t:token, id:card.dataset.id});
-  if(act==="cancel"){
-    if(!confirm("Cancel this booking? We'll let the venue know.")) return;
+  if(act==="pick"){
+    if(!confirm("Confirm "+btn.dataset.slot+"? You'll get your confirmation email straight away.")) return;
+    body.set("action","pick"); body.set("slot",btn.dataset.slot);
+  }else if(act==="cancel"){
+    const pendingNow=/Requested|with the venue|Dates offered|Change requested/.test(card.querySelector(".pill")?.textContent||"");
+    if(!confirm(pendingNow?"Withdraw this request? You can always request it again from the invitations page.":"Cancel this booking? We'll let the venue know.")) return;
     body.set("action","cancel");
   }else{
     body.set("action","change");
@@ -162,8 +168,9 @@ list.addEventListener("click", async e=>{
   }
   card.querySelectorAll("button").forEach(b=>b.disabled=true); btn.textContent="Sending…";
   try{
-    await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body});
-    setTimeout(load,1500);
+    const r=await fetch(ENDPOINT,{method:"POST",body,redirect:"follow"}); const d=await r.json().catch(()=>({ok:true}));
+    if(d.error) throw new Error(d.error);
+    setTimeout(load,800);
   }catch(x){ alert("That didn't send — please try again or email ciara@thewonder.group."); card.querySelectorAll("button").forEach(b=>b.disabled=false); }
 });
 

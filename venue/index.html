@@ -96,7 +96,7 @@ const vt = new URLSearchParams(location.search).get("v") || "";
 const list = document.getElementById("list");
 const $ = s => document.querySelector(s);
 const EVENTS=["tantrums","notto"];
-const EVENT_WHEN={tantrums:"Wed 30 Sept, from 5pm",notto:"Thu 1 Oct, evening"};
+const EVENT_WHEN={tantrums:"Wed 30 Sept, from 5pm",notto:"New date TBC"};
 let DATA=null, FILTER="", MULTI=false;
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
