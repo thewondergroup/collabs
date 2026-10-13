@@ -66,6 +66,8 @@ h1 em{font-style:italic;color:var(--gold-bright)}
 .diary .slot .st.ok{color:var(--ok)}.diary .slot .st.wait{color:var(--warn)}.diary .slot .st.gold{color:var(--gold)}
 .diary .tbc{color:var(--warn)}
 @media (max-width:560px){.diary .day{grid-template-columns:1fr;gap:6px}.diary .slot{grid-template-columns:56px 1fr;font-size:13px}.diary .slot .st{grid-column:2}}
+.copy{appearance:none;background:none;border:1px solid var(--line-strong);color:var(--gold-bright);font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:4px 10px 3px;border-radius:2px;cursor:pointer;margin-left:8px;vertical-align:middle}
+.copy:hover{border-color:var(--gold)}
 .sec{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:40px 0 12px;display:flex;align-items:center;gap:12px}
 .sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .sec b{font-weight:400;color:var(--ink-3);letter-spacing:.1em}
@@ -132,7 +134,8 @@ function site(b){ return SITEMAP[String(b.venue||"").trim()]||String(b.venue||""
 function creatorLine(b){
   const ig=b.instagram?`<a href="https://instagram.com/${esc(b.instagram.replace('@',''))}" target="_blank" rel="noopener">${esc(b.instagram.startsWith('@')?b.instagram:'@'+b.instagram)}</a>`:"";
   const tt=b.tiktok?`<span>TikTok ${esc(b.tiktok)}</span>`:"";
-  return `<div class="creator"><b style="font-weight:400;color:var(--ink)">${esc(b.name)}</b>${ig}${tt}${bracket(b.followers)?`<span class="bracket">${esc(bracket(b.followers))} followers</span>`:(b.followers?`<span>${esc(b.followers)} followers</span>`:"")}</div>`;
+  const em=b.email?`<a href="mailto:${esc(b.email)}" style="color:var(--ink-2);text-decoration:underline;text-underline-offset:3px">${esc(b.email)}</a>`:"";
+  return `<div class="creator"><b style="font-weight:400;color:var(--ink)">${esc(b.name)}</b>${ig}${tt}${em}${bracket(b.followers)?`<span class="bracket">${esc(bracket(b.followers))} followers</span>`:(b.followers?`<span>${esc(b.followers)} followers</span>`:"")}</div>`;
 }
 function card(b){
   const needs = ["Requested","Sent to venue","Change requested"].includes(b.status);
@@ -151,6 +154,7 @@ function card(b){
       ${b.notes?`<li><span class="k">Notes</span><span class="v">${esc(b.notes)}</span></li>`:""}
       ${b.status==="Dates sent"?`<li><span class="k">Offered</span><span class="v">${esc(b.offered)}</span></li>`:""}
       ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details)}</span></li>`:""}
+      ${b.status==="Confirmed"?`<li><span class="k">Booking</span><span class="v" style="color:var(--ink-2)">${esc(b.name)} · 2 covers · ${esc(b.confirmed||"")}${b.email?` · ${esc(b.email)}`:""}${b.dietary?` · ${esc(b.dietary)}`:""} <button class="copy" data-copy="${esc([b.name,"2 covers",b.confirmed,b.email,b.dietary,"Wonder Agency creator visit"].filter(Boolean).join(" · "))}">Copy</button></span></li>`:""}
     </ul>
     ${needs?`
     <div class="actions"><button class="btn ok" data-act="approve">Approve${isEvent?"":" this time"}</button>${isEvent?"":`<button class="btn ghost" data-act="open-suggest">Suggest another slot</button>`}<button class="btn ghost" data-act="open-decline">Can't host</button></div>
@@ -239,6 +243,7 @@ function render(){
   list.innerHTML = tabs + chips + body;
   window.scrollTo({top:Math.min(window.scrollY, list.offsetTop-20)});
 }
+list.addEventListener("click", e=>{ const c=e.target.closest(".copy"); if(!c) return; navigator.clipboard?.writeText(c.dataset.copy).then(()=>{ const o=c.textContent; c.textContent="Copied"; setTimeout(()=>c.textContent=o,1400); }); });
 list.addEventListener("click", e=>{ const t=e.target.closest(".tab"); if(!t) return; TAB=t.dataset.tab; render(); });
 list.addEventListener("click", e=>{ const c=e.target.closest(".chip"); if(!c) return; FILTER=c.dataset.site; render(); });
 list.addEventListener("click", async e=>{
