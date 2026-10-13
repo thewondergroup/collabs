@@ -69,7 +69,12 @@ h1 em{font-style:italic;color:var(--gold-bright)}
 .sec{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:40px 0 12px;display:flex;align-items:center;gap:12px}
 .sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .sec b{font-weight:400;color:var(--ink-3);letter-spacing:.1em}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 -16px}
+.tabs{display:flex;gap:0;margin:32px 0 0;border-bottom:1px solid var(--line-strong);overflow-x:auto}
+.tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-3);font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:14px 18px 12px;cursor:pointer;white-space:nowrap;margin-bottom:-1px}
+.tab b{font-weight:400;margin-left:8px;color:var(--gold);background:rgba(182,154,91,.12);padding:2px 8px;border-radius:999px;font-size:10px}
+.tab.on{color:var(--ink);border-bottom-color:var(--gold)}
+.tab:hover{color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 -16px}
 .chip{appearance:none;background:none;border:1px solid var(--line-strong);color:var(--ink-2);font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px 8px;border-radius:999px;cursor:pointer}
 .chip b{font-weight:400;color:var(--gold);margin-left:6px}
 .chip.on{background:var(--gold);border-color:var(--gold);color:#0a0a0a}
@@ -93,7 +98,7 @@ textarea:focus{outline:none;border-color:var(--gold)}
 
   <div class="eyebrow">Creator visits</div>
   <h1 id="title">Loading<em>…</em></h1>
-  <p class="lede">Creators who've asked to visit through The Wonder Agency. Approve a visit and they're emailed a confirmation straight away; suggest another slot if the time doesn't work. Nothing is confirmed to a creator until you press a button here.</p>
+  <p class="lede">Creators who've asked to visit through The Wonder Agency. Approve a visit and they're emailed a confirmation straight away; suggest another slot if the time doesn't work. Nothing is confirmed to a creator until you press a button here. Requests whose date has passed drop off on their own.</p>
 
   <div id="list"><div class="state">Loading…</div></div>
 
@@ -109,7 +114,7 @@ const list = document.getElementById("list");
 const $ = s => document.querySelector(s);
 const EVENTS=["tantrums","notto"];
 const EVENT_WHEN={tantrums:"Wed 30 Sept, from 5pm",notto:"New date TBC"};
-let DATA=null, FILTER="", MULTI=false;
+let DATA=null, FILTER="", MULTI=false, TAB="approve";
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 function pill(st){
@@ -199,28 +204,42 @@ function diary(rows){
   const days=Object.keys(byDay).sort((a,b)=>a==="tbc"?1:b==="tbc"?-1:a.localeCompare(b));
   if(!days.length) return "";
   const stOf=b=>b.status==="Confirmed"?["ok","Confirmed"]:b.status==="Dates sent"?["wait","Offered"]:b.status==="Change requested"?["gold","Wants to change"]:["wait","Awaiting approval"];
-  return `<div class="sec">Diary — who's asked for when <b>${live.length}</b></div><div class="diary">${days.map(d=>{
+  return `<div class="sec" style="margin-top:28px">Who's asked for when <b>${live.length}</b></div><div class="diary">${days.map(d=>{
     const items=byDay[d].sort((a,b)=>(timeOf(a)||"99").localeCompare(timeOf(b)||"99"));
     const dt=d==="tbc"?null:new Date(d);
     const head=dt?`<div class="dd">${dt.toLocaleDateString("en-GB",{day:"numeric",month:"short"})}<small>${dt.toLocaleDateString("en-GB",{weekday:"long"})}</small></div>`:`<div class="dd tbc">Date TBC</div>`;
     return `<div class="day">${head}<div>${items.map(b=>{ const [c,l]=stOf(b); const tm=timeOf(b); return `<div class="slot"><b${tm?"":' class="tbc"'}>${tm||"time?"}</b><span><span class="who">${esc(b.name)}</span>${b.instagram?` <span style="color:var(--ink-3)">${esc(b.instagram.startsWith("@")?b.instagram:"@"+b.instagram)}</span>`:""} · ${esc(b.service||b.title)}${MULTI?` · ${esc(site(b))}`:""} · 2 people</span><span class="st ${c}">${l}</span></div>`; }).join("")}</div></div>`;
   }).join("")}</div>`;
 }
+const TODAY=new Date(); TODAY.setHours(0,0,0,0);
+function isPast(b){ const d=dayOf(b); if(!d) return false; const dt=new Date(d+"T00:00:00"); return !isNaN(dt) && dt<TODAY; }
 function render(){
   const d=DATA; if(!d) return; buildSites(d.rows);
   const sites=[...new Set(d.rows.map(site).filter(Boolean))].sort();
   MULTI=sites.length>1;
-  const rows=FILTER?d.rows.filter(b=>site(b)===FILTER):d.rows;
+  const scoped=FILTER?d.rows.filter(b=>site(b)===FILTER):d.rows;
   const isNeed=b=>["Requested","Sent to venue","Change requested"].includes(b.status);
-  const needs=rows.filter(isNeed);
-  const pending=rows.filter(b=>b.status==="Dates sent");
-  const upcoming=rows.filter(b=>b.status==="Confirmed").sort((a,b)=>new Date(a.confirmed)-new Date(b.confirmed));
-  const past=rows.filter(b=>["Attended","Content received","No show","Declined"].includes(b.status));
+  // what the venue never needs to see: declined, withdrawn, and requests whose date has already gone
+  const live=scoped.filter(b=>b.status!=="Declined" && b.status!=="No show" && b.status!=="Expired" && !(isPast(b) && b.status!=="Confirmed" && b.status!=="Attended" && b.status!=="Content received"));
+  const needs=live.filter(isNeed);
+  const pending=live.filter(b=>b.status==="Dates sent");
+  const upcoming=live.filter(b=>b.status==="Confirmed"&&!isPast(b)).sort((a,b)=>(dayOf(a)+timeOf(a)).localeCompare(dayOf(b)+timeOf(b)));
+  const past=scoped.filter(b=>["Attended","Content received"].includes(b.status) || (b.status==="Confirmed"&&isPast(b))).sort((a,b)=>(dayOf(b)+timeOf(b)).localeCompare(dayOf(a)+timeOf(a)));
   const sec=(t,arr,empty)=>`<div class="sec">${t} <b>${arr.length}</b></div>${arr.length?arr.map(card).join(""):`<div class="empty">${empty}</div>`}`;
-  const chip=(label,val)=>{ const n=d.rows.filter(b=>(!val||site(b)===val)&&isNeed(b)).length; return `<button class="chip ${FILTER===val?"on":""}" data-site="${esc(val)}">${esc(label)}${n?`<b>${n}</b>`:""}</button>`; };
+  const chip=(label,val)=>{ const n=d.rows.filter(b=>(!val||site(b)===val)&&isNeed(b)&&!isPast(b)).length; return `<button class="chip ${FILTER===val?"on":""}" data-site="${esc(val)}">${esc(label)}${n?`<b>${n}</b>`:""}</button>`; };
   const chips=MULTI?`<div class="chips">${chip("All venues","")}${sites.map(v=>chip(v,v)).join("")}</div>`:"";
-  list.innerHTML = chips + diary(rows) + sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
+  const tab=(key,label,n)=>`<button class="tab ${TAB===key?"on":""}" data-tab="${key}">${label}${n?`<b>${n}</b>`:""}</button>`;
+  const tabs=`<div class="tabs">${tab("approve","To approve",needs.length)}${tab("confirmed","Confirmed",upcoming.length)}${tab("diary","Diary",0)}${tab("waiting","Waiting on creator",pending.length)}${past.length?tab("past","Past",0):""}</div>`;
+  let body="";
+  if(TAB==="approve") body=sec("Needs your approval",needs,"Nothing waiting — you're up to date.");
+  else if(TAB==="confirmed") body=sec("Confirmed visits coming up",upcoming,"None coming up.");
+  else if(TAB==="diary") body=(diary(live.filter(b=>!isPast(b)))||`<div class="empty" style="margin-top:28px">Nothing in the diary yet.</div>`);
+  else if(TAB==="waiting") body=sec("You suggested a slot — waiting for them to pick",pending,"None.");
+  else body=sec("Past visits",past,"");
+  list.innerHTML = tabs + chips + body;
+  window.scrollTo({top:Math.min(window.scrollY, list.offsetTop-20)});
 }
+list.addEventListener("click", e=>{ const t=e.target.closest(".tab"); if(!t) return; TAB=t.dataset.tab; render(); });
 list.addEventListener("click", e=>{ const c=e.target.closest(".chip"); if(!c) return; FILTER=c.dataset.site; render(); });
 list.addEventListener("click", async e=>{
   const btn=e.target.closest("button[data-act]"); if(!btn) return; if(!btn.dataset.label) btn.dataset.label=btn.textContent;
