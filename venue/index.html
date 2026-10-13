@@ -54,6 +54,18 @@ h1 em{font-style:italic;color:var(--gold-bright)}
 .hint{font-size:12px;color:var(--ink-3);margin:0}
 .help{margin-top:48px;border-top:1px solid var(--line-strong);padding-top:24px;color:var(--ink-3);font-size:13px}
 .help a{color:var(--ink-2)}
+.diary{border:1px solid var(--line-strong);border-radius:2px;background:var(--surface);padding:6px 22px 10px;margin-top:28px}
+.diary .day{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.diary .day:last-child{border-bottom:0}
+.diary .dd{font-family:var(--display);font-size:20px;color:var(--ink);line-height:1.1}
+.diary .dd small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.diary .slot{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:baseline;padding:4px 0;font-size:14px;color:var(--ink-2)}
+.diary .slot b{font-weight:400;color:var(--ink);font-variant-numeric:tabular-nums}
+.diary .slot .who{color:var(--ink)}
+.diary .slot .st{font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.diary .slot .st.ok{color:var(--ok)}.diary .slot .st.wait{color:var(--warn)}.diary .slot .st.gold{color:var(--gold)}
+.diary .tbc{color:var(--warn)}
+@media (max-width:560px){.diary .day{grid-template-columns:1fr;gap:6px}.diary .slot{grid-template-columns:56px 1fr;font-size:13px}.diary .slot .st{grid-column:2}}
 .sec{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:40px 0 12px;display:flex;align-items:center;gap:12px}
 .sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .sec b{font-weight:400;color:var(--ink-3);letter-spacing:.1em}
@@ -165,6 +177,35 @@ async function load(){
     DATA=d; render();
   }catch(e){ list.innerHTML='<div class="state">Couldn\'t load just now — try again in a minute or email <a href="mailto:ciara@thewonder.group">ciara@thewonder.group</a>.</div>'; }
 }
+const MONTHS=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+function dayOf(b){
+  const t=b.confirmed||b.change||"";
+  let m=t.match(/(\d{4})-(\d{2})-(\d{2})/); if(m) return m[0];
+  m=t.match(/(\d{1,2})(?:st|nd|rd|th)?\s+([a-z]{3})[a-z]*\.?(?:\s+(\d{4}))?/i);
+  if(m){ const mo=MONTHS.indexOf(m[2].toLowerCase()); if(mo>=0){ const now=new Date(); let y=m[3]?+m[3]:now.getFullYear(); let d=new Date(y,mo,+m[1]); if(!m[3]&&d<new Date(now.getTime()-60*864e5)) d=new Date(y+1,mo,+m[1]); return d.toISOString().slice(0,10); } }
+  if(b.date1) return b.date1;
+  return "";
+}
+function timeOf(b){
+  const t=b.confirmed||b.change||"";
+  const m=t.match(/\b(\d{1,2})[:.](\d{2})\s*(am|pm)?\b|\b(\d{1,2})\s*(am|pm)\b/i);
+  if(m){ let h=+(m[1]||m[4]), mi=m[2]||"00", ap=(m[3]||m[5]||"").toLowerCase(); if(ap==="pm"&&h<12)h+=12; if(ap==="am"&&h===12)h=0; return String(h).padStart(2,"0")+":"+mi; }
+  return b.time||"";
+}
+function diary(rows){
+  const live=rows.filter(b=>!["Declined","No show","Attended","Content received"].includes(b.status));
+  const byDay={};
+  live.forEach(b=>{ const d=dayOf(b)||"tbc"; (byDay[d]=byDay[d]||[]).push(b); });
+  const days=Object.keys(byDay).sort((a,b)=>a==="tbc"?1:b==="tbc"?-1:a.localeCompare(b));
+  if(!days.length) return "";
+  const stOf=b=>b.status==="Confirmed"?["ok","Confirmed"]:b.status==="Dates sent"?["wait","Offered"]:b.status==="Change requested"?["gold","Wants to change"]:["wait","Awaiting approval"];
+  return `<div class="sec">Diary — who's asked for when <b>${live.length}</b></div><div class="diary">${days.map(d=>{
+    const items=byDay[d].sort((a,b)=>(timeOf(a)||"99").localeCompare(timeOf(b)||"99"));
+    const dt=d==="tbc"?null:new Date(d);
+    const head=dt?`<div class="dd">${dt.toLocaleDateString("en-GB",{day:"numeric",month:"short"})}<small>${dt.toLocaleDateString("en-GB",{weekday:"long"})}</small></div>`:`<div class="dd tbc">Date TBC</div>`;
+    return `<div class="day">${head}<div>${items.map(b=>{ const [c,l]=stOf(b); const tm=timeOf(b); return `<div class="slot"><b${tm?"":' class="tbc"'}>${tm||"time?"}</b><span><span class="who">${esc(b.name)}</span>${b.instagram?` <span style="color:var(--ink-3)">${esc(b.instagram.startsWith("@")?b.instagram:"@"+b.instagram)}</span>`:""} · ${esc(b.service||b.title)}${MULTI?` · ${esc(site(b))}`:""} · 2 people</span><span class="st ${c}">${l}</span></div>`; }).join("")}</div></div>`;
+  }).join("")}</div>`;
+}
 function render(){
   const d=DATA; if(!d) return; buildSites(d.rows);
   const sites=[...new Set(d.rows.map(site).filter(Boolean))].sort();
@@ -178,7 +219,7 @@ function render(){
   const sec=(t,arr,empty)=>`<div class="sec">${t} <b>${arr.length}</b></div>${arr.length?arr.map(card).join(""):`<div class="empty">${empty}</div>`}`;
   const chip=(label,val)=>{ const n=d.rows.filter(b=>(!val||site(b)===val)&&isNeed(b)).length; return `<button class="chip ${FILTER===val?"on":""}" data-site="${esc(val)}">${esc(label)}${n?`<b>${n}</b>`:""}</button>`; };
   const chips=MULTI?`<div class="chips">${chip("All venues","")}${sites.map(v=>chip(v,v)).join("")}</div>`:"";
-  list.innerHTML = chips + sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
+  list.innerHTML = chips + diary(rows) + sec("Needs your approval",needs,"Nothing waiting — you're up to date.") + sec("Waiting on the creator",pending,"None.") + sec("Confirmed visits",upcoming,"None yet.") + (past.length?sec("Past",past,""):"");
 }
 list.addEventListener("click", e=>{ const c=e.target.closest(".chip"); if(!c) return; FILTER=c.dataset.site; render(); });
 list.addEventListener("click", async e=>{
