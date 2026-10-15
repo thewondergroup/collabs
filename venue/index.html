@@ -129,8 +129,10 @@ function bracket(f){
   if(n<5e3) return "Under 5k"; if(n<1e4) return "5k–10k"; if(n<2.5e4) return "10k–25k"; if(n<5e4) return "25k–50k"; if(n<1e5) return "50k–100k"; if(n<2.5e5) return "100k–250k"; return "250k+";
 }
 let SITEMAP={};
+const DEFAULT_LOC={temper:"Temper, Soho"};
+function fixLoc(rows){ rows.forEach(b=>{ if(DEFAULT_LOC[b.opId] && !/,/.test(b.venue||"")) b.venue=DEFAULT_LOC[b.opId]; }); }
 function buildSites(rows){ const byBase={}; rows.forEach(b=>{ const v=String(b.venue||"").trim(); const base=v.split(",")[0].trim(); (byBase[base]=byBase[base]||new Set()).add(v); }); SITEMAP={}; Object.entries(byBase).forEach(([base,set])=>set.forEach(v=>{ SITEMAP[v]=set.size>1?v.replace(/,\s*/g," "):base; })); }
-function site(b){ return SITEMAP[String(b.venue||"").trim()]||String(b.venue||"").split(",")[0].trim(); }
+function site(b){ return String(b.venue||"").trim().replace(/,\s*/g," · "); }
 function creatorLine(b){
   const ig=b.instagram?`<a href="https://instagram.com/${esc(b.instagram.replace('@',''))}" target="_blank" rel="noopener">${esc(b.instagram.startsWith('@')?b.instagram:'@'+b.instagram)}</a>`:"";
   const tt=b.tiktok?`<span>TikTok ${esc(b.tiktok)}</span>`:"";
@@ -143,18 +145,19 @@ function card(b){
   const asked = b.status==="Change requested" ? `<b>${esc(b.change)}</b> <span style="color:var(--ink-3)">(currently ${esc(b.confirmed||"unconfirmed")})</span>`
               : (b.confirmed ? `<b>${esc(b.confirmed)}</b>` : (isEvent ? `<b>${esc(EVENT_WHEN[b.opId]||"Event night")}</b>` : `<b>${b.date1?fmtDate(b.date1):"No date given"}${b.time?" at "+esc(b.time):""}</b>${!b.time?` <span style="color:var(--warn)">· time not given — confirm one when you approve</span>`:""}${b.date2?` <span style="color:var(--ink-3)">(or ${fmtDate(b.date2)})</span>`:""}`));
   return `<div class="card ${needs?"new":""}" data-id="${esc(b.id)}" data-site="${esc(site(b))}">
-    ${MULTI?`<div class="site">${esc(site(b))}</div>`:""}
+    <div class="site">${esc(site(b))}</div>
     <div class="head"><h2>${esc(b.title)}</h2>${pill(b.status)}</div>
     ${creatorLine(b)}
     <ul class="facts">
       <li><span class="k">When</span><span class="v">${asked}</span></li>
-      ${b.service?`<li><span class="k">What</span><span class="v">${esc(b.service)}${b.venue&&/,/.test(b.venue)?" · "+esc(b.venue.split(",").pop().trim()):""}</span></li>`:""}
+      <li><span class="k">Where</span><span class="v"><b>${esc(site(b))}</b></span></li>
+      ${b.service?`<li><span class="k">What</span><span class="v">${esc(b.service)}</span></li>`:""}
       <li><span class="k">Party</span><span class="v">2 (creator + guest)${b.dietary?` · ${esc(b.dietary)}`:""}</span></li>
       <li><span class="k">They'll post</span><span class="v">${esc(b.content)}</span></li>
       ${b.notes?`<li><span class="k">Notes</span><span class="v">${esc(b.notes)}</span></li>`:""}
       ${b.status==="Dates sent"?`<li><span class="k">Offered</span><span class="v">${esc(b.offered)}</span></li>`:""}
       ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details)}</span></li>`:""}
-      ${b.status==="Confirmed"?`<li><span class="k">Booking</span><span class="v" style="color:var(--ink-2)">${esc(b.name)} · 2 covers · ${esc(b.confirmed||"")}${b.email?` · ${esc(b.email)}`:""}${b.dietary?` · ${esc(b.dietary)}`:""} <button class="copy" data-copy="${esc([b.name,"2 covers",b.confirmed,b.email,b.dietary,"Wonder Agency creator visit"].filter(Boolean).join(" · "))}">Copy</button></span></li>`:""}
+      ${b.status==="Confirmed"?`<li><span class="k">Booking</span><span class="v" style="color:var(--ink-2)">${esc(b.name)} · 2 covers · ${esc(site(b))} · ${esc(b.confirmed||"")}${b.email?` · ${esc(b.email)}`:""}${b.dietary?` · ${esc(b.dietary)}`:""} <button class="copy" data-copy="${esc([b.name,"2 covers",site(b),b.confirmed,b.email,b.dietary,"Wonder Agency creator visit"].filter(Boolean).join(" · "))}">Copy</button></span></li>`:""}
     </ul>
     ${needs?`
     <div class="actions"><button class="btn ok" data-act="approve">Approve${isEvent?"":" this time"}</button>${isEvent?"":`<button class="btn ghost" data-act="open-suggest">Suggest another slot</button>`}<button class="btn ghost" data-act="open-decline">Can't host</button></div>
@@ -212,13 +215,13 @@ function diary(rows){
     const items=byDay[d].sort((a,b)=>(timeOf(a)||"99").localeCompare(timeOf(b)||"99"));
     const dt=d==="tbc"?null:new Date(d);
     const head=dt?`<div class="dd">${dt.toLocaleDateString("en-GB",{day:"numeric",month:"short"})}<small>${dt.toLocaleDateString("en-GB",{weekday:"long"})}</small></div>`:`<div class="dd tbc">Date TBC</div>`;
-    return `<div class="day">${head}<div>${items.map(b=>{ const [c,l]=stOf(b); const tm=timeOf(b); return `<div class="slot"><b${tm?"":' class="tbc"'}>${tm||"time?"}</b><span><span class="who">${esc(b.name)}</span>${b.instagram?` <span style="color:var(--ink-3)">${esc(b.instagram.startsWith("@")?b.instagram:"@"+b.instagram)}</span>`:""} · ${esc(b.service||b.title)}${MULTI?` · ${esc(site(b))}`:""} · 2 people</span><span class="st ${c}">${l}</span></div>`; }).join("")}</div></div>`;
+    return `<div class="day">${head}<div>${items.map(b=>{ const [c,l]=stOf(b); const tm=timeOf(b); return `<div class="slot"><b${tm?"":' class="tbc"'}>${tm||"time?"}</b><span><span class="who">${esc(b.name)}</span>${b.instagram?` <span style="color:var(--ink-3)">${esc(b.instagram.startsWith("@")?b.instagram:"@"+b.instagram)}</span>`:""} · ${esc(b.service||b.title)} · <b style="color:var(--gold-bright);font-weight:400">${esc(site(b))}</b> · 2 people</span><span class="st ${c}">${l}</span></div>`; }).join("")}</div></div>`;
   }).join("")}</div>`;
 }
 const TODAY=new Date(); TODAY.setHours(0,0,0,0);
 function isPast(b){ const d=dayOf(b); if(!d) return false; const dt=new Date(d+"T00:00:00"); return !isNaN(dt) && dt<TODAY; }
 function render(){
-  const d=DATA; if(!d) return; buildSites(d.rows);
+  const d=DATA; if(!d) return; fixLoc(d.rows); buildSites(d.rows);
   const sites=[...new Set(d.rows.map(site).filter(Boolean))].sort();
   MULTI=sites.length>1;
   const scoped=FILTER?d.rows.filter(b=>site(b)===FILTER):d.rows;
