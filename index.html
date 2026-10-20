@@ -275,7 +275,7 @@ body.locked{overflow:hidden}
     <div class="group">
       <div class="glabel"><span>Experiences</span><small>Book a visit that suits you</small></div>
       <div class="strip">
-        <a href="#tantrumsdine"><img src="img/tantrums.jpg" alt=""><div><span>Lunch · dinner</span><b>Temper Tantrums<span class="new">New</span></b></div></a>
+        <a href="#tantrumsdine"><img src="img/tantrums.jpg" alt=""><div><span>Breakfast · lunch · dinner</span><b>Temper Tantrums<span class="new">New</span></b></div></a>
         <a href="#tantrumsbrunch"><img src="img/tantrums-brunch.jpg" alt=""><div><span>Bottomless brunch</span><b>Temper Tantrums<span class="new">New</span></b></div></a>
         <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Lobster brunch · City only</span><b>Temper</b></div></a>
         <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
@@ -296,17 +296,17 @@ body.locked{overflow:hidden}
   <article class="op" id="tantrumsdine">
     <figure class="pic"><span class="num">I</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
     <div class="copy">
-      <div class="meta"><span class="tag new">New</span><span class="tag">Lunch · dinner</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
-      <h2>Temper Tantrums, <em>lunch or dinner.</em></h2>
+      <div class="meta"><span class="tag new">New</span><span class="tag">Breakfast · lunch · dinner</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
+      <h2>Temper Tantrums, <em>morning to night.</em></h2>
       <p>The newest opening from the team behind Temper and Paradiso: a coffee and wine bar on Wimpole Street. Italian at heart with Asian accents — flatbreads, charcuterie, tasting plates, a serious wine list and a matcha tiramisu you'll want on camera.</p>
-      <p>Come for a long lunch or a wine-led dinner with a plus one, and show people what Marylebone's newest room is all about.</p>
+      <p>Come for coffee, pastries and breakfast, a long lunch, or a wine-led dinner with a plus one, and show people what Marylebone's newest room is all about.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">Temper Tantrums · 94 Wimpole Street, Marylebone W1</span></li>
-        <li><span class="k">When</span><span class="v"><b>Lunch</b> · any day, 12:00–15:00<small><b>Dinner</b> · Monday–Saturday, from 17:30</small></span></li>
-        <li><span class="k">Your invite</span><span class="v">Lunch or dinner with wine for you and a plus one</span></li>
+        <li><span class="k">When</span><span class="v"><b>Breakfast</b> · any day, 08:00–12:00<small><b>Lunch</b> · any day, 12:00–15:00</small><small><b>Dinner</b> · Monday–Saturday, from 17:30</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Breakfast, or lunch or dinner with wine, for you and a plus one</span></li>
         <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
-      <div class="cta"><button class="btn" data-op="tantrumsdine">Request a table</button><small>Pick lunch or dinner, a date and a time</small></div>
+      <div class="cta"><button class="btn" data-op="tantrumsdine">Request a table</button><small>Pick breakfast, lunch or dinner, a date and a time</small></div>
     </div>
   </article>
 
@@ -533,10 +533,10 @@ body.locked{overflow:hidden}
         <legend>Which would you like to request? <i>tick as many as you like</i></legend>
         <div class="invites">
         <div class="inv">
-          <input type="checkbox" id="i-tantrumsdine" name="invitations" value="tantrumsdine"><label for="i-tantrumsdine">Temper Tantrums · lunch or dinner <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
+          <input type="checkbox" id="i-tantrumsdine" name="invitations" value="tantrumsdine"><label for="i-tantrumsdine">Temper Tantrums · breakfast, lunch or dinner <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
           <div class="dates" id="dates-tantrumsdine" hidden>
-            <div class="dl">Lunch or dinner?</div>
-            <div class="f"><select id="tantrumsdine-service" name="tantrumsdine_service" aria-label="Temper Tantrums service"><option>Lunch (any day)</option><option>Dinner (Monday–Saturday)</option></select></div>
+            <div class="dl">Breakfast, lunch or dinner?</div>
+            <div class="f"><select id="tantrumsdine-service" name="tantrumsdine_service" aria-label="Temper Tantrums service"><option>Breakfast (any day)</option><option>Lunch (any day)</option><option>Dinner (Monday–Saturday)</option></select></div>
             <div class="dl">Which date suits?</div>
             <div class="row2">
               <div class="f"><label for="tantrumsdine-d1">First choice date</label><select id="tantrumsdine-d1" name="tantrumsdine_date_1" class="pick"></select></div>
@@ -692,7 +692,7 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uT
 /* -------------------------------------------------------------------- */
 
 const OPS = {
-  tantrumsdine:{title:"Temper Tantrums — lunch or dinner", img:"img/tantrums.jpg"},
+  tantrumsdine:{title:"Temper Tantrums — breakfast, lunch or dinner", img:"img/tantrums.jpg"},
   tantrumsbrunch:{title:"Bottomless brunch — Temper Tantrums", img:"img/tantrums-brunch.jpg"},
   temper:  {title:"Bottomless brunch — Temper City or Soho", img:"img/temper.jpg"},
   paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
@@ -730,7 +730,7 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsbrunch:[0], tantrumsdine:{"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={tantrumsbrunch:[0], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 function upcoming(days,count){
@@ -749,7 +749,7 @@ function fill(id,days){
   }
 }
 /* time slots per venue / service: [start hour, end hour], half-hour steps */
-const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
+const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Breakfast (any day)":[8,11.5],"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
   brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays & Sundays)":[10,13],"Sunday roast (Sundays)":[12,17]},
   centanni:{"Set lunch (Monday–Friday)":[12,14.5],"Sunday roast (Sundays, St John's Wood only)":[12,17],"Dinner (any evening)":[17.5,21.5]}};
 function fillTime(id,range){
