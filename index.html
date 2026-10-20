@@ -63,7 +63,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .glabel{display:flex;align-items:baseline;gap:14px;padding:0 0 10px}
 .glabel span{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 .glabel small{color:var(--ink-3);font-size:12px;letter-spacing:.04em}
-.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.strip{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .strip.events{grid-template-columns:1fr 1fr}
 .strip.events:has(> a:only-child){grid-template-columns:1fr}
 .strip.events a{grid-template-columns:120px 1fr;align-items:center;gap:18px}
@@ -260,7 +260,7 @@ body.locked{overflow:hidden}
     <h1>Our favourite places. <em>Our favourite creators.</em></h1>
     <p class="lede">We look after some brilliant restaurants and bars across London — and we're inviting some of our favourite creators to experience them. Choose an invitation below, bring a plus one and enjoy everything listed <strong>on us</strong>, in exchange for a little content about your visit.</p>
     <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email.</p>
-    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Eight invitations available</small><small>Takes about a minute to request</small></div>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Nine invitations available</small><small>Takes about a minute to request</small></div>
   </div>
 </section>
 
@@ -276,7 +276,8 @@ body.locked{overflow:hidden}
       <div class="glabel"><span>Experiences</span><small>Book a visit that suits you</small></div>
       <div class="strip">
         <a href="#tantrumsdine"><img src="img/tantrums.jpg" alt=""><div><span>Lunch · dinner</span><b>Temper Tantrums<span class="new">New</span></b></div></a>
-        <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Brunch · Soho or City</span><b>Temper</b></div></a>
+        <a href="#tantrumsbrunch"><img src="img/tantrums-brunch.jpg" alt=""><div><span>Bottomless brunch</span><b>Temper Tantrums<span class="new">New</span></b></div></a>
+        <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Lobster brunch · City only</span><b>Temper</b></div></a>
         <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
         <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · roast</span><b>BRIX LDN</b></div></a>
         <a href="#nottodine"><img src="img/nottodine.jpg" alt=""><div><span>Lunch · dinner</span><b>Notto</b></div></a>
@@ -310,26 +311,45 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- II -->
-  <article class="op flip" id="temper">
-    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Temper · City or Soho</figcaption></figure>
+  <!-- Tantrums brunch -->
+  <article class="op flip" id="tantrumsbrunch">
+    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/tantrums-brunch.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag new">New</span><span class="tag">Bottomless brunch</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
+      <h2>Three courses, <em>90 minutes bottomless.</em></h2>
+      <p>Make your Sunday a little more indulgent with bottomless brunch at Temper Tantrums. Three courses alongside 90 minutes of bottomless drinks — prosecco, selected wines, beers, Aperol Spritz and margaritas. Bring a plus one, settle in and let them take care of brunch.</p>
+      <p>Start with burrata and miso honey or a trio of butters with baked pinsa romana, move on to pinsa topped with prosciutto and camembert di bufala or a creamy mushroom pasta, and finish with matcha tiramisu or cannoli. Very filmable, all of it.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Temper Tantrums · 94 Wimpole Street, Marylebone W1</span></li>
+        <li><span class="k">When</span><span class="v"><b>Sundays</b> · any time from 12:00</span></li>
+        <li><span class="k">Your invite</span><span class="v">Starter, main &amp; dessert + 90 minutes of bottomless drinks for two<small>Aperol Spritz, prosecco, margaritas, beers, white, red or rosé</small></span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="tantrumsbrunch">Request a brunch</button><small>Pick your Sunday and a time from 12:00</small></div>
+    </div>
+  </article>
+
+  <article class="op" id="temper">
+    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Lobster brunch · Temper City only</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Temper</span><span>City or Soho</span></div>
       <h2>Bottomless brunch, <em>City or Soho.</em></h2>
       <p>Two Temper brunches, two moods — both on Saturdays with 90 minutes of bottomless drinks for you and a plus one.</p>
-      <p><b>Temper City</b>, by Bank, is the big one: freshly shucked oysters, surf &amp; turf and half a grilled Cornish lobster. <b>Temper Soho</b>, on Broadwick Street, is steak, tacos and smashed cheeseburgers. Pick the one you'd like when you request.</p>
+      <p><b>Temper City</b>, by Bank, is the lobster brunch: freshly shucked oysters, surf &amp; turf and half a grilled Cornish lobster. <b>Temper Soho</b>, on Broadwick Street, is steak, tacos and smashed cheeseburgers.</p>
+      <p class="lobster-note" style="border-left:2px solid var(--gold);padding:10px 14px;background:rgba(182,154,91,.08);color:var(--ink)"><b>Lobster is only at Temper City.</b> The Soho brunch doesn't include lobster — if that's what you're coming for, choose City when you request.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">Temper City · Angel Court EC2<small>Temper Soho · Broadwick Street W1</small></span></li>
         <li><span class="k">When</span><span class="v"><b>Saturdays</b> · City 12:00–16:00<small>Soho 12:00–15:30</small></span></li>
-        <li><span class="k">Your invite</span><span class="v">Brunch + 90 minutes of bottomless drinks for two — with lobster at City</span></li>
+        <li><span class="k">Your invite</span><span class="v"><b>City:</b> lobster &amp; steak surf &amp; turf + 90 minutes bottomless for two<small><b>Soho:</b> steak, tacos &amp; burgers + 90 minutes bottomless for two (no lobster)</small></span></li>
         <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
-      <div class="cta"><button class="btn" data-op="temper">Request a brunch</button><small>Choose City or Soho, then your Saturday</small></div>
+      <div class="cta"><button class="btn" data-op="temper">Request a brunch</button><small>Lobster? Choose City · Soho is steak, tacos &amp; burgers</small></div>
     </div>
   </article>
 
   <!-- III -->
-  <article class="op" id="paradiso">
-    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
+  <article class="op flip" id="paradiso">
+    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Paradiso</span><span>Covent Garden</span></div>
       <h2>Brunch with <em>bottomless cocktails.</em></h2>
@@ -346,8 +366,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- IV -->
-  <article class="op flip" id="brix">
-    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
+  <article class="op" id="brix">
+    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Dinner · brunch · Sunday roast</span><span class="venue">BRIX LDN</span><span>London Bridge</span></div>
       <h2>Your choice: <em>dinner, brunch or roast.</em></h2>
@@ -365,8 +385,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- V -->
-  <article class="op" id="notto">
-    <figure class="pic"><span class="num">V</span><span class="ribbon">Event · New date TBC</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
+  <article class="op flip" id="notto">
+    <figure class="pic"><span class="num">VI</span><span class="ribbon">Event · New date TBC</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag event">Event</span><span class="tag">Relaunch party</span><span class="venue">Notto</span><span>Piccadilly</span></div>
       <h2>A new look for <em>Notto Piccadilly.</em></h2>
@@ -383,8 +403,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- Notto dining -->
-  <article class="op flip" id="nottodine">
-    <figure class="pic"><span class="num">VI</span><div class="img"><img src="img/nottodine.jpg" alt="Fresh pasta at Notto"></div><figcaption>Notto · Piccadilly &amp; Covent Garden</figcaption></figure>
+  <article class="op" id="nottodine">
+    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/nottodine.jpg" alt="Fresh pasta at Notto"></div><figcaption>Notto · Piccadilly &amp; Covent Garden</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Lunch · dinner</span><span class="venue">Notto</span><span>Piccadilly · Covent Garden</span></div>
       <h2>Fresh pasta at Notto, <em>whenever suits.</em></h2>
@@ -401,8 +421,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- VI -->
-  <article class="op" id="kasakin">
-    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
+  <article class="op flip" id="kasakin">
+    <figure class="pic"><span class="num">VIII</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Filipino feast</span><span class="venue">Kasa &amp; Kin</span><span>Soho</span></div>
       <h2>London's home of ube, <em>on us.</em></h2>
@@ -419,8 +439,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- VII -->
-  <article class="op flip" id="centanni">
-    <figure class="pic"><span class="num">VIII</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
+  <article class="op" id="centanni">
+    <figure class="pic"><span class="num">IX</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Lunch · roast · dinner</span><span class="venue">Cent Anni</span><span>St John's Wood · Wimbledon Village</span></div>
       <h2>Italian, <em>your way.</em></h2>
@@ -438,7 +458,7 @@ body.locked{overflow:hidden}
 
   <section class="deliv" id="deliverables">
     <div><div class="eyebrow">What we ask for</div><h3>Four deliverables, <em>every visit.</em></h3>
-      <p class="dnote">The same for all eight invitations. Please share everything within 7 days of your visit and send Ciara the links.</p></div>
+      <p class="dnote">The same for all nine invitations. Please share everything within 7 days of your visit and send Ciara the links.</p></div>
     <ol>
       <li><div><b>A reel or a carousel</b>One or the other — your call. Tell us which when you request. No copyrighted music on the reel (see 4).</div></li>
       <li><div><b>Stories on the day</b>A few stories while you're there, tagging the venue.</div></li>
@@ -526,10 +546,22 @@ body.locked{overflow:hidden}
           </div>
         </div>
         <div class="inv">
+          <input type="checkbox" id="i-tantrumsbrunch" name="invitations" value="tantrumsbrunch"><label for="i-tantrumsbrunch">Bottomless brunch · Temper Tantrums <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
+          <div class="dates" id="dates-tantrumsbrunch" hidden>
+            <input type="hidden" name="tantrumsbrunch_service" value="Bottomless brunch">
+            <div class="dl">Which Sunday suits? Arrive any time from 12:00</div>
+            <div class="row2">
+              <div class="f"><label for="tantrumsbrunch-d1">First choice date</label><select id="tantrumsbrunch-d1" name="tantrumsbrunch_date_1" class="pick"></select></div>
+              <div class="f"><label for="tantrumsbrunch-d2">Second choice <i>optional</i></label><select id="tantrumsbrunch-d2" name="tantrumsbrunch_date_2" class="pick"></select></div>
+            </div>
+            <div class="f"><label for="tantrumsbrunch-time">Preferred time</label><select id="tantrumsbrunch-time" name="tantrumsbrunch_time" class="tpick"></select></div>
+          </div>
+        </div>
+        <div class="inv">
           <input type="checkbox" id="i-temper" name="invitations" value="temper"><label for="i-temper">Bottomless brunch · Temper City or Soho</label>
           <div class="dates" id="dates-temper" hidden>
             <div class="dl">Which Temper?</div>
-            <div class="f"><select id="temper-location" name="temper_location" aria-label="Temper location"><option>City</option><option>Soho</option></select><small id="temper-loc-note" style="display:block;margin-top:6px;color:var(--ink-3);font-size:12px"></small></div>
+            <div class="f"><select id="temper-location" name="temper_location" aria-label="Temper location"><option value="City">City — lobster &amp; steak brunch</option><option value="Soho">Soho — steak, tacos &amp; burgers (no lobster)</option></select><small id="temper-loc-note" style="display:block;margin-top:6px;color:var(--ink-3);font-size:12px"></small></div>
             <div class="dl">Which Saturday suits?</div>
             <div class="row2">
               <div class="f"><label for="temper-d1">First choice date</label><select id="temper-d1" name="temper_date_1" class="pick"></select></div>
@@ -661,6 +693,7 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uT
 
 const OPS = {
   tantrumsdine:{title:"Temper Tantrums — lunch or dinner", img:"img/tantrums.jpg"},
+  tantrumsbrunch:{title:"Bottomless brunch — Temper Tantrums", img:"img/tantrums-brunch.jpg"},
   temper:  {title:"Bottomless brunch — Temper City or Soho", img:"img/temper.jpg"},
   paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
   brix:    {title:"BRIX LDN — dinner, brunch or Sunday roast", img:"img/brix.jpg"},
@@ -674,7 +707,7 @@ const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), er
 let lastFocus=null;
 
 function syncDates(){
-  for(const id of ["tantrumsdine","temper","paradiso","brix","kasakin","centanni","nottodine"]){
+  for(const id of ["tantrumsdine","tantrumsbrunch","temper","paradiso","brix","kasakin","centanni","nottodine"]){
     const on=$("#i-"+id).checked; $("#dates-"+id).hidden=!on;
     $("#"+id+"-d1").required=on; $("#"+id+"-time").required=on;
   }
@@ -697,7 +730,7 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsdine:{"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={tantrumsbrunch:[0], tantrumsdine:{"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 function upcoming(days,count){
@@ -716,21 +749,22 @@ function fill(id,days){
   }
 }
 /* time slots per venue / service: [start hour, end hour], half-hour steps */
-const TIMES={tantrumsdine:{"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
+const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
   brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays & Sundays)":[10,13],"Sunday roast (Sundays)":[12,17]},
   centanni:{"Set lunch (Monday–Friday)":[12,14.5],"Sunday roast (Sundays, St John's Wood only)":[12,17],"Dinner (any evening)":[17.5,21.5]}};
 function fillTime(id,range){
   const sel=$("#"+id+"-time"), cur=sel.value, out=[];
-  for(let t=range[0]; t<=range[1]; t+=0.5){ const h=Math.floor(t)%24, m=t%1?"30":"00"; out.push(`${String(h).padStart(2,"0")}:${m}`); }
+  const step=range[2]||0.5;
+  for(let t=range[0]; t<=range[1]+1e-9; t+=step){ const h=Math.floor(t)%24, m=Math.round((t%1)*60); out.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`); }
   sel.innerHTML='<option value="">Choose a time</option>'+out.map(t=>`<option>${t}</option>`).join("");
   if(out.includes(cur)) sel.value=cur;
 }
-fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin); fill("nottodine",DAYS.nottodine);
+fill("tantrumsbrunch",DAYS.tantrumsbrunch); fillTime("tantrumsbrunch",TIMES.tantrumsbrunch); fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin); fill("nottodine",DAYS.nottodine);
 fillTime("paradiso",TIMES.paradiso); fillTime("kasakin",TIMES.kasakin);
 const ndSel=$("#nottodine-service"); const fillND=()=>fillTime("nottodine",TIMES.nottodine[ndSel.value]||[12,21.5]); ndSel.addEventListener("change",fillND); fillND();
 /* Temper: City (lobster) or Soho */
 const tLoc=$("#temper-location");
-const TEMPER_NOTE={City:"Angel Court, by Bank · oysters, surf & turf and half a Cornish lobster · 12:00–16:00",Soho:"Broadwick Street · steak, tacos and smashed cheeseburgers · 12:00–15:30"};
+const TEMPER_NOTE={City:"Angel Court, by Bank · the lobster brunch: oysters, surf & turf and half a Cornish lobster · 12:00–16:00",Soho:"Broadwick Street · steak, tacos and smashed cheeseburgers · 12:00–15:30 · no lobster at Soho — choose City for the lobster brunch"};
 const fillTemper=()=>{ fillTime("temper",TIMES.temper[tLoc.value]||[12,14]); $("#temper-loc-note").textContent=TEMPER_NOTE[tLoc.value]||""; };
 tLoc.addEventListener("change",fillTemper); fillTemper();
 /* Temper Tantrums: lunch any day, dinner Mon–Sat */
