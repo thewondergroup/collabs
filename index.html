@@ -733,13 +733,15 @@ const ALL=[0,1,2,3,4,5,6];
 const DAYS={tantrumsbrunch:[0], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
-function upcoming(days,count){
-  const out=[], d=new Date(); d.setDate(d.getDate()+MIN_NOTICE_DAYS);
+/* venues that can take bookings at short notice (days ahead); everyone else needs MIN_NOTICE_DAYS */
+const NOTICE={tantrumsbrunch:0};
+function upcoming(days,count,notice){
+  const out=[], d=new Date(); d.setDate(d.getDate()+(notice==null?MIN_NOTICE_DAYS:notice));
   while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
   return out;
 }
 function fill(id,days){
-  const opts=upcoming(days, days.length>=7?21:8);
+  const opts=upcoming(days, days.length>=7?21:8, NOTICE[id]);
   const fmt=x=>x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
   const iso=x=>x.toISOString().slice(0,10);
   for(const n of ["d1","d2"]){
