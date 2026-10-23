@@ -317,15 +317,15 @@ body.locked{overflow:hidden}
     <div class="copy">
       <div class="meta"><span class="tag new">New</span><span class="tag">Bottomless brunch</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
       <h2>Three courses, <em>90 minutes bottomless.</em></h2>
-      <p>Make your Sunday a little more indulgent with bottomless brunch at Temper Tantrums. Three courses alongside 90 minutes of bottomless drinks — prosecco, selected wines, beers, Aperol Spritz and margaritas. Bring a plus one, settle in and let them take care of brunch.</p>
+      <p>Make your Saturday a little more indulgent with bottomless brunch at Temper Tantrums. Three courses alongside 90 minutes of bottomless drinks — prosecco, selected wines, beers, Aperol Spritz and margaritas. Bring a plus one, settle in and let them take care of brunch.</p>
       <p>Start with burrata and miso honey or a trio of butters with baked pinsa romana, move on to pinsa topped with prosciutto and camembert di bufala or a creamy mushroom pasta, and finish with matcha tiramisu or cannoli. Very filmable, all of it.</p>
       <ul class="facts">
         <li><span class="k">Where</span><span class="v">Temper Tantrums · 94 Wimpole Street, Marylebone W1</span></li>
-        <li><span class="k">When</span><span class="v"><b>Sundays</b> · any time from 12:00</span></li>
+        <li><span class="k">When</span><span class="v"><b>Saturdays</b> · any time from 12:00</span></li>
         <li><span class="k">Your invite</span><span class="v">Starter, main &amp; dessert + 90 minutes of bottomless drinks for two<small>Aperol Spritz, prosecco, margaritas, beers, white, red or rosé</small></span></li>
         <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
       </ul>
-      <div class="cta"><button class="btn" data-op="tantrumsbrunch">Request a brunch</button><small>Pick your Sunday and a time from 12:00</small></div>
+      <div class="cta"><button class="btn" data-op="tantrumsbrunch">Request a brunch</button><small>Pick your Saturday and a time from 12:00</small></div>
     </div>
   </article>
 
@@ -549,7 +549,7 @@ body.locked{overflow:hidden}
           <input type="checkbox" id="i-tantrumsbrunch" name="invitations" value="tantrumsbrunch"><label for="i-tantrumsbrunch">Bottomless brunch · Temper Tantrums <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
           <div class="dates" id="dates-tantrumsbrunch" hidden>
             <input type="hidden" name="tantrumsbrunch_service" value="Bottomless brunch">
-            <div class="dl">Which Sunday suits? Arrive any time from 12:00</div>
+            <div class="dl">Which Saturday suits? Arrive any time from 12:00</div>
             <div class="row2">
               <div class="f"><label for="tantrumsbrunch-d1">First choice date</label><select id="tantrumsbrunch-d1" name="tantrumsbrunch_date_1" class="pick"></select></div>
               <div class="f"><label for="tantrumsbrunch-d2">Second choice <i>optional</i></label><select id="tantrumsbrunch-d2" name="tantrumsbrunch_date_2" class="pick"></select></div>
@@ -730,7 +730,7 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsbrunch:[0], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={tantrumsbrunch:[6], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 /* venues that can take bookings at short notice (days ahead); everyone else needs MIN_NOTICE_DAYS */

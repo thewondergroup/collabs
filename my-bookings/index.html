@@ -80,19 +80,20 @@ const $ = s => document.querySelector(s);
 
 /* same day rules as the main page */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsbrunch:[0], tantrumsdine:[0,1,2,3,4,5,6], taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:ALL, centanni:ALL};
+const DAYS={tantrumsbrunch:[6], tantrumsdine:[0,1,2,3,4,5,6], taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:ALL, centanni:ALL};
 const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:[8,21], taka:[23,25], temper:[12,14.5], paradiso:[12,14.5], kasakin:[12,21.5], nottodine:[12,21.5], brix:[10,21.5], centanni:[12,21.5]};
 const MIN_NOTICE_DAYS=7;
+const NOTICE={tantrumsbrunch:0};
 const EVENTS=["tantrums","notto"];
 
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function pill(st){
-  const m={ "Requested":["warn","Requested — awaiting confirmation"], "Sent to venue":["warn","Requested — with the venue"], "Expired":["bad","Date passed — pick another"], "Dates sent":["warn","Pick a slot below"], "Confirmed":["ok","Confirmed"], "Change requested":["gold","Change requested"], "Declined":["bad","Not this time"], "Attended":["ok","Attended"], "Content received":["ok","Complete — thank you"], "No show":["bad","No show"] };
+  const m={ "Requested":["warn","Requested — awaiting confirmation"], "Sent to venue":["warn","Requested — with the venue"], "Expired":["bad","Needs a new date"], "Dates sent":["warn","Pick a slot below"], "Confirmed":["ok","Confirmed"], "Change requested":["gold","Change requested"], "Declined":["bad","Not this time"], "Attended":["ok","Attended"], "Content received":["ok","Complete — thank you"], "No show":["bad","No show"] };
   const [cls,label]=m[st]||["",st||"—"]; return `<span class="pill ${cls}">${esc(label)}</span>`;
 }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 function dateOpts(op){
-  const days=DAYS[op]||ALL, out=[], d=new Date(); d.setDate(d.getDate()+MIN_NOTICE_DAYS);
+  const days=DAYS[op]||ALL, out=[], d=new Date(); d.setDate(d.getDate()+(NOTICE[op]==null?MIN_NOTICE_DAYS:NOTICE[op]));
   while(out.length<(days.length>=7?21:8)){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); }
   return out.map(x=>`<option value="${x.toISOString().slice(0,10)}">${x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</option>`).join("");
 }
@@ -116,7 +117,7 @@ function card(b){
       <li><span class="k">When</span><span class="v">${when}</span></li>
       ${b.details?`<li><span class="k">Details</span><span class="v">${esc(b.details).replace(/\n/g,"<br>")}</span></li>`:""}
       ${b.status==="Dates sent"&&b.offered?`<li><span class="k">Offered</span><span class="v">The venue can do any of these — tap one to confirm it:<div class="actions" style="margin-top:10px">${splitOffers(b.offered).map(o=>`<button class="btn" data-act="pick" data-slot="${esc(o)}">${esc(o)}</button>`).join("")}</div><span style="color:var(--ink-3);font-size:12px">None of them work? Use "Change date or time" below and we'll go back to the venue.</span></span></li>`:""}
-      ${b.status==="Expired"?`<li><span class="k">Note</span><span class="v">The venue couldn't fit this date in before it came round. Pick a new date and time below and we'll ask them again.</span></li>`:""}
+      ${b.status==="Expired"?`<li><span class="k">Note</span><span class="v">This date can't go ahead. Pick a new date and time below and we'll ask the venue again — it only takes a few seconds.</span></li>`:""}
       ${b.status==="Change requested"?`<li><span class="k">Asked for</span><span class="v">${esc(b.change)} — we're checking with the venue; your original booking stands until you hear from us</span></li>`:""}
     </ul>
     ${b.status==="Confirmed"?`<div class="note">Please bring this confirmation. Anything not listed is on you. Content due within 7 days of your visit.</div>`:""}
@@ -159,7 +160,7 @@ list.addEventListener("click", async e=>{
     if(!confirm("Confirm "+btn.dataset.slot+"? You'll get your confirmation email straight away.")) return;
     body.set("action","pick"); body.set("slot",btn.dataset.slot);
   }else if(act==="cancel"){
-    const pendingNow=/Requested|with the venue|Pick a slot|Change requested|Date passed/.test(card.querySelector(".pill")?.textContent||"");
+    const pendingNow=/Requested|with the venue|Pick a slot|Change requested|Needs a new date/.test(card.querySelector(".pill")?.textContent||"");
     if(!confirm(pendingNow?"Withdraw this request? You can always request it again from the invitations page.":"Cancel this booking? We'll let the venue know.")) return;
     body.set("action","cancel");
   }else{
