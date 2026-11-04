@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
 <style>
+html,body{overflow-x:clip}
 :root{
   --ground:#080808; --surface:#111110; --raise:#171716;
   --line:#242320; --line-strong:#3a3833;
@@ -63,7 +64,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .glabel{display:flex;align-items:baseline;gap:14px;padding:0 0 10px}
 .glabel span{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 .glabel small{color:var(--ink-3);font-size:12px;letter-spacing:.04em}
-.strip{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.strip{display:grid;grid-template-columns:repeat(9,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .strip.events{grid-template-columns:1fr 1fr}
 .strip.events:has(> a:only-child){grid-template-columns:1fr}
 .strip.events a{grid-template-columns:120px 1fr;align-items:center;gap:18px}
@@ -72,6 +73,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .strip a>div>small{display:block;color:var(--ink-3);font-size:12px;margin-top:4px;letter-spacing:.02em}
 .strip.events{position:relative}
 .strip.events a::before{content:"Event";position:absolute;top:10px;right:10px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#0a0a0a;background:var(--gold);padding:4px 8px 3px;border-radius:2px}
+.strip.events a[data-label]::before{content:attr(data-label)}
 .strip a{position:relative}
 .strip a{display:grid;gap:12px;align-content:start;padding:14px 16px 18px;background:var(--ground);text-decoration:none;transition:background .25s}
 .strip a:hover{background:var(--surface)}
@@ -87,6 +89,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .rule .big{font-family:var(--display);font-weight:300;font-size:clamp(38px,5.5vw,68px);line-height:1;margin:14px 0 0;letter-spacing:-.01em}
 .rule .big em{font-style:italic;color:var(--gold-bright)}
 .rule .count{font-family:var(--display);font-style:italic;color:var(--ink-3);font-size:20px;white-space:nowrap}
+@media (max-width:760px){.rule{flex-wrap:wrap}.rule .count{white-space:normal;font-size:16px}}
 
 /* ---------- opportunities ---------- */
 .op{scroll-margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px clamp(32px,5vw,80px);padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);align-items:center}
@@ -260,7 +263,7 @@ body.locked{overflow:hidden}
     <h1>Our favourite places. <em>Our favourite creators.</em></h1>
     <p class="lede">We look after some brilliant restaurants and bars across London — and we're inviting some of our favourite creators to experience them. Choose an invitation below, bring a plus one and enjoy everything listed <strong>on us</strong>, in exchange for a little content about your visit.</p>
     <p class="lede">Invitations are limited, so request the ones you want while they're available. We'll check availability with the venue and confirm everything by email.</p>
-    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Nine invitations available</small><small>Takes about a minute to request</small></div>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Eleven invitations available</small><small>Takes about a minute to request</small></div>
   </div>
 </section>
 
@@ -269,6 +272,7 @@ body.locked{overflow:hidden}
     <div class="group">
       <div class="glabel"><span>Events</span><small>Fixed dates · limited places</small></div>
       <div class="strip events">
+        <a href="#kasakinhalo" data-label="Limited" data-until="2026-11-08"><img src="img/kasakin-halo.jpg" alt=""><div><span>Unlimited Halo-Halo</span><b>Kasa &amp; Kin</b><small>Visits by Sunday 8 November · Soho</small></div></a>
         <a href="#notto"><img src="img/notto.jpg" alt=""><div><span>Relaunch party</span><b>Notto Piccadilly</b><small>New date coming soon · with Phil Howard</small></div></a>
       </div>
     </div>
@@ -280,9 +284,10 @@ body.locked{overflow:hidden}
         <a href="#temper"><img src="img/temper.jpg" alt=""><div><span>Lobster brunch · City only</span><b>Temper</b></div></a>
         <a href="#paradiso"><img src="img/paradiso.jpg" alt=""><div><span>Bottomless brunch</span><b>Paradiso</b></div></a>
         <a href="#brix"><img src="img/brix.jpg" alt=""><div><span>Dinner · roast</span><b>BRIX LDN</b></div></a>
-        <a href="#nottodine"><img src="img/nottodine.jpg" alt=""><div><span>Lunch · dinner</span><b>Notto</b></div></a>
+        <a href="#nottodine"><img src="img/nottodine.jpg" alt=""><div><span>Festive · from £14.95</span><b>Notto</b></div></a>
         <a href="#kasakin"><img src="img/kasakin.jpg" alt=""><div><span>Feast</span><b>Kasa &amp; Kin</b></div></a>
         <a href="#centanni"><img src="img/centanni.jpg" alt=""><div><span>Lunch · dinner</span><b>Cent Anni</b></div></a>
+        <a href="#canal"><img src="img/canal.jpg" alt=""><div><span>Lunch · dinner</span><b>Canal<span class="new">New</span></b></div></a>
       </div>
     </div>
   </nav>
@@ -292,9 +297,28 @@ body.locked{overflow:hidden}
     <div class="count">Choose → Request → We confirm → You visit → You share</div>
   </div>
 
+  <!-- Kasa & Kin Halo-Halo (limited) -->
+  <article class="op" id="kasakinhalo" data-until="2026-11-08">
+    <figure class="pic"><span class="num">I</span><span class="ribbon">Limited · visits by 8 Nov</span><div class="img"><img src="img/kasakin-halo.jpg" alt="Halo-Halo with ube ice cream at Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag event">Limited</span><span class="tag">Unlimited Halo-Halo</span><span class="venue">Kasa &amp; Kin</span><span>Soho</span></div>
+      <h2>Unlimited <em>Halo-Halo.</em></h2>
+      <p>Kasa &amp; Kin have cemented themselves as a Soho staple: contemporary Filipino flavours and cooking that make for better dishes, better desserts and better evenings. In the run-up to the festive season, they're launching something new.</p>
+      <p>Halo-Halo means "mix-mix" — leche flan, tropical fruit, shaved ice and Kasa &amp; Kin's famous ube ice cream, all mixed together. For the first time you build your own bowl: twelve toppings, piled as high as you like. That's 4,095 ways to make it yours, and it looks fantastic on camera.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Kasa &amp; Kin · Soho</span></li>
+        <li><span class="k">When</span><span class="v"><b>Saturday 7 or Sunday 8 November</b><small>Halo-Halo bar runs 15:00–17:00 — arrive in time to finish with it</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Three courses for two, with the unlimited Halo-Halo bar for dessert</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day<small>A reel within 7 days that includes the price (usually £12.50pp) and what's on offer</small><small>The ad code for your reel, so Kasa &amp; Kin can share it</small></span></li>
+      </ul>
+      <p class="hint" style="color:var(--ink-3);font-size:13px">The offer runs until 29 November, so we're booking visits before then to give your audience time to go and try it.</p>
+      <div class="cta"><button class="btn" data-op="kasakinhalo">Request a Halo-Halo visit</button><small>Limited · visits by Sunday 8 November</small></div>
+    </div>
+  </article>
+
   <!-- Tantrums -->
-  <article class="op" id="tantrumsdine">
-    <figure class="pic"><span class="num">I</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+  <article class="op flip" id="tantrumsdine">
+    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/tantrums.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag new">New</span><span class="tag">Breakfast · lunch · dinner</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
       <h2>Temper Tantrums, <em>morning to night.</em></h2>
@@ -312,8 +336,8 @@ body.locked{overflow:hidden}
 
   <!-- II -->
   <!-- Tantrums brunch -->
-  <article class="op flip" id="tantrumsbrunch">
-    <figure class="pic"><span class="num">II</span><div class="img"><img src="img/tantrums-brunch.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
+  <article class="op" id="tantrumsbrunch">
+    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/tantrums-brunch.jpg" alt="Temper Tantrums, Wimpole Street"></div><figcaption>Temper Tantrums · Marylebone</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag new">New</span><span class="tag">Bottomless brunch</span><span class="venue">Temper Tantrums</span><span>Marylebone</span></div>
       <h2>Three courses, <em>90 minutes bottomless.</em></h2>
@@ -329,8 +353,8 @@ body.locked{overflow:hidden}
     </div>
   </article>
 
-  <article class="op" id="temper">
-    <figure class="pic"><span class="num">III</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Lobster brunch · Temper City only</figcaption></figure>
+  <article class="op flip" id="temper">
+    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/temper.jpg" alt="Bottomless brunch at Temper"></div><figcaption>Lobster brunch · Temper City only</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Temper</span><span>City or Soho</span></div>
       <h2>Bottomless brunch, <em>City or Soho.</em></h2>
@@ -348,8 +372,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- III -->
-  <article class="op flip" id="paradiso">
-    <figure class="pic"><span class="num">IV</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
+  <article class="op" id="paradiso">
+    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/paradiso.jpg" alt="Bottomless brunch at Paradiso"></div><figcaption>Paradiso · Covent Garden</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Bottomless brunch</span><span class="venue">Paradiso</span><span>Covent Garden</span></div>
       <h2>Brunch with <em>bottomless cocktails.</em></h2>
@@ -366,8 +390,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- IV -->
-  <article class="op" id="brix">
-    <figure class="pic"><span class="num">V</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
+  <article class="op flip" id="brix">
+    <figure class="pic"><span class="num">VI</span><div class="img"><img src="img/brix.jpg" alt="The BRIX board"></div><figcaption>BRIX LDN · London Bridge</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Dinner · brunch · Sunday roast</span><span class="venue">BRIX LDN</span><span>London Bridge</span></div>
       <h2>Your choice: <em>dinner, brunch or roast.</em></h2>
@@ -385,8 +409,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- V -->
-  <article class="op flip" id="notto">
-    <figure class="pic"><span class="num">VI</span><span class="ribbon">Event · New date TBC</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
+  <article class="op" id="notto">
+    <figure class="pic"><span class="num">VII</span><span class="ribbon">Event · New date TBC</span><div class="img"><img src="img/notto.jpg" alt="Pasta at Notto Piccadilly"></div><figcaption>Notto · Piccadilly</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag event">Event</span><span class="tag">Relaunch party</span><span class="venue">Notto</span><span>Piccadilly</span></div>
       <h2>A new look for <em>Notto Piccadilly.</em></h2>
@@ -403,26 +427,26 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- Notto dining -->
-  <article class="op" id="nottodine">
-    <figure class="pic"><span class="num">VII</span><div class="img"><img src="img/nottodine.jpg" alt="Fresh pasta at Notto"></div><figcaption>Notto · Piccadilly &amp; Covent Garden</figcaption></figure>
+  <article class="op flip" id="nottodine">
+    <figure class="pic"><span class="num">VIII</span><span class="ribbon">Festive · from £14.95</span><div class="img"><img src="img/nottodine.jpg" alt="Fresh pasta at Notto"></div><figcaption>Notto · Piccadilly &amp; Covent Garden</figcaption></figure>
     <div class="copy">
-      <div class="meta"><span class="tag">Lunch · dinner</span><span class="venue">Notto</span><span>Piccadilly · Covent Garden</span></div>
-      <h2>Fresh pasta at Notto, <em>whenever suits.</em></h2>
-      <p>Can't make the relaunch, or just want a proper sit-down with Phil Howard's pasta? Notto is opening its doors to you and a plus one any day of the week, lunch or dinner.</p>
-      <p>Hand-made pasta, the kind of plates that stop a scroll, and a glass or two to go with them. Choose your restaurant and tell us when suits.</p>
+      <div class="meta"><span class="tag event">Festive</span><span class="tag">Lunch · supper · feast</span><span class="venue">Notto</span><span>Piccadilly · Covent Garden</span></div>
+      <h2>Festive feasting <em>at Notto.</em></h2>
+      <p>Great pasta at great prices — that's the whole idea. Pick one of Notto's three festive offers and come with a plus one. In your content, let the food shine and make the deal clear: the price points are the story.</p>
       <ul class="facts">
-        <li><span class="k">Where</span><span class="v">Notto · Piccadilly or Covent Garden</span></li>
-        <li><span class="k">When</span><span class="v"><b>Any day</b> · lunch or dinner — you choose</span></li>
-        <li><span class="k">Your invite</span><span class="v">Starters, pasta and drinks for two</span></li>
-        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
+        <li><span class="k">Lunchissimo</span><span class="v"><b>Any pasta, side salad &amp; focaccia</b> · under £17, 12–2pm<small>Drops to £14.95 from 2–5pm · add a drink for £5</small><small><b style="color:var(--ink)">Your invite:</b> Lunchissimo with a drink, for two</small></span></li>
+        <li><span class="k">Supper Club</span><span class="v"><b>After 8pm</b> · two courses £19.95, three for £24.95<small>Add a drink for £6 — because great pasta is an anytime affair</small><small><b style="color:var(--ink)">Your invite:</b> three courses with a drink each course, for two</small></span></li>
+        <li><span class="k">The Feast</span><span class="v"><b>£38pp, for two or more</b> · sit back and the dishes keep coming<small>Focaccias and dips, a range of starters, pasta and salads, then tiramisu</small><small><b style="color:var(--ink)">Your invite:</b> the Feast plus the drinks pairing, for two</small></span></li>
+        <li><span class="k">Drinks</span><span class="v">House wine, prosecco, Moretti or a soft drink</span></li>
+        <li><span class="k">In return</span><span class="v">Stories on the day<small>A reel within 7 days that includes the price points and what's on offer</small><small>The ad code for your reel, so Notto can share it</small></span></li>
       </ul>
-      <div class="cta"><button class="btn" data-op="nottodine">Request a table</button><small>Pick your date and a time</small></div>
+      <div class="cta"><button class="btn" data-op="nottodine">Choose your festive offer</button><small>Lunchissimo, Supper Club or the Feast · Piccadilly or Covent Garden</small></div>
     </div>
   </article>
 
   <!-- VI -->
-  <article class="op flip" id="kasakin">
-    <figure class="pic"><span class="num">VIII</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
+  <article class="op" id="kasakin">
+    <figure class="pic"><span class="num">IX</span><div class="img"><img src="img/kasakin.jpg" alt="Kasa &amp; Kin"></div><figcaption>Kasa &amp; Kin · Soho</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Filipino feast</span><span class="venue">Kasa &amp; Kin</span><span>Soho</span></div>
       <h2>London's home of ube, <em>on us.</em></h2>
@@ -439,8 +463,8 @@ body.locked{overflow:hidden}
   </article>
 
   <!-- VII -->
-  <article class="op" id="centanni">
-    <figure class="pic"><span class="num">IX</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
+  <article class="op flip" id="centanni">
+    <figure class="pic"><span class="num">X</span><div class="img"><img src="img/centanni.jpg" alt="Cent Anni"></div><figcaption>Cent Anni · St John's Wood &amp; Wimbledon Village</figcaption></figure>
     <div class="copy">
       <div class="meta"><span class="tag">Lunch · roast · dinner</span><span class="venue">Cent Anni</span><span>St John's Wood · Wimbledon Village</span></div>
       <h2>Italian, <em>your way.</em></h2>
@@ -456,9 +480,27 @@ body.locked{overflow:hidden}
     </div>
   </article>
 
+  <!-- Canal -->
+  <article class="op" id="canal">
+    <figure class="pic"><span class="num">XI</span><div class="img"><img src="img/canal.jpg" alt="A table of dishes at Canal, Westbourne Park"></div><figcaption>Canal · Westbourne Park</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag new">New</span><span class="tag">Lunch · dinner</span><span class="venue">Canal</span><span>Westbourne Park</span></div>
+      <h2>Canal, <em>on the water's edge.</em></h2>
+      <p>From HAM, the minds behind Bistro Freddie and Crispin, Canal is a modern European restaurant inside Mason &amp; Fifth in Westbourne Park. The dining room and bar open onto a south-facing terrace right on the edge of the Grand Union Canal.</p>
+      <p>A restaurant and drinking spot that shifts with the seasons. Come for a long lunch or dinner with a plus one: three courses and a bottle of house wine, on the house.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Canal · Mason &amp; Fifth, Westbourne Park W2</span></li>
+        <li><span class="k">When</span><span class="v"><b>Lunch or dinner</b> · any day<small>Monday–Saturday 12:00–22:00 · Sunday 12:00–20:30</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Three courses for two with a bottle of house wine</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="canal">Request a table</button><small>Pick lunch or dinner, a date and a time</small></div>
+    </div>
+  </article>
+
   <section class="deliv" id="deliverables">
     <div><div class="eyebrow">What we ask for</div><h3>Four deliverables, <em>every visit.</em></h3>
-      <p class="dnote">The same for all nine invitations. Please share everything within 7 days of your visit and send Ciara the links.</p></div>
+      <p class="dnote">The same for every invitation unless it says otherwise. Please share everything within 7 days of your visit and send Ciara the links.</p></div>
     <ol>
       <li><div><b>A reel or a carousel</b>One or the other — your call. Tell us which when you request. No copyrighted music on the reel (see 4).</div></li>
       <li><div><b>Stories on the day</b>A few stories while you're there, tagging the venue.</div></li>
@@ -532,6 +574,18 @@ body.locked{overflow:hidden}
       <fieldset class="f">
         <legend>Which would you like to request? <i>tick as many as you like</i></legend>
         <div class="invites">
+        <div class="inv" data-until="2026-11-08">
+          <input type="checkbox" id="i-kasakinhalo" name="invitations" value="kasakinhalo"><label for="i-kasakinhalo">Kasa &amp; Kin · unlimited Halo-Halo <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">LIMITED</span></label>
+          <div class="dates" id="dates-kasakinhalo" hidden>
+            <input type="hidden" name="kasakinhalo_service" value="Three courses + unlimited Halo-Halo">
+            <div class="dl">Which day? Halo-Halo bar runs 3–5pm</div>
+            <div class="row2">
+              <div class="f"><label for="kasakinhalo-d1">First choice date</label><select id="kasakinhalo-d1" name="kasakinhalo_date_1" class="pick"></select></div>
+              <div class="f"><label for="kasakinhalo-d2">Second choice <i>optional</i></label><select id="kasakinhalo-d2" name="kasakinhalo_date_2" class="pick"></select></div>
+            </div>
+            <div class="f"><label for="kasakinhalo-time">Arrival time</label><select id="kasakinhalo-time" name="kasakinhalo_time" class="tpick"></select></div>
+          </div>
+        </div>
         <div class="inv">
           <input type="checkbox" id="i-tantrumsdine" name="invitations" value="tantrumsdine"><label for="i-tantrumsdine">Temper Tantrums · breakfast, lunch or dinner <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
           <div class="dates" id="dates-tantrumsdine" hidden>
@@ -598,12 +652,12 @@ body.locked{overflow:hidden}
           <input type="checkbox" id="i-notto" name="invitations" value="notto"><label for="i-notto">Notto Piccadilly relaunch party · date TBC</label>
         </div>
         <div class="inv">
-          <input type="checkbox" id="i-nottodine" name="invitations" value="nottodine"><label for="i-nottodine">Notto · lunch or dinner, any day</label>
+          <input type="checkbox" id="i-nottodine" name="invitations" value="nottodine"><label for="i-nottodine">Notto · festive feasting (Lunchissimo, Supper Club or the Feast)</label>
           <div class="dates" id="dates-nottodine" hidden>
             <div class="dl">Which restaurant?</div>
             <div class="f"><select id="nottodine-location" name="nottodine_location" aria-label="Notto location"><option>Piccadilly</option><option>Covent Garden</option></select></div>
-            <div class="dl">Lunch or dinner?</div>
-            <div class="f"><select id="nottodine-service" name="nottodine_service" aria-label="Notto service"><option>Dinner</option><option>Lunch</option></select></div>
+            <div class="dl">Which festive offer?</div>
+            <div class="f"><select id="nottodine-service" name="nottodine_service" aria-label="Notto festive offer"><option value="Festive Lunchissimo">Festive Lunchissimo — any pasta, salad &amp; focaccia (12–5pm)</option><option value="Supper Club">Supper Club — three courses (after 8pm)</option><option value="The Feast">The Feast — sharing feast + drinks pairing</option></select></div>
             <div class="dl">Which date suits?</div>
             <div class="row2">
               <div class="f"><label for="nottodine-d1">First choice date</label><select id="nottodine-d1" name="nottodine_date_1" class="pick"></select></div>
@@ -638,6 +692,19 @@ body.locked{overflow:hidden}
             <div class="f"><label for="centanni-time">Preferred time</label><select id="centanni-time" name="centanni_time" class="tpick"></select></div>
           </div>
         </div>
+        <div class="inv">
+          <input type="checkbox" id="i-canal" name="invitations" value="canal"><label for="i-canal">Canal · lunch or dinner <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
+          <div class="dates" id="dates-canal" hidden>
+            <div class="dl">Lunch or dinner?</div>
+            <div class="f"><select id="canal-service" name="canal_service" aria-label="Canal service"><option>Dinner</option><option>Lunch</option></select></div>
+            <div class="dl">Which date suits?</div>
+            <div class="row2">
+              <div class="f"><label for="canal-d1">First choice date</label><select id="canal-d1" name="canal_date_1" class="pick"></select></div>
+              <div class="f"><label for="canal-d2">Second choice <i>optional</i></label><select id="canal-d2" name="canal_date_2" class="pick"></select></div>
+            </div>
+            <div class="f"><label for="canal-time">Preferred time</label><select id="canal-time" name="canal_time" class="tpick"></select></div>
+          </div>
+        </div>
         </div>
         <p class="sub">For each visit, give us a first-choice date and time (a second date helps if the first is full). Restaurant visits need at least a week's notice, so dates start from next week. The Notto relaunch has a new date coming, so just request it and we'll email you when it's set.</p>
       </fieldset>
@@ -663,7 +730,7 @@ body.locked{overflow:hidden}
       </fieldset>
       <div class="agree">
         <input type="checkbox" id="agree" name="agree" value="yes" required>
-        <label for="agree">I'll deliver the four things for each visit: a reel or carousel (no copyrighted music), stories on the day, the venue added as collaborator, and a partnership ad code — all within 7 days. <a href="#deliverables" class="dl-link" id="agree-link">See the details</a>.</label>
+        <label for="agree">I agree to deliver what each invitation asks for, within 7 days of my visit — for most, the four deliverables: a reel or carousel (no copyrighted music), stories on the day, the venue added as collaborator, and a partnership ad code. Limited offers list their own asks. <a href="#deliverables" class="dl-link" id="agree-link">See the details</a>.</label>
       </div>
       <div class="f"><label for="notes">Anything else?</label><textarea id="notes" name="notes" placeholder="Timings, ideas, collaboration pitches, dates to avoid or anything else we should know."></textarea></div>
 
@@ -692,23 +759,31 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbwojo21pK1VoRPsxE4e-uT
 /* -------------------------------------------------------------------- */
 
 const OPS = {
+  kasakinhalo:{title:"Kasa & Kin — unlimited Halo-Halo", img:"img/kasakin-halo.jpg"},
   tantrumsdine:{title:"Temper Tantrums — breakfast, lunch or dinner", img:"img/tantrums.jpg"},
   tantrumsbrunch:{title:"Bottomless brunch — Temper Tantrums", img:"img/tantrums-brunch.jpg"},
   temper:  {title:"Bottomless brunch — Temper City or Soho", img:"img/temper.jpg"},
   paradiso:{title:"Bottomless brunch — Paradiso", img:"img/paradiso.jpg"},
   brix:    {title:"BRIX LDN — dinner, brunch or Sunday roast", img:"img/brix.jpg"},
   notto:   {title:"Notto Piccadilly relaunch party", img:"img/notto.jpg"},
-  nottodine:{title:"Notto — lunch or dinner", img:"img/nottodine.jpg"},
+  nottodine:{title:"Notto — festive feasting", img:"img/nottodine.jpg"},
   kasakin: {title:"Kasa & Kin — Filipino feast", img:"img/kasakin.jpg"},
+  canal:{title:"Canal — lunch or dinner", img:"img/canal.jpg"},
   centanni:{title:"Cent Anni — set lunch, Sunday roast or dinner", img:"img/centanni.jpg"}
 };
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+/* time-limited offers disappear the day after their last date */
+(()=>{ const today=new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll("[data-until]").forEach(el=>{ if(new Date(el.dataset.until+"T23:59:59")<today){ const op=el.id||el.getAttribute("href")?.slice(1); el.remove(); } });
+  document.querySelectorAll("article.op").forEach((el,i)=>{ el.classList.toggle("flip", i%2===1); const n=el.querySelector(".num"); if(n) n.textContent=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"][i]; });
+  if(!document.getElementById("kasakinhalo")){ ["#i-kasakinhalo"].forEach(q=>{ const el=document.querySelector(q); if(el) el.closest(".inv").remove(); }); }
+})();
 const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), err=$("#err");
 let lastFocus=null;
 
 function syncDates(){
-  for(const id of ["tantrumsdine","tantrumsbrunch","temper","paradiso","brix","kasakin","centanni","nottodine"]){
-    const on=$("#i-"+id).checked; $("#dates-"+id).hidden=!on;
+  for(const id of ["kasakinhalo","tantrumsdine","tantrumsbrunch","temper","paradiso","brix","kasakin","centanni","nottodine","canal"]){
+    const cb=$("#i-"+id); if(!cb) continue; const on=cb.checked; $("#dates-"+id).hidden=!on;
     $("#"+id+"-d1").required=on; $("#"+id+"-time").required=on;
   }
 }
@@ -717,7 +792,7 @@ $$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
 function open(id){
   lastFocus=document.activeElement;
   const o=OPS[id]||OPS.tantrumsdine; id=OPS[id]?id:"tantrumsdine";
-  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix(); fillCA(); fillND(); fillTT(); fillTemper();
+  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix(); fillCA(); fillND(); fillTT(); fillTemper(); fillCanal();
   $("#cover-img").src=o.img;
   form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
@@ -730,38 +805,41 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsbrunch:[6], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const DAYS={canal:ALL, kasakinhalo:[6,0], tantrumsbrunch:[6], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 /* venues that can take bookings at short notice (days ahead); everyone else needs MIN_NOTICE_DAYS */
-const NOTICE={tantrumsbrunch:0};
-function upcoming(days,count,notice){
-  const out=[], d=new Date(); d.setDate(d.getDate()+(notice==null?MIN_NOTICE_DAYS:notice));
-  while(out.length<count){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); if(out.length===0&&days.length===0) break; }
+const NOTICE={tantrumsbrunch:0, kasakinhalo:0};
+/* last bookable date for time-limited offers (inclusive) */
+const LAST={kasakinhalo:"2026-11-08"};
+function upcoming(days,count,notice,last){
+  const out=[], d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+(notice==null?MIN_NOTICE_DAYS:notice));
+  const end=last?new Date(last+"T12:00:00"):null;
+  for(let guard=0; out.length<count && guard<400; guard++){ if(end && d>end) break; if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); }
   return out;
 }
 function fill(id,days){
-  const opts=upcoming(days, days.length>=7?21:8, NOTICE[id]);
+  const opts=upcoming(days, days.length>=7?21:8, NOTICE[id], LAST[id]);
   const fmt=x=>x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
   const iso=x=>x.toISOString().slice(0,10);
   for(const n of ["d1","d2"]){
-    const sel=$("#"+id+"-"+n), cur=sel.value;
+    const sel=$("#"+id+"-"+n); if(!sel) continue; const cur=sel.value;
     sel.innerHTML='<option value="">'+(n==="d1"?"Choose a date":"None")+'</option>'+opts.map(x=>`<option value="${iso(x)}">${fmt(x)}</option>`).join("");
     if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
   }
 }
 /* time slots per venue / service: [start hour, end hour], half-hour steps */
-const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Breakfast (any day)":[8,11.5],"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{Lunch:[12,14.5],Dinner:[17.5,21.5]},
+const TIMES={canal:{Lunch:[12,15],Dinner:[17.5,21],SundayDinner:[17,19.5]}, kasakinhalo:[13.5,15.5], tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Breakfast (any day)":[8,11.5],"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{"Festive Lunchissimo":[12,16.5],"Supper Club":[20,21.5],"The Feast":[12,21]},
   brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays & Sundays)":[10,13],"Sunday roast (Sundays)":[12,17]},
   centanni:{"Set lunch (Monday–Friday)":[12,14.5],"Sunday roast (Sundays, St John's Wood only)":[12,17],"Dinner (any evening)":[17.5,21.5]}};
 function fillTime(id,range){
-  const sel=$("#"+id+"-time"), cur=sel.value, out=[];
+  const sel=$("#"+id+"-time"); if(!sel) return; const cur=sel.value, out=[];
   const step=range[2]||0.5;
   for(let t=range[0]; t<=range[1]+1e-9; t+=step){ const h=Math.floor(t)%24, m=Math.round((t%1)*60); out.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`); }
   sel.innerHTML='<option value="">Choose a time</option>'+out.map(t=>`<option>${t}</option>`).join("");
   if(out.includes(cur)) sel.value=cur;
 }
-fill("tantrumsbrunch",DAYS.tantrumsbrunch); fillTime("tantrumsbrunch",TIMES.tantrumsbrunch); fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin); fill("nottodine",DAYS.nottodine);
+fill("kasakinhalo",DAYS.kasakinhalo); fillTime("kasakinhalo",TIMES.kasakinhalo); fill("tantrumsbrunch",DAYS.tantrumsbrunch); fillTime("tantrumsbrunch",TIMES.tantrumsbrunch); fill("temper",DAYS.temper); fill("paradiso",DAYS.paradiso); fill("kasakin",DAYS.kasakin); fill("nottodine",DAYS.nottodine);
 fillTime("paradiso",TIMES.paradiso); fillTime("kasakin",TIMES.kasakin);
 const ndSel=$("#nottodine-service"); const fillND=()=>fillTime("nottodine",TIMES.nottodine[ndSel.value]||[12,21.5]); ndSel.addEventListener("change",fillND); fillND();
 /* Temper: City (lobster) or Soho */
@@ -773,6 +851,12 @@ tLoc.addEventListener("change",fillTemper); fillTemper();
 const ttSel=$("#tantrumsdine-service");
 const fillTT=()=>{ fill("tantrumsdine",DAYS.tantrumsdine[ttSel.value]||ALL); fillTime("tantrumsdine",TIMES.tantrumsdine[ttSel.value]||[12,21]); };
 ttSel.addEventListener("change",fillTT); fillTT();
+/* Canal: lunch or dinner */
+const cnSel=$("#canal-service");
+/* Canal closes at 22:00 Mon–Sat and 20:30 on Sundays, so Sunday dinner slots finish earlier */
+const canalTimes=()=>{ const d=$("#canal-d1").value; const sun=d && new Date(d+"T12:00:00").getDay()===0; fillTime("canal", cnSel.value==="Dinner" ? (sun?TIMES.canal.SundayDinner:TIMES.canal.Dinner) : TIMES.canal.Lunch); };
+const fillCanal=()=>{ fill("canal",DAYS.canal); canalTimes(); };
+cnSel.addEventListener("change",canalTimes); $("#canal-d1").addEventListener("change",canalTimes); fillCanal();
 const brixSel=$("#brix-service");
 const fillBrix=()=>{ fill("brix",DAYS.brix[brixSel.value]||ALL); fillTime("brix",TIMES.brix[brixSel.value]||[12,21.5]); };
 brixSel.addEventListener("change",fillBrix); fillBrix();

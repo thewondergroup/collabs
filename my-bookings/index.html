@@ -80,10 +80,11 @@ const $ = s => document.querySelector(s);
 
 /* same day rules as the main page */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={tantrumsbrunch:[6], tantrumsdine:[0,1,2,3,4,5,6], taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:ALL, centanni:ALL};
-const TIMES={tantrumsbrunch:[12,18,0.25], tantrumsdine:[8,21], taka:[23,25], temper:[12,14.5], paradiso:[12,14.5], kasakin:[12,21.5], nottodine:[12,21.5], brix:[10,21.5], centanni:[12,21.5]};
+const DAYS={canal:ALL, kasakinhalo:[6,0], tantrumsbrunch:[6], tantrumsdine:[0,1,2,3,4,5,6], taka:[5,6], temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:ALL, centanni:ALL};
+const TIMES={canal:[12,21], kasakinhalo:[13.5,15.5], tantrumsbrunch:[12,18,0.25], tantrumsdine:[8,21], taka:[23,25], temper:[12,14.5], paradiso:[12,14.5], kasakin:[12,21.5], nottodine:[12,21.5], brix:[10,21.5], centanni:[12,21.5]};
 const MIN_NOTICE_DAYS=7;
-const NOTICE={tantrumsbrunch:0};
+const NOTICE={tantrumsbrunch:0, kasakinhalo:0};
+const LAST={kasakinhalo:"2026-11-08"};
 const EVENTS=["tantrums","notto"];
 
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -93,8 +94,9 @@ function pill(st){
 }
 function fmtDate(iso){ if(!iso) return ""; const d=new Date(iso); return isNaN(d)?esc(iso):d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 function dateOpts(op){
-  const days=DAYS[op]||ALL, out=[], d=new Date(); d.setDate(d.getDate()+(NOTICE[op]==null?MIN_NOTICE_DAYS:NOTICE[op]));
-  while(out.length<(days.length>=7?21:8)){ if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); }
+  const days=DAYS[op]||ALL, out=[], d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+(NOTICE[op]==null?MIN_NOTICE_DAYS:NOTICE[op]));
+  const end=LAST[op]?new Date(LAST[op]+"T12:00:00"):null;
+  for(let g=0; out.length<(days.length>=7?21:8) && g<400; g++){ if(end && d>end) break; if(days.includes(d.getDay())) out.push(new Date(d)); d.setDate(d.getDate()+1); }
   return out.map(x=>`<option value="${x.toISOString().slice(0,10)}">${x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</option>`).join("");
 }
 function timeOpts(op){
