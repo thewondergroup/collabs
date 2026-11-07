@@ -301,7 +301,7 @@ body.locked{overflow:hidden}
     <div class="eyebrow">Creator invitations · The Wonder Agency</div>
     <h1>London's best tables, <em>on us.</em></h1>
     <p class="lede">We look after some brilliant restaurants and bars across London, and we're inviting creators we love to experience them. Pick an invitation, bring a plus one, and everything listed is on us — in exchange for a little content about your visit.</p>
-    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small>Eleven invitations available</small><small>Takes about a minute to request</small></div>
+    <div class="row"><a class="btn" href="#whats-on">See the invitations</a><small id="op-count">Twelve invitations available</small><small>Takes about a minute to request</small></div>
   </div>
 </section>
 
@@ -540,6 +540,23 @@ body.locked{overflow:hidden}
     </div>
   </article>
 
+  <article class="op" id="zahter" data-cat="dining">
+    <figure class="pic"><span class="num">XII</span><div class="img"><img src="img/zahter.jpg" alt="Whole grilled fish with lemon and herbs, potatoes and pide at Zahter"></div><figcaption>Zahter · Carnaby</figcaption></figure>
+    <div class="copy">
+      <div class="meta"><span class="tag new">New</span><span class="tag">Set lunch · pre-theatre</span><span class="venue">Zahter</span><span>Carnaby</span></div>
+      <h2>Zahter, <em>Istanbul in Carnaby.</em></h2>
+      <p>Michelin-listed Zahter brings Istanbul to the streets around Carnaby: meze, wood-oven pide and dishes from the charcoal grill. It's one of very few kitchens in London with a wood-fired oven and a charcoal grill side by side, and Jay Rayner called its baklava the best he's ever eaten.</p>
+      <p>Choose the weekday <b>set lunch</b>: three courses of meze, a main from the grill and baklava. Or the <b>pre-theatre</b> set menu: pide, meze and a main, with a glass of prosecco or house wine each, timed for curtain up in the West End.</p>
+      <ul class="facts">
+        <li><span class="k">Where</span><span class="v">Zahter · 30–32 Foubert's Place, Carnaby W1F</span></li>
+        <li><span class="k">When</span><span class="v"><b>Set lunch or pre-theatre</b> · Monday–Friday<small>Lunch 11:30–16:30 · pre-theatre 17:00–18:30</small></span></li>
+        <li><span class="k">Your invite</span><span class="v">Three-course set lunch for two, or the pre-theatre set menu for two with a glass of prosecco or house wine each</span></li>
+        <li><span class="k">In return</span><span class="v">Our four deliverables — <a href="#deliverables" class="dl-link">see what we ask for</a></span></li>
+      </ul>
+      <div class="cta"><button class="btn" data-op="zahter">Request a table</button><small>Pick lunch or pre-theatre, a date and a time</small></div>
+    </div>
+  </article>
+
   </div>
   <p class="none-msg" hidden>Nothing here right now — try another filter.</p>
 
@@ -742,6 +759,19 @@ body.locked{overflow:hidden}
             <div class="f"><label for="canal-time">Preferred time</label><select id="canal-time" name="canal_time" class="tpick"></select></div>
           </div>
         </div>
+        <div class="inv">
+          <input type="checkbox" id="i-zahter" name="invitations" value="zahter"><label for="i-zahter">Zahter · set lunch or pre-theatre <span class="new" style="font-size:9px;letter-spacing:.2em;padding:3px 6px 2px;border-radius:2px;margin-left:4px">NEW</span></label>
+          <div class="dates" id="dates-zahter" hidden>
+            <div class="dl">Set lunch or pre-theatre?</div>
+            <div class="f"><select id="zahter-service" name="zahter_service" aria-label="Zahter menu"><option>Set lunch</option><option>Pre-theatre</option></select></div>
+            <div class="dl">Which date suits? <i>weekdays only</i></div>
+            <div class="row2">
+              <div class="f"><label for="zahter-d1">First choice date</label><select id="zahter-d1" name="zahter_date_1" class="pick"></select></div>
+              <div class="f"><label for="zahter-d2">Second choice <i>optional</i></label><select id="zahter-d2" name="zahter_date_2" class="pick"></select></div>
+            </div>
+            <div class="f"><label for="zahter-time">Preferred time</label><select id="zahter-time" name="zahter_time" class="tpick"></select></div>
+          </div>
+        </div>
         </div>
         <p class="sub">For each visit, give us a first-choice date and time (a second date helps if the first is full). Restaurant visits need at least a week's notice, so dates start from next week. The Notto relaunch has a new date coming, so just request it and we'll email you when it's set.</p>
       </fieldset>
@@ -806,20 +836,23 @@ const OPS = {
   nottodine:{title:"Notto — festive feasting", img:"img/nottodine.jpg"},
   kasakin: {title:"Kasa & Kin — Filipino feast", img:"img/kasakin.jpg"},
   canal:{title:"Canal — lunch or dinner", img:"img/canal.jpg"},
+  zahter:{title:"Zahter — set lunch or pre-theatre", img:"img/zahter.jpg"},
   centanni:{title:"Cent Anni — set lunch, Sunday roast or dinner", img:"img/centanni.jpg"}
 };
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 /* time-limited offers disappear the day after their last date */
 (()=>{ const today=new Date(); today.setHours(0,0,0,0);
   document.querySelectorAll("[data-until]").forEach(el=>{ if(new Date(el.dataset.until+"T23:59:59")<today){ const op=el.id||el.getAttribute("href")?.slice(1); el.remove(); } });
-  document.querySelectorAll("article.op").forEach((el,i)=>{ el.classList.toggle("flip", i%2===1); const n=el.querySelector(".num"); if(n) n.textContent=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"][i]; });
+  document.querySelectorAll("article.op").forEach((el,i)=>{ el.classList.toggle("flip", i%2===1); const n=el.querySelector(".num"); if(n) n.textContent=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV"][i]; });
+  const n=document.querySelectorAll("article.op").length, W=["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen"];
+  const oc=document.getElementById("op-count"); if(oc) oc.textContent=(W[n]||n)+" invitation"+(n===1?"":"s")+" available";
   if(!document.getElementById("kasakinhalo")){ ["#i-kasakinhalo"].forEach(q=>{ const el=document.querySelector(q); if(el) el.closest(".inv").remove(); }); }
 })();
 const sheet=$("#sheet"), scrim=$("#scrim"), form=$("#form"), done=$("#done"), err=$("#err");
 let lastFocus=null;
 
 function syncDates(){
-  for(const id of ["kasakinhalo","tantrumsdine","tantrumsbrunch","temper","paradiso","brix","kasakin","centanni","nottodine","canal"]){
+  for(const id of ["kasakinhalo","tantrumsdine","tantrumsbrunch","temper","paradiso","brix","kasakin","centanni","nottodine","canal","zahter"]){
     const cb=$("#i-"+id); if(!cb) continue; const on=cb.checked; $("#dates-"+id).hidden=!on;
     $("#"+id+"-d1").required=on; $("#"+id+"-time").required=on;
   }
@@ -829,7 +862,7 @@ $$(".invites input").forEach(c=>c.addEventListener("change",syncDates));
 function open(id){
   lastFocus=document.activeElement;
   const o=OPS[id]||OPS.tantrumsdine; id=OPS[id]?id:"tantrumsdine";
-  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix(); fillCA(); fillND(); fillTT(); fillTemper(); fillCanal();
+  form.reset(); $("#i-"+id).checked=true; syncDates(); fillBrix(); fillCA(); fillND(); fillTT(); fillTemper(); fillCanal(); fillZahter();
   $("#cover-img").src=o.img;
   form.style.display=""; done.classList.remove("on"); err.classList.remove("on");
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
@@ -842,7 +875,8 @@ function close(){
 $$("[data-op]").forEach(b=>b.addEventListener("click",()=>open(b.dataset.op)));
 /* date dropdowns: only the days each venue actually does */
 const ALL=[0,1,2,3,4,5,6];
-const DAYS={canal:ALL, kasakinhalo:[6,0], tantrumsbrunch:[6], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
+const WEEKDAYS=[1,2,3,4,5];
+const DAYS={zahter:WEEKDAYS, canal:ALL, kasakinhalo:[6,0], tantrumsbrunch:[6], tantrumsdine:{"Breakfast (any day)":ALL,"Lunch (any day)":ALL,"Dinner (Monday–Saturday)":[1,2,3,4,5,6]}, temper:[6], paradiso:[6,0], kasakin:ALL, nottodine:ALL, brix:{ "Dinner (any evening)":ALL, "Brunch (Saturdays & Sundays)":[6,0], "Sunday roast (Sundays)":[0] }, centanni:{ "Set lunch (Monday–Friday)":[1,2,3,4,5], "Sunday roast (Sundays, St John's Wood only)":[0], "Dinner (any evening)":ALL }};
 /* restaurant visits need at least a week's notice; events are fixed dates so aren't affected */
 const MIN_NOTICE_DAYS=7;
 /* venues that can take bookings at short notice (days ahead); everyone else needs MIN_NOTICE_DAYS */
@@ -866,7 +900,7 @@ function fill(id,days){
   }
 }
 /* time slots per venue / service: [start hour, end hour], half-hour steps */
-const TIMES={canal:{Lunch:[12,15],Dinner:[17.5,21],SundayDinner:[17,19.5]}, kasakinhalo:[13.5,15.5], tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Breakfast (any day)":[8,11.5],"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{"Festive Lunchissimo":[12,16.5],"Supper Club":[20,21.5],"The Feast":[12,21]},
+const TIMES={zahter:{"Set lunch":[11.5,15],"Pre-theatre":[17,18.5]}, canal:{Lunch:[12,15],Dinner:[17.5,21],SundayDinner:[17,19.5]}, kasakinhalo:[13.5,15.5], tantrumsbrunch:[12,18,0.25], tantrumsdine:{"Breakfast (any day)":[8,11.5],"Lunch (any day)":[12,14.5],"Dinner (Monday–Saturday)":[17.5,21]}, temper:{City:[12,14.5],Soho:[12,14]}, paradiso:[12,14.5], kasakin:[12,21.5], nottodine:{"Festive Lunchissimo":[12,16.5],"Supper Club":[20,21.5],"The Feast":[12,21]},
   brix:{"Dinner (any evening)":[17.5,21.5],"Brunch (Saturdays & Sundays)":[10,13],"Sunday roast (Sundays)":[12,17]},
   centanni:{"Set lunch (Monday–Friday)":[12,14.5],"Sunday roast (Sundays, St John's Wood only)":[12,17],"Dinner (any evening)":[17.5,21.5]}};
 function fillTime(id,range){
@@ -894,6 +928,10 @@ const cnSel=$("#canal-service");
 const canalTimes=()=>{ const d=$("#canal-d1").value; const sun=d && new Date(d+"T12:00:00").getDay()===0; fillTime("canal", cnSel.value==="Dinner" ? (sun?TIMES.canal.SundayDinner:TIMES.canal.Dinner) : TIMES.canal.Lunch); };
 const fillCanal=()=>{ fill("canal",DAYS.canal); canalTimes(); };
 cnSel.addEventListener("change",canalTimes); $("#canal-d1").addEventListener("change",canalTimes); fillCanal();
+/* Zahter: weekday set lunch (11:30–16:30, last arrival 15:00) or pre-theatre (17:00–18:30) */
+const zhSel=$("#zahter-service");
+const fillZahter=()=>{ fill("zahter",DAYS.zahter); fillTime("zahter",TIMES.zahter[zhSel.value]||TIMES.zahter["Set lunch"]); };
+zhSel.addEventListener("change",fillZahter); fillZahter();
 const brixSel=$("#brix-service");
 const fillBrix=()=>{ fill("brix",DAYS.brix[brixSel.value]||ALL); fillTime("brix",TIMES.brix[brixSel.value]||[12,21.5]); };
 brixSel.addEventListener("change",fillBrix); fillBrix();
